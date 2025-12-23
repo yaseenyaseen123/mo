@@ -39,6 +39,59 @@
     <!-- Quran Content -->
     <section class="quran-section">
         <div class="container">
+            <!-- Audio Player Section -->
+            <div class="quran-audio-player">
+                <div class="player-header">
+                    <h3><i class="fas fa-headphones"></i> استمع إلى القرآن الكريم</h3>
+                </div>
+                <div class="player-controls-section">
+                    <div class="player-selectors">
+                        <div class="selector-group">
+                            <label><i class="fas fa-user"></i> اختر القارئ:</label>
+                            <select id="reciterSelect" class="form-select">
+                                <option value="abdul_basit">عبد الباسط عبد الصمد</option>
+                                <option value="mishary">مشاري راشد العفاسي</option>
+                                <option value="sudais">عبد الرحمن السديس</option>
+                                <option value="minshawi">محمد صديق المنشاوي</option>
+                                <option value="afasy">مشاري بن راشد العفاسي</option>
+                                <option value="ghamdi">سعد الغامدي</option>
+                                <option value="husary">محمود خليل الحصري</option>
+                                <option value="ajmi">أحمد العجمي</option>
+                            </select>
+                        </div>
+                        <div class="selector-group">
+                            <label><i class="fas fa-book-quran"></i> اختر السورة:</label>
+                            <select id="surahSelectAudio" class="form-select">
+                                <option value="1">1. الفاتحة</option>
+                                <option value="2">2. البقرة</option>
+                                <option value="3">3. آل عمران</option>
+                                <option value="18">18. الكهف</option>
+                                <option value="36">36. يس</option>
+                                <option value="55">55. الرحمن</option>
+                                <option value="56">56. الواقعة</option>
+                                <option value="67">67. الملك</option>
+                                <option value="78">78. النبأ</option>
+                                <option value="112">112. الإخلاص</option>
+                                <option value="113">113. الفلق</option>
+                                <option value="114">114. الناس</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="audio-player-main">
+                        <audio id="quranAudio" controls controlsList="nodownload">
+                            متصفحك لا يدعم تشغيل الصوت
+                        </audio>
+                        <button class="btn btn-primary" id="playSelectedBtn">
+                            <i class="fas fa-play"></i> استمع الآن
+                        </button>
+                    </div>
+                    <div class="now-playing" id="nowPlaying" style="display: none;">
+                        <i class="fas fa-music"></i>
+                        <span id="currentInfo">جاري التشغيل...</span>
+                    </div>
+                </div>
+            </div>
+
             <div class="search-bar">
                 <input type="text" id="surahSearch" placeholder="ابحث عن سورة...">
                 <button><i class="fas fa-search"></i></button>
