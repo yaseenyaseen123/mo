@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تسجيل الدخول - التطبيق الإسلامي</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="login-page">
+    <!-- Login Container -->
+    <div class="login-container">
+        <!-- Left Side - Login Form -->
+        <div class="login-form-section">
+            <div class="login-header">
+                <div class="logo-login">
+                    <i class="fas fa-mosque"></i>
+                    <h2>التطبيق الإسلامي</h2>
+                </div>
+                <p class="welcome-text">مرحباً بك، سجل دخولك للمتابعة</p>
+            </div>
+
+            <form class="login-form" id="loginForm">
+                <div class="form-group-login">
+                    <label for="email">
+                        <i class="fas fa-envelope"></i>
+                        البريد الإلكتروني
+                    </label>
+                    <input 
+                        type="email" 
+                        id="email" 
+                        name="email" 
+                        placeholder="example@email.com"
+                        required
+                        autocomplete="email"
+                    >
+                </div>
+
+                <div class="form-group-login">
+                    <label for="password">
+                        <i class="fas fa-lock"></i>
+                        كلمة المرور
+                    </label>
+                    <div class="password-input-wrapper">
+                        <input 
+                            type="password" 
+                            id="password" 
+                            name="password" 
+                            placeholder="••••••••"
+                            required
+                            autocomplete="current-password"
+                        >
+                        <button type="button" class="toggle-password" onclick="togglePassword()">
+                            <i class="fas fa-eye" id="eyeIcon"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="form-options">
+                    <label class="remember-me">
+                        <input type="checkbox" name="remember" id="remember">
+                        <span>تذكرني</span>
+                    </label>
+                    <a href="#" class="forgot-password">نسيت كلمة المرور؟</a>
+                </div>
+
+                <button type="submit" class="btn-login">
+                    <i class="fas fa-sign-in-alt"></i>
+                    تسجيل الدخول
+                </button>
+
+                <div class="divider">
+                    <span>أو</span>
+                </div>
+
+                <div class="social-login">
+                    <button type="button" class="social-btn google-btn">
+                        <i class="fab fa-google"></i>
+                        الدخول بحساب Google
+                    </button>
+                    <button type="button" class="social-btn facebook-btn">
+                        <i class="fab fa-facebook-f"></i>
+                        الدخول بحساب Facebook
+                    </button>
+                </div>
+
+                <div class="register-link">
+                    ليس لديك حساب؟ 
+                    <a href="register.html">سجل الآن</a>
+                </div>
+            </form>
+
+            <div class="quick-access">
+                <a href="../index.html" class="back-home">
+                    <i class="fas fa-home"></i>
+                    العودة للرئيسية
+                </a>
+            </div>
+        </div>
+
+        <!-- Right Side - Islamic Design -->
+        <div class="login-image-section">
+            <div class="overlay-pattern"></div>
+            <div class="login-content">
+                <div class="islamic-quote">
+                    <i class="fas fa-quote-right quote-icon"></i>
+                    <p class="quote-text">"رَبِّ اشْرَحْ لِي صَدْرِي وَيَسِّرْ لِي أَمْرِي"</p>
+                    <span class="quote-source">سورة طه</span>
+                </div>
+                <div class="features-preview">
+                    <div class="feature-item">
+                        <i class="fas fa-book-quran"></i>
+                        <span>القرآن الكريم كاملاً</span>
+                    </div>
+                    <div class="feature-item">
+                        <i class="fas fa-headphones"></i>
+                        <span>16 قارئ مشهور</span>
+                    </div>
+                    <div class="feature-item">
+                        <i class="fas fa-book"></i>
+                        <span>آلاف الأحاديث النبوية</span>
+                    </div>
+                    <div class="feature-item">
+                        <i class="fas fa-hand-holding-heart"></i>
+                        <span>الرقية الشرعية</span>
+                    </div>
+                </div>
+            </div>
+            <div class="decorative-circles">
+                <div class="circle circle-1"></div>
+                <div class="circle circle-2"></div>
+                <div class="circle circle-3"></div>
+            </div>
+        </div>
+    </div>
+
+    <script src="../js/login.js"></script>
+</body>
+</html>
