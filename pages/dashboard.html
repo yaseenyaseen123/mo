@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>لوحة التحكم - التطبيق الإسلامي</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-brand">
+                <i class="fas fa-mosque"></i>
+                <span>التطبيق الإسلامي</span>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="../index.html"><i class="fas fa-home"></i> الرئيسية</a></li>
+                <li><a href="quran.html"><i class="fas fa-book-quran"></i> القرآن الكريم</a></li>
+                <li><a href="hadith.html"><i class="fas fa-book"></i> الأحاديث</a></li>
+                <li><a href="ruqyah.html"><i class="fas fa-hand-holding-heart"></i> الرقية الشرعية</a></li>
+                <li><a href="dashboard.html" class="active"><i class="fas fa-dashboard"></i> لوحة التحكم</a></li>
+            </ul>
+            <div class="menu-toggle">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Dashboard Container -->
+    <div class="dashboard-container">
+        <!-- Sidebar -->
+        <aside class="dashboard-sidebar">
+            <div class="sidebar-header">
+                <h3><i class="fas fa-user-shield"></i> لوحة التحكم</h3>
+            </div>
+            <nav class="sidebar-nav">
+                <a href="#overview" class="nav-item active">
+                    <i class="fas fa-chart-line"></i>
+                    <span>نظرة عامة</span>
+                </a>
+                <a href="#hadiths" class="nav-item">
+                    <i class="fas fa-book"></i>
+                    <span>إدارة الأحاديث</span>
+                </a>
+                <a href="#quran" class="nav-item">
+                    <i class="fas fa-book-quran"></i>
+                    <span>إدارة القرآن</span>
+                </a>
+                <a href="#ruqyah" class="nav-item">
+                    <i class="fas fa-hand-holding-heart"></i>
+                    <span>إدارة الرقية</span>
+                </a>
+                <a href="#users" class="nav-item">
+                    <i class="fas fa-users"></i>
+                    <span>المستخدمون</span>
+                </a>
+                <a href="#settings" class="nav-item">
+                    <i class="fas fa-cog"></i>
+                    <span>الإعدادات</span>
+                </a>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="dashboard-main">
+            <!-- Overview Section -->
+            <section id="overview" class="dashboard-section active">
+                <div class="section-header">
+                    <h2>نظرة عامة</h2>
+                    <p>إحصائيات ومعلومات سريعة عن التطبيق</p>
+                </div>
+
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+                            <i class="fas fa-book"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3>عدد الأحاديث</h3>
+                            <p class="stat-number">1,250</p>
+                            <span class="stat-change positive">+15 هذا الأسبوع</span>
+                        </div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-icon" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3>المستخدمون</h3>
+                            <p class="stat-number">5,420</p>
+                            <span class="stat-change positive">+120 هذا الشهر</span>
+                        </div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-icon" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);">
+                            <i class="fas fa-eye"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3>الزيارات اليومية</h3>
+                            <p class="stat-number">8,350</p>
+                            <span class="stat-change positive">+5.2%</span>
+                        </div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-icon" style="background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);">
+                            <i class="fas fa-download"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3>التحميلات</h3>
+                            <p class="stat-number">2,840</p>
+                            <span class="stat-change positive">+22%</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="dashboard-grid">
+                    <div class="dashboard-card">
+                        <h3><i class="fas fa-chart-bar"></i> نشاط المستخدمين</h3>
+                        <div class="chart-placeholder">
+                            <canvas id="activityChart"></canvas>
+                        </div>
+                    </div>
+
+                    <div class="dashboard-card">
+                        <h3><i class="fas fa-clock"></i> آخر الأنشطة</h3>
+                        <div class="activity-list">
+                            <div class="activity-item">
+                                <i class="fas fa-plus-circle"></i>
+                                <div>
+                                    <p>تم إضافة حديث جديد</p>
+                                    <span>منذ 5 دقائق</span>
+                                </div>
+                            </div>
+                            <div class="activity-item">
+                                <i class="fas fa-user-plus"></i>
+                                <div>
+                                    <p>مستخدم جديد انضم للتطبيق</p>
+                                    <span>منذ 12 دقيقة</span>
+                                </div>
+                            </div>
+                            <div class="activity-item">
+                                <i class="fas fa-edit"></i>
+                                <div>
+                                    <p>تم تعديل محتوى الرقية</p>
+                                    <span>منذ ساعة</span>
+                                </div>
+                            </div>
+                            <div class="activity-item">
+                                <i class="fas fa-download"></i>
+                                <div>
+                                    <p>تحميل الرقية الشرعية PDF</p>
+                                    <span>منذ ساعتين</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Hadiths Management Section -->
+            <section id="hadiths" class="dashboard-section">
+                <div class="section-header">
+                    <h2>إدارة الأحاديث</h2>
+                    <button class="btn btn-primary" onclick="openAddHadithModal()">
+                        <i class="fas fa-plus"></i> إضافة حديث جديد
+                    </button>
+                </div>
+
+                <div class="table-container">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>نص الحديث</th>
+                                <th>الراوي</th>
+                                <th>المصدر</th>
+                                <th>التصنيف</th>
+                                <th>الإجراءات</th>
+                            </tr>
+                        </thead>
+                        <tbody id="hadithTableBody">
+                            <tr>
+                                <td>1</td>
+                                <td>إنما الأعمال بالنيات...</td>
+                                <td>عمر بن الخطاب</td>
+                                <td>صحيح البخاري</td>
+                                <td><span class="badge badge-primary">الإيمان</span></td>
+                                <td>
+                                    <button class="btn-icon" title="تعديل"><i class="fas fa-edit"></i></button>
+                                    <button class="btn-icon" title="حذف"><i class="fas fa-trash"></i></button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td>المسلم من سلم المسلمون...</td>
+                                <td>عبد الله بن عمرو</td>
+                                <td>صحيح البخاري</td>
+                                <td><span class="badge badge-success">الأخلاق</span></td>
+                                <td>
+                                    <button class="btn-icon" title="تعديل"><i class="fas fa-edit"></i></button>
+                                    <button class="btn-icon" title="حذف"><i class="fas fa-trash"></i></button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>3</td>
+                                <td>بني الإسلام على خمس...</td>
+                                <td>عبد الله بن عمر</td>
+                                <td>صحيح البخاري</td>
+                                <td><span class="badge badge-warning">العبادات</span></td>
+                                <td>
+                                    <button class="btn-icon" title="تعديل"><i class="fas fa-edit"></i></button>
+                                    <button class="btn-icon" title="حذف"><i class="fas fa-trash"></i></button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Quran Management Section -->
+            <section id="quran" class="dashboard-section">
+                <div class="section-header">
+                    <h2>إدارة القرآن الكريم</h2>
+                    <button class="btn btn-primary">
+                        <i class="fas fa-sync"></i> تحديث البيانات
+                    </button>
+                </div>
+
+                <div class="dashboard-grid">
+                    <div class="dashboard-card">
+                        <h3><i class="fas fa-book-quran"></i> إحصائيات القرآن</h3>
+                        <div class="info-grid">
+                            <div class="info-item">
+                                <span>عدد السور</span>
+                                <strong>114</strong>
+                            </div>
+                            <div class="info-item">
+                                <span>الآيات المكية</span>
+                                <strong>4,613</strong>
+                            </div>
+                            <div class="info-item">
+                                <span>الآيات المدنية</span>
+                                <strong>1,623</strong>
+                            </div>
+                            <div class="info-item">
+                                <span>إجمالي الآيات</span>
+                                <strong>6,236</strong>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="dashboard-card">
+                        <h3><i class="fas fa-headphones"></i> التلاوات المتاحة</h3>
+                        <div class="reciter-list">
+                            <div class="reciter-item">
+                                <i class="fas fa-microphone"></i>
+                                <span>عبد الباسط عبد الصمد</span>
+                                <span class="badge badge-success">متاح</span>
+                            </div>
+                            <div class="reciter-item">
+                                <i class="fas fa-microphone"></i>
+                                <span>محمد صديق المنشاوي</span>
+                                <span class="badge badge-success">متاح</span>
+                            </div>
+                            <div class="reciter-item">
+                                <i class="fas fa-microphone"></i>
+                                <span>ماهر المعيقلي</span>
+                                <span class="badge badge-warning">قريباً</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Ruqyah Management Section -->
+            <section id="ruqyah" class="dashboard-section">
+                <div class="section-header">
+                    <h2>إدارة الرقية الشرعية</h2>
+                    <button class="btn btn-primary">
+                        <i class="fas fa-plus"></i> إضافة محتوى جديد
+                    </button>
+                </div>
+
+                <div class="content-manager">
+                    <div class="content-item">
+                        <div class="content-header">
+                            <h4>آيات الرقية من القرآن</h4>
+                            <div class="content-actions">
+                                <button class="btn btn-sm btn-secondary"><i class="fas fa-edit"></i> تعديل</button>
+                                <button class="btn btn-sm btn-danger"><i class="fas fa-trash"></i> حذف</button>
+                            </div>
+                        </div>
+                        <p>عدد الآيات: 25 آية</p>
+                    </div>
+
+                    <div class="content-item">
+                        <div class="content-header">
+                            <h4>أدعية الرقية من السنة</h4>
+                            <div class="content-actions">
+                                <button class="btn btn-sm btn-secondary"><i class="fas fa-edit"></i> تعديل</button>
+                                <button class="btn btn-sm btn-danger"><i class="fas fa-trash"></i> حذف</button>
+                            </div>
+                        </div>
+                        <p>عدد الأدعية: 12 دعاء</p>
+                    </div>
+
+                    <div class="content-item">
+                        <div class="content-header">
+                            <h4>ملفات الصوت</h4>
+                            <div class="content-actions">
+                                <button class="btn btn-sm btn-primary"><i class="fas fa-upload"></i> رفع</button>
+                                <button class="btn btn-sm btn-secondary"><i class="fas fa-edit"></i> إدارة</button>
+                            </div>
+                        </div>
+                        <p>الملفات المتاحة: 3 ملفات</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Users Section -->
+            <section id="users" class="dashboard-section">
+                <div class="section-header">
+                    <h2>إدارة المستخدمين</h2>
+                    <button class="btn btn-primary">
+                        <i class="fas fa-user-plus"></i> إضافة مستخدم
+                    </button>
+                </div>
+
+                <div class="table-container">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>الاسم</th>
+                                <th>البريد الإلكتروني</th>
+                                <th>الدور</th>
+                                <th>تاريخ التسجيل</th>
+                                <th>الإجراءات</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td>أحمد محمد</td>
+                                <td>ahmed@example.com</td>
+                                <td><span class="badge badge-danger">مدير</span></td>
+                                <td>2025-01-15</td>
+                                <td>
+                                    <button class="btn-icon" title="تعديل"><i class="fas fa-edit"></i></button>
+                                    <button class="btn-icon" title="حذف"><i class="fas fa-trash"></i></button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td>فاطمة علي</td>
+                                <td>fatima@example.com</td>
+                                <td><span class="badge badge-warning">محرر</span></td>
+                                <td>2025-02-20</td>
+                                <td>
+                                    <button class="btn-icon" title="تعديل"><i class="fas fa-edit"></i></button>
+                                    <button class="btn-icon" title="حذف"><i class="fas fa-trash"></i></button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Settings Section -->
+            <section id="settings" class="dashboard-section">
+                <div class="section-header">
+                    <h2>الإعدادات</h2>
+                </div>
+
+                <div class="settings-grid">
+                    <div class="settings-card">
+                        <h3><i class="fas fa-cog"></i> الإعدادات العامة</h3>
+                        <form class="settings-form">
+                            <div class="form-group">
+                                <label>اسم التطبيق</label>
+                                <input type="text" value="التطبيق الإسلامي" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label>وصف التطبيق</label>
+                                <textarea class="form-control" rows="3">تطبيق شامل للقرآن والأحاديث والرقية الشرعية</textarea>
+                            </div>
+                            <div class="form-group">
+                                <label>البريد الإلكتروني</label>
+                                <input type="email" value="info@islamic-app.com" class="form-control">
+                            </div>
+                            <button type="submit" class="btn btn-primary">حفظ التغييرات</button>
+                        </form>
+                    </div>
+
+                    <div class="settings-card">
+                        <h3><i class="fas fa-palette"></i> إعدادات المظهر</h3>
+                        <form class="settings-form">
+                            <div class="form-group">
+                                <label>اللون الأساسي</label>
+                                <input type="color" value="#1e5a3e" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label>اللون الثانوي</label>
+                                <input type="color" value="#d4af37" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label>
+                                    <input type="checkbox" checked> تفعيل الوضع الليلي
+                                </label>
+                            </div>
+                            <button type="submit" class="btn btn-primary">حفظ التغييرات</button>
+                        </form>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Add Hadith Modal -->
+    <div id="addHadithModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>إضافة حديث جديد</h2>
+                <span class="close" onclick="closeAddHadithModal()">&times;</span>
+            </div>
+            <div class="modal-body">
+                <form id="addHadithForm">
+                    <div class="form-group">
+                        <label>نص الحديث <span class="required">*</span></label>
+                        <textarea class="form-control" rows="4" required placeholder="أدخل نص الحديث كاملاً..."></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>الراوي <span class="required">*</span></label>
+                        <input type="text" class="form-control" required placeholder="مثال: أبو هريرة">
+                    </div>
+                    <div class="form-group">
+                        <label>المصدر <span class="required">*</span></label>
+                        <select class="form-control" required>
+                            <option value="">اختر المصدر</option>
+                            <option value="bukhari">صحيح البخاري</option>
+                            <option value="muslim">صحيح مسلم</option>
+                            <option value="tirmidhi">سنن الترمذي</option>
+                            <option value="abudawud">سنن أبي داود</option>
+                            <option value="nasai">سنن النسائي</option>
+                            <option value="ibnmajah">سنن ابن ماجه</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>التصنيف <span class="required">*</span></label>
+                        <select class="form-control" required>
+                            <option value="">اختر التصنيف</option>
+                            <option value="faith">الإيمان والعقيدة</option>
+                            <option value="worship">العبادات</option>
+                            <option value="ethics">الأخلاق والآداب</option>
+                            <option value="society">المجتمع</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>درجة الحديث</label>
+                        <select class="form-control">
+                            <option value="sahih">صحيح</option>
+                            <option value="hasan">حسن</option>
+                            <option value="daif">ضعيف</option>
+                        </select>
+                    </div>
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-save"></i> حفظ الحديث
+                        </button>
+                        <button type="button" class="btn btn-secondary" onclick="closeAddHadithModal()">
+                            إلغاء
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="../js/dashboard.js"></script>
+    <script src="../js/main.js"></script>
+</body>
+</html>

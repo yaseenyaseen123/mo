@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>القرآن الكريم - التطبيق الإسلامي</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-brand">
+                <i class="fas fa-mosque"></i>
+                <span>التطبيق الإسلامي</span>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="../index.html"><i class="fas fa-home"></i> الرئيسية</a></li>
+                <li><a href="quran.html" class="active"><i class="fas fa-book-quran"></i> القرآن الكريم</a></li>
+                <li><a href="hadith.html"><i class="fas fa-book"></i> الأحاديث</a></li>
+                <li><a href="ruqyah.html"><i class="fas fa-hand-holding-heart"></i> الرقية الشرعية</a></li>
+                <li><a href="dashboard.html"><i class="fas fa-dashboard"></i> لوحة التحكم</a></li>
+            </ul>
+            <div class="menu-toggle">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <h1><i class="fas fa-book-quran"></i> القرآن الكريم</h1>
+            <p>اقرأ وتدبر كلام الله عز وجل</p>
+        </div>
+    </section>
+
+    <!-- Quran Content -->
+    <section class="quran-section">
+        <div class="container">
+            <div class="search-bar">
+                <input type="text" id="surahSearch" placeholder="ابحث عن سورة...">
+                <button><i class="fas fa-search"></i></button>
+            </div>
+
+            <div class="surah-list">
+                <!-- Surahs will be loaded here -->
+                <div class="surah-card" onclick="loadSurah(1)">
+                    <div class="surah-number">1</div>
+                    <div class="surah-info">
+                        <h3>الفاتحة</h3>
+                        <p>مكية • 7 آيات</p>
+                    </div>
+                    <div class="surah-icon">
+                        <i class="fas fa-chevron-left"></i>
+                    </div>
+                </div>
+
+                <div class="surah-card" onclick="loadSurah(2)">
+                    <div class="surah-number">2</div>
+                    <div class="surah-info">
+                        <h3>البقرة</h3>
+                        <p>مدنية • 286 آية</p>
+                    </div>
+                    <div class="surah-icon">
+                        <i class="fas fa-chevron-left"></i>
+                    </div>
+                </div>
+
+                <div class="surah-card" onclick="loadSurah(3)">
+                    <div class="surah-number">3</div>
+                    <div class="surah-info">
+                        <h3>آل عمران</h3>
+                        <p>مدنية • 200 آية</p>
+                    </div>
+                    <div class="surah-icon">
+                        <i class="fas fa-chevron-left"></i>
+                    </div>
+                </div>
+
+                <div class="surah-card" onclick="loadSurah(112)">
+                    <div class="surah-number">112</div>
+                    <div class="surah-info">
+                        <h3>الإخلاص</h3>
+                        <p>مكية • 4 آيات</p>
+                    </div>
+                    <div class="surah-icon">
+                        <i class="fas fa-chevron-left"></i>
+                    </div>
+                </div>
+
+                <div class="surah-card" onclick="loadSurah(113)">
+                    <div class="surah-number">113</div>
+                    <div class="surah-info">
+                        <h3>الفلق</h3>
+                        <p>مكية • 5 آيات</p>
+                    </div>
+                    <div class="surah-icon">
+                        <i class="fas fa-chevron-left"></i>
+                    </div>
+                </div>
+
+                <div class="surah-card" onclick="loadSurah(114)">
+                    <div class="surah-number">114</div>
+                    <div class="surah-info">
+                        <h3>الناس</h3>
+                        <p>مكية • 6 آيات</p>
+                    </div>
+                    <div class="surah-icon">
+                        <i class="fas fa-chevron-left"></i>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Surah Reader Modal -->
+            <div id="surahModal" class="modal">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h2 id="surahTitle"></h2>
+                        <span class="close">&times;</span>
+                    </div>
+                    <div class="modal-body">
+                        <div class="bismillah">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</div>
+                        <div id="ayatContainer" class="ayat-container">
+                            <!-- Ayat will be loaded here -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3><i class="fas fa-mosque"></i> التطبيق الإسلامي</h3>
+                    <p>تطبيق شامل للقرآن الكريم والأحاديث النبوية والرقية الشرعية</p>
+                </div>
+                <div class="footer-section">
+                    <h4>روابط سريعة</h4>
+                    <ul>
+                        <li><a href="quran.html">القرآن الكريم</a></li>
+                        <li><a href="hadith.html">الأحاديث النبوية</a></li>
+                        <li><a href="ruqyah.html">الرقية الشرعية</a></li>
+                        <li><a href="dashboard.html">لوحة التحكم</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>تواصل معنا</h4>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 التطبيق الإسلامي. جميع الحقوق محفوظة.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../js/quran.js"></script>
+    <script src="../js/main.js"></script>
+</body>
+</html>

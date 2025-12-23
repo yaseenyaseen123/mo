@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>الأحاديث النبوية - التطبيق الإسلامي</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-brand">
+                <i class="fas fa-mosque"></i>
+                <span>التطبيق الإسلامي</span>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="../index.html"><i class="fas fa-home"></i> الرئيسية</a></li>
+                <li><a href="quran.html"><i class="fas fa-book-quran"></i> القرآن الكريم</a></li>
+                <li><a href="hadith.html" class="active"><i class="fas fa-book"></i> الأحاديث</a></li>
+                <li><a href="ruqyah.html"><i class="fas fa-hand-holding-heart"></i> الرقية الشرعية</a></li>
+                <li><a href="dashboard.html"><i class="fas fa-dashboard"></i> لوحة التحكم</a></li>
+            </ul>
+            <div class="menu-toggle">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <h1><i class="fas fa-book"></i> الأحاديث النبوية الشريفة</h1>
+            <p>من سنة النبي محمد صلى الله عليه وسلم</p>
+        </div>
+    </section>
+
+    <!-- Hadith Content -->
+    <section class="hadith-section">
+        <div class="container">
+            <div class="filter-bar">
+                <select id="categoryFilter">
+                    <option value="all">جميع التصنيفات</option>
+                    <option value="faith">الإيمان والعقيدة</option>
+                    <option value="worship">العبادات</option>
+                    <option value="ethics">الأخلاق والآداب</option>
+                    <option value="society">المجتمع</option>
+                </select>
+                <div class="search-bar">
+                    <input type="text" id="hadithSearch" placeholder="ابحث في الأحاديث...">
+                    <button><i class="fas fa-search"></i></button>
+                </div>
+            </div>
+
+            <div class="hadith-grid" id="hadithContainer">
+                <!-- Sample Hadiths -->
+                <div class="hadith-item" data-category="faith">
+                    <div class="hadith-header">
+                        <i class="fas fa-quote-right"></i>
+                        <span class="hadith-category">الإيمان والعقيدة</span>
+                    </div>
+                    <div class="hadith-text">
+                        <p>"إنما الأعمال بالنيات، وإنما لكل امرئ ما نوى، فمن كانت هجرته إلى الله ورسوله فهجرته إلى الله ورسوله، ومن كانت هجرته لدنيا يصيبها أو امرأة ينكحها فهجرته إلى ما هاجر إليه"</p>
+                    </div>
+                    <div class="hadith-footer">
+                        <div class="hadith-info">
+                            <p><strong>الراوي:</strong> عمر بن الخطاب</p>
+                            <p><strong>المصدر:</strong> صحيح البخاري</p>
+                            <p><strong>الدرجة:</strong> <span class="sahih">صحيح</span></p>
+                        </div>
+                        <div class="hadith-actions">
+                            <button class="btn-icon" title="نسخ"><i class="fas fa-copy"></i></button>
+                            <button class="btn-icon" title="مشاركة"><i class="fas fa-share"></i></button>
+                            <button class="btn-icon" title="حفظ"><i class="fas fa-bookmark"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="hadith-item" data-category="ethics">
+                    <div class="hadith-header">
+                        <i class="fas fa-quote-right"></i>
+                        <span class="hadith-category">الأخلاق والآداب</span>
+                    </div>
+                    <div class="hadith-text">
+                        <p>"الْمُسْلِمُ مَنْ سَلِمَ الْمُسْلِمُونَ مِنْ لِسَانِهِ وَيَدِهِ، وَالْمُهَاجِرُ مَنْ هَجَرَ مَا نَهَى اللَّهُ عَنْهُ"</p>
+                    </div>
+                    <div class="hadith-footer">
+                        <div class="hadith-info">
+                            <p><strong>الراوي:</strong> عبد الله بن عمرو</p>
+                            <p><strong>المصدر:</strong> صحيح البخاري</p>
+                            <p><strong>الدرجة:</strong> <span class="sahih">صحيح</span></p>
+                        </div>
+                        <div class="hadith-actions">
+                            <button class="btn-icon" title="نسخ"><i class="fas fa-copy"></i></button>
+                            <button class="btn-icon" title="مشاركة"><i class="fas fa-share"></i></button>
+                            <button class="btn-icon" title="حفظ"><i class="fas fa-bookmark"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="hadith-item" data-category="worship">
+                    <div class="hadith-header">
+                        <i class="fas fa-quote-right"></i>
+                        <span class="hadith-category">العبادات</span>
+                    </div>
+                    <div class="hadith-text">
+                        <p>"بُنِيَ الإِسْلَامُ عَلَى خَمْسٍ: شَهَادَةِ أَنْ لَا إِلَهَ إِلَّا اللَّهُ وَأَنَّ مُحَمَّدًا رَسُولُ اللَّهِ، وَإِقَامِ الصَّلَاةِ، وَإِيتَاءِ الزَّكَاةِ، وَالْحَجِّ، وَصَوْمِ رَمَضَانَ"</p>
+                    </div>
+                    <div class="hadith-footer">
+                        <div class="hadith-info">
+                            <p><strong>الراوي:</strong> عبد الله بن عمر</p>
+                            <p><strong>المصدر:</strong> صحيح البخاري</p>
+                            <p><strong>الدرجة:</strong> <span class="sahih">صحيح</span></p>
+                        </div>
+                        <div class="hadith-actions">
+                            <button class="btn-icon" title="نسخ"><i class="fas fa-copy"></i></button>
+                            <button class="btn-icon" title="مشاركة"><i class="fas fa-share"></i></button>
+                            <button class="btn-icon" title="حفظ"><i class="fas fa-bookmark"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="hadith-item" data-category="society">
+                    <div class="hadith-header">
+                        <i class="fas fa-quote-right"></i>
+                        <span class="hadith-category">المجتمع</span>
+                    </div>
+                    <div class="hadith-text">
+                        <p>"مَثَلُ الْمُؤْمِنِينَ فِي تَوَادِّهِمْ وَتَرَاحُمِهِمْ وَتَعَاطُفِهِمْ مَثَلُ الْجَسَدِ، إِذَا اشْتَكَى مِنْهُ عُضْوٌ تَدَاعَى لَهُ سَائِرُ الْجَسَدِ بِالسَّهَرِ وَالْحُمَّى"</p>
+                    </div>
+                    <div class="hadith-footer">
+                        <div class="hadith-info">
+                            <p><strong>الراوي:</strong> النعمان بن بشير</p>
+                            <p><strong>المصدر:</strong> صحيح مسلم</p>
+                            <p><strong>الدرجة:</strong> <span class="sahih">صحيح</span></p>
+                        </div>
+                        <div class="hadith-actions">
+                            <button class="btn-icon" title="نسخ"><i class="fas fa-copy"></i></button>
+                            <button class="btn-icon" title="مشاركة"><i class="fas fa-share"></i></button>
+                            <button class="btn-icon" title="حفظ"><i class="fas fa-bookmark"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="hadith-item" data-category="ethics">
+                    <div class="hadith-header">
+                        <i class="fas fa-quote-right"></i>
+                        <span class="hadith-category">الأخلاق والآداب</span>
+                    </div>
+                    <div class="hadith-text">
+                        <p>"مَن كان يؤمن بالله واليوم الآخر فليقل خيراً أو ليصمت، ومن كان يؤمن بالله واليوم الآخر فليكرم جاره، ومن كان يؤمن بالله واليوم الآخر فليكرم ضيفه"</p>
+                    </div>
+                    <div class="hadith-footer">
+                        <div class="hadith-info">
+                            <p><strong>الراوي:</strong> أبو هريرة</p>
+                            <p><strong>المصدر:</strong> صحيح البخاري</p>
+                            <p><strong>الدرجة:</strong> <span class="sahih">صحيح</span></p>
+                        </div>
+                        <div class="hadith-actions">
+                            <button class="btn-icon" title="نسخ"><i class="fas fa-copy"></i></button>
+                            <button class="btn-icon" title="مشاركة"><i class="fas fa-share"></i></button>
+                            <button class="btn-icon" title="حفظ"><i class="fas fa-bookmark"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="hadith-item" data-category="faith">
+                    <div class="hadith-header">
+                        <i class="fas fa-quote-right"></i>
+                        <span class="hadith-category">الإيمان والعقيدة</span>
+                    </div>
+                    <div class="hadith-text">
+                        <p>"الْإِيمَانُ بِضْعٌ وَسَبْعُونَ -أَوْ بِضْعٌ وَسِتُّونَ- شُعْبَةً، فَأَفْضَلُهَا قَوْلُ: لَا إِلَهَ إِلَّا اللَّهُ، وَأَدْنَاهَا إِمَاطَةُ الْأَذَى عَنِ الطَّرِيقِ، وَالْحَيَاءُ شُعْبَةٌ مِنَ الْإِيمَانِ"</p>
+                    </div>
+                    <div class="hadith-footer">
+                        <div class="hadith-info">
+                            <p><strong>الراوي:</strong> أبو هريرة</p>
+                            <p><strong>المصدر:</strong> صحيح مسلم</p>
+                            <p><strong>الدرجة:</strong> <span class="sahih">صحيح</span></p>
+                        </div>
+                        <div class="hadith-actions">
+                            <button class="btn-icon" title="نسخ"><i class="fas fa-copy"></i></button>
+                            <button class="btn-icon" title="مشاركة"><i class="fas fa-share"></i></button>
+                            <button class="btn-icon" title="حفظ"><i class="fas fa-bookmark"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3><i class="fas fa-mosque"></i> التطبيق الإسلامي</h3>
+                    <p>تطبيق شامل للقرآن الكريم والأحاديث النبوية والرقية الشرعية</p>
+                </div>
+                <div class="footer-section">
+                    <h4>روابط سريعة</h4>
+                    <ul>
+                        <li><a href="quran.html">القرآن الكريم</a></li>
+                        <li><a href="hadith.html">الأحاديث النبوية</a></li>
+                        <li><a href="ruqyah.html">الرقية الشرعية</a></li>
+                        <li><a href="dashboard.html">لوحة التحكم</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>تواصل معنا</h4>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 التطبيق الإسلامي. جميع الحقوق محفوظة.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../js/hadith.js"></script>
+    <script src="../js/main.js"></script>
+</body>
+</html>
