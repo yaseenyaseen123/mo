@@ -1,4 +1,5 @@
 // Qibla Finder - JavaScript
+console.log('Qibla.js loaded successfully!');
 
 // Kaaba Coordinates
 const KAABA = {
@@ -23,18 +24,30 @@ document.addEventListener('DOMContentLoaded', function() {
     const findQiblaBtn = document.getElementById('findQiblaBtn');
     console.log('Find Qibla Button:', findQiblaBtn);
     
-    // Simple click listener
-    if (findQiblaBtn) {
-        findQiblaBtn.onclick = function() {
-            console.log('Button clicked!');
-            findQibla();
-        };
-    } else {
-        console.error('Button not found!');
+    // Test button existence
+    if (!findQiblaBtn) {
+        console.error('❌ Button not found! ID might be wrong.');
+        alert('خطأ: لم يتم العثور على الزر');
+        return;
     }
+    
+    console.log('✅ Button found, adding click listener...');
+    
+    // Add click listener - multiple methods for compatibility
+    findQiblaBtn.addEventListener('click', function() {
+        console.log('🔵 Button clicked via addEventListener!');
+        findQibla();
+    });
+    
+    findQiblaBtn.onclick = function() {
+        console.log('🟢 Button clicked via onclick!');
+    };
+    
+    console.log('✅ Click listeners added successfully');
     
     // Check if device supports orientation
     if (!window.DeviceOrientationEvent) {
+        console.warn('⚠️ Device does not support orientation');
         showError('جهازك لا يدعم البوصلة');
     }
 });
