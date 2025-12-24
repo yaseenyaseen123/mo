@@ -33,63 +33,73 @@ document.addEventListener('DOMContentLoaded', function() {
     
     console.log('✅ Button found, adding click listener...');
     
-    // Add click listener - multiple methods for compatibility
+    // Add simple click listener
     findQiblaBtn.addEventListener('click', function() {
-        console.log('🔵 Button clicked via addEventListener!');
-        findQibla();
+        console.log('🔵 Button clicked!');
+        alert('الزر يعمل! Button works!');
+        
+        try {
+            findQibla();
+        } catch (error) {
+            console.error('❌ Error calling findQibla:', error);
+            alert('خطأ: ' + error.message);
+        }
     });
     
-    findQiblaBtn.onclick = function() {
-        console.log('🟢 Button clicked via onclick!');
-    };
-    
-    console.log('✅ Click listeners added successfully');
-    
-    // Check if device supports orientation
-    if (!window.DeviceOrientationEvent) {
-        console.warn('⚠️ Device does not support orientation');
-        showError('جهازك لا يدعم البوصلة');
-    }
+    console.log('✅ Click listener added successfully');
 });
 
 // Find Qibla Direction
 async function findQibla() {
-    console.log('findQibla function called');
-    showNotification('جاري تحديد موقعك...');
-    
-    // Request device orientation permission for iOS 13+
-    if (typeof DeviceOrientationEvent !== 'undefined' && 
-        typeof DeviceOrientationEvent.requestPermission === 'function') {
-        console.log('Requesting DeviceOrientation permission for iOS...');
-        try {
-            const permission = await DeviceOrientationEvent.requestPermission();
-            console.log('Permission result:', permission);
-            if (permission !== 'granted') {
-                showError('يرجى السماح باستخدام البوصلة');
-                return;
+    try {
+        console.log('🚀 findQibla function called');
+        
+        const statusEl = document.getElementById('statusMessage');
+        if (statusEl) {
+            statusEl.innerHTML = `<i class="fas fa-info-circle"></i><p>جاري تحديد موقعك...</p>`;
+            statusEl.style.display = 'flex';
+            statusEl.className = 'status-message info';
+        }
+        
+        // Request device orientation permission for iOS 13+
+        if (typeof DeviceOrientationEvent !== 'undefined' && 
+            typeof DeviceOrientationEvent.requestPermission === 'function') {
+            console.log('Requesting DeviceOrientation permission for iOS...');
+            try {
+                const permission = await DeviceOrientationEvent.requestPermission();
+                console.log('Permission result:', permission);
+                if (permission !== 'granted') {
+                    throw new Error('البوصلة: تم رفض الإذن');
+                }
+            } catch (error) {
+                console.error('Error requesting orientation permission:', error);
+                throw new Error('لم نتمكن من الوصول إلى البوصلة');
             }
-        } catch (error) {
-            console.error('Error requesting orientation permission:', error);
-            showError('لم نتمكن من الوصول إلى البوصلة');
-            return;
+        }
+        
+        if (!navigator.geolocation) {
+            throw new Error('المتصفح لا يدعم تحديد الموقع');
+        }
+        
+        console.log('Requesting geolocation...');
+        navigator.geolocation.getCurrentPosition(
+            handleLocationSuccess,
+            handleLocationError,
+            { 
+                enableHighAccuracy: true,
+                timeout: 10000,
+                maximumAge: 0
+            }
+        );
+    } catch (error) {
+        console.error('❌ Error in findQibla:', error);
+        const statusEl = document.getElementById('statusMessage');
+        if (statusEl) {
+            statusEl.innerHTML = `<i class="fas fa-exclamation-triangle"></i><p>${error.message}</p>`;
+            statusEl.style.display = 'flex';
+            statusEl.className = 'status-message error';
         }
     }
-    
-    if (!navigator.geolocation) {
-        showError('المتصفح لا يدعم تحديد الموقع');
-        return;
-    }
-    
-    console.log('Requesting geolocation...');
-    navigator.geolocation.getCurrentPosition(
-        handleLocationSuccess,
-        handleLocationError,
-        { 
-            enableHighAccuracy: true,
-            timeout: 10000,
-            maximumAge: 0
-        }
-    );
 }
 
 // Handle successful location
