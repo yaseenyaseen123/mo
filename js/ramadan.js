@@ -193,42 +193,45 @@ function createDayRow(dayNumber, date, city) {
 
 // Calculate prayer times for a specific date and city
 function calculatePrayerTimes(date, city) {
-    // This is a simplified calculation
-    // In production, use a proper prayer times library
+    // أوقات محددة لكل مدينة في فبراير-مارس (شهر رمضان)
+    // الأوقات تختلف بناءً على خط العرض والطول لكل مدينة
     
-    const baseImsak = new Date(date);
-    baseImsak.setHours(4, 30, 0);
+    const cityBaseTimes = {
+        makkah: { imsak: [4, 45], fajr: [5, 0], sunrise: [6, 20], dhuhr: [12, 15], asr: [3, 35], maghrib: [6, 10], isha: [7, 40] },
+        madinah: { imsak: [4, 50], fajr: [5, 5], sunrise: [6, 25], dhuhr: [12, 20], asr: [3, 40], maghrib: [6, 15], isha: [7, 45] },
+        riyadh: { imsak: [4, 35], fajr: [4, 50], sunrise: [6, 10], dhuhr: [12, 10], asr: [3, 30], maghrib: [6, 5], isha: [7, 35] },
+        jeddah: { imsak: [4, 50], fajr: [5, 5], sunrise: [6, 25], dhuhr: [12, 20], asr: [3, 40], maghrib: [6, 15], isha: [7, 45] },
+        cairo: { imsak: [4, 25], fajr: [4, 40], sunrise: [6, 0], dhuhr: [12, 5], asr: [3, 20], maghrib: [5, 55], isha: [7, 20] },
+        dubai: { imsak: [4, 40], fajr: [4, 55], sunrise: [6, 15], dhuhr: [12, 15], asr: [3, 35], maghrib: [6, 10], isha: [7, 40] },
+        jerusalem: { imsak: [4, 20], fajr: [4, 35], sunrise: [5, 55], dhuhr: [12, 0], asr: [3, 15], maghrib: [5, 50], isha: [7, 15] },
+        amman: { imsak: [4, 25], fajr: [4, 40], sunrise: [6, 0], dhuhr: [12, 5], asr: [3, 20], maghrib: [5, 55], isha: [7, 20] },
+        qalqilya: { imsak: [4, 20], fajr: [4, 35], sunrise: [5, 55], dhuhr: [12, 0], asr: [3, 15], maghrib: [5, 50], isha: [7, 15] }
+    };
     
-    const baseFajr = new Date(date);
-    baseFajr.setHours(4, 45, 0);
+    const baseTimes = cityBaseTimes[selectedCity] || cityBaseTimes.makkah;
     
-    const baseSunrise = new Date(date);
-    baseSunrise.setHours(6, 15, 0);
-    
-    const baseDhuhr = new Date(date);
-    baseDhuhr.setHours(12, 15, 0);
-    
-    const baseAsr = new Date(date);
-    baseAsr.setHours(15, 30, 0);
-    
-    const baseMaghrib = new Date(date);
-    baseMaghrib.setHours(18, 30, 0);
-    
-    const baseIsha = new Date(date);
-    baseIsha.setHours(20, 0, 0);
-    
-    // Adjust based on day of year (simplified)
+    // تعديل بسيط بناءً على يوم من الشهر (تغير الأوقات خلال رمضان)
+    const dayOfMonth = date.getDate();
     const dayOfYear = getDayOfYear(date);
-    const adjustment = Math.sin((dayOfYear / 365) * Math.PI * 2) * 30; // ±30 minutes variation
+    
+    // تغيير تدريجي في الأوقات (الربيع - الأيام تطول)
+    const seasonalAdjustment = Math.floor((dayOfMonth - 18) * 0.5); // نصف دقيقة كل يوم
+    
+    // إنشاء أوقات الصلاة
+    const createTime = (hours, mins, adjustment = 0) => {
+        const d = new Date(date);
+        d.setHours(hours, mins + adjustment, 0, 0);
+        return formatTime(d);
+    };
     
     return {
-        imsak: formatTime(addMinutes(baseImsak, adjustment - 15)),
-        fajr: formatTime(addMinutes(baseFajr, adjustment - 15)),
-        sunrise: formatTime(addMinutes(baseSunrise, adjustment)),
-        dhuhr: formatTime(addMinutes(baseDhuhr, adjustment)),
-        asr: formatTime(addMinutes(baseAsr, adjustment + 10)),
-        maghrib: formatTime(addMinutes(baseMaghrib, adjustment + 15)),
-        isha: formatTime(addMinutes(baseIsha, adjustment + 15))
+        imsak: createTime(baseTimes.imsak[0], baseTimes.imsak[1], seasonalAdjustment),
+        fajr: createTime(baseTimes.fajr[0], baseTimes.fajr[1], seasonalAdjustment),
+        sunrise: createTime(baseTimes.sunrise[0], baseTimes.sunrise[1], seasonalAdjustment),
+        dhuhr: createTime(baseTimes.dhuhr[0], baseTimes.dhuhr[1], 0), // الظهر ثابت نسبياً
+        asr: createTime(baseTimes.asr[0], baseTimes.asr[1], -seasonalAdjustment),
+        maghrib: createTime(baseTimes.maghrib[0], baseTimes.maghrib[1], -seasonalAdjustment),
+        isha: createTime(baseTimes.isha[0], baseTimes.isha[1], -seasonalAdjustment)
     };
 }
 
