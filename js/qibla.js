@@ -14,39 +14,46 @@ let qiblaAngle = null;
 let userLocation = null;
 
 // Initialize when page loads
-document.addEventListener('DOMContentLoaded', function() {
-    console.log('DOM loaded - initializing Qibla finder');
+window.addEventListener('load', function() {
+    console.log('✅ Window loaded - initializing Qibla finder');
     
-    compassCircle = document.getElementById('compass');
-    kaabaIcon = document.getElementById('kaabaIcon');
-    headingValue = document.getElementById('headingValue');
-    
-    const findQiblaBtn = document.getElementById('findQiblaBtn');
-    console.log('Find Qibla Button:', findQiblaBtn);
-    
-    // Test button existence
-    if (!findQiblaBtn) {
-        console.error('❌ Button not found! ID might be wrong.');
-        alert('خطأ: لم يتم العثور على الزر');
-        return;
-    }
-    
-    console.log('✅ Button found, adding click listener...');
-    
-    // Add simple click listener
-    findQiblaBtn.addEventListener('click', function() {
-        console.log('🔵 Button clicked!');
-        alert('الزر يعمل! Button works!');
+    // Wait a bit to ensure everything is ready
+    setTimeout(function() {
+        compassCircle = document.getElementById('compass');
+        kaabaIcon = document.getElementById('kaabaIcon');
+        headingValue = document.getElementById('headingValue');
         
-        try {
-            findQibla();
-        } catch (error) {
-            console.error('❌ Error calling findQibla:', error);
-            alert('خطأ: ' + error.message);
+        const findQiblaBtn = document.getElementById('findQiblaBtn');
+        console.log('🔍 Looking for button with ID: findQiblaBtn');
+        console.log('📍 Button found:', findQiblaBtn);
+        
+        if (!findQiblaBtn) {
+            console.error('❌ BUTTON NOT FOUND!');
+            return;
         }
-    });
-    
-    console.log('✅ Click listener added successfully');
+        
+        console.log('✅ Button exists! Adding listener...');
+        
+        // Remove any existing listeners
+        const newButton = findQiblaBtn.cloneNode(true);
+        findQiblaBtn.parentNode.replaceChild(newButton, findQiblaBtn);
+        
+        // Add fresh click listener
+        newButton.addEventListener('click', function(e) {
+            console.log('🎯 BUTTON CLICKED!');
+            e.preventDefault();
+            e.stopPropagation();
+            
+            try {
+                findQibla();
+            } catch (error) {
+                console.error('❌ Error:', error);
+                alert('خطأ: ' + error.message);
+            }
+        }, false);
+        
+        console.log('✅ Listener added successfully!');
+    }, 500);
 });
 
 // Find Qibla Direction
