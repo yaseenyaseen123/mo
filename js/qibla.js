@@ -12,6 +12,8 @@ let kaabaIcon = null;
 let headingValue = null;
 let qiblaAngle = null;
 let userLocation = null;
+let lastHeading = 0;
+let smoothHeading = 0;
 
 // Initialize when page loads
 window.addEventListener('load', function() {
@@ -224,7 +226,16 @@ function handleOrientation(event) {
     }
     
     if (heading !== null) {
-        updateCompass(heading);
+        // تنعيم الحركة - تجاهل التغييرات الصغيرة جداً
+        const diff = Math.abs(heading - lastHeading);
+        
+        // تجاهل التغييرات أقل من 2 درجات لتقليل الاهتزاز
+        if (diff > 2 && diff < 358) {
+            // تنعيم الحركة بنسبة 30%
+            smoothHeading = smoothHeading * 0.7 + heading * 0.3;
+            lastHeading = heading;
+            updateCompass(smoothHeading);
+        }
     }
 }
 
@@ -232,8 +243,8 @@ function handleOrientation(event) {
 function updateCompass(heading) {
     if (!compassCircle || qiblaAngle === null) return;
     
-    // Rotate compass circle
-    compassCircle.style.transform = `rotate(${-heading}deg)`;
+    // Rotate compass circle - keep centered
+    compassCircle.style.transform = `translate(-50%, -50%) rotate(${-heading}deg)`;
     
     // Update heading display
     headingValue.textContent = Math.round(heading) + '°';

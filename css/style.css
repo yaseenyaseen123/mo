@@ -2432,7 +2432,7 @@ p {
     padding: 3rem;
     box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
     position: relative;
-    overflow: visible;
+    overflow: hidden;
 }
 
 .compass-card::before {
@@ -2585,7 +2585,8 @@ p {
     border-radius: 50%;
     background: linear-gradient(135deg, #fff 0%, #f0f8f0 100%);
     box-shadow: 0 0 20px rgba(30, 90, 62, 0.3);
-    transition: transform 0.3s ease;
+    transition: transform 0.5s cubic-bezier(0.4, 0.0, 0.2, 1);
+    transform-origin: center center;
 }
 
 .compass-rose {
