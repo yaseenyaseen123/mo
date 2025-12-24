@@ -112,54 +112,194 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 2rem;
-    perspective: 2000px;
+    padding: 3rem;
+    perspective: 3000px;
 }
 
 .book {
     position: relative;
     width: 90%;
-    max-width: 1200px;
-    height: 800px;
+    max-width: 1400px;
+    height: 850px;
     display: flex;
+    transform-style: preserve-3d;
     box-shadow: 
-        0 20px 60px rgba(0, 0, 0, 0.5),
-        0 10px 30px rgba(0, 0, 0, 0.3);
-    border-radius: 10px;
-    overflow: hidden;
-    background: #f5f1e8;
-    transition: transform 0.3s ease;
+        0 30px 90px rgba(0, 0, 0, 0.6),
+        0 15px 40px rgba(0, 0, 0, 0.4),
+        inset 0 0 0 1px rgba(139, 69, 19, 0.2);
+    border-radius: 5px 15px 15px 5px;
+    overflow: visible;
+    background: linear-gradient(to right, #e8dcc0 0%, #f5f1e8 3%, #faf8f3 50%, #f5f1e8 97%, #e8dcc0 100%);
+    transition: transform 0.4s ease;
+    animation: bookOpen 1s ease-out;
+}
+
+@keyframes bookOpen {
+    from {
+        transform: perspective(3000px) rotateY(-20deg);
+        opacity: 0;
+    }
+    to {
+        transform: perspective(3000px) rotateY(0deg);
+        opacity: 1;
+    }
+}
+
+.book::before {
+    content: '';
+    position: absolute;
+    top: -5px;
+    left: -5px;
+    right: -5px;
+    bottom: -5px;
+    background: linear-gradient(135deg, #8b4513 0%, #a0522d 50%, #8b4513 100%);
+    border-radius: 5px 15px 15px 5px;
+    z-index: -1;
+    box-shadow: 0 0 20px rgba(139, 69, 19, 0.5);
 }
 
 .book:hover {
-    transform: scale(1.02);
+    transform: perspective(3000px) rotateY(0deg) translateY(-10px);
+    box-shadow: 
+        0 40px 100px rgba(0, 0, 0, 0.7),
+        0 20px 50px rgba(0, 0, 0, 0.5),
+        inset 0 0 0 1px rgba(212, 175, 55, 0.3);
 }
 
 /* Pages */
 .page {
     flex: 1;
-    background: linear-gradient(to bottom, #faf8f3 0%, #f5f1e8 100%);
+    background: 
+        linear-gradient(90deg, rgba(255,255,255,0.05) 0%, transparent 5%, transparent 95%, rgba(0,0,0,0.03) 100%),
+        radial-gradient(circle at 50% 50%, #fdfcfa 0%, #f8f6f0 50%, #f0ede3 100%);
     position: relative;
-    border: 1px solid #d4c5a9;
+    border: none;
+    transform-style: preserve-3d;
+    transition: transform 0.6s ease;
+}
+
+.page::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 100%;
+    background: 
+        repeating-linear-gradient(
+            0deg,
+            transparent,
+            transparent 2px,
+            rgba(139, 69, 19, 0.01) 2px,
+            rgba(139, 69, 19, 0.01) 3px
+        );
+    pointer-events: none;
+    z-index: 1;
 }
 
 .left-page {
-    border-left: none;
-    border-radius: 10px 0 0 10px;
-    box-shadow: inset -5px 0 15px rgba(0, 0, 0, 0.05);
+    border-left: 3px solid #c9b896;
+    border-radius: 8px 0 0 8px;
+    box-shadow: 
+        inset -8px 0 20px rgba(0, 0, 0, 0.08),
+        inset -2px 0 5px rgba(0, 0, 0, 0.05),
+        -5px 0 15px rgba(0, 0, 0, 0.1);
+    background: 
+        linear-gradient(90deg, rgba(212, 175, 55, 0.08) 0%, transparent 3%, transparent 100%),
+        radial-gradient(circle at 50% 50%, #fdfcfa 0%, #f8f6f0 50%, #f0ede3 100%);
+}
+
+.left-page::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 30px;
+    background: linear-gradient(90deg, 
+        rgba(212, 175, 55, 0.15) 0%, 
+        rgba(212, 175, 55, 0.05) 50%, 
+        transparent 100%
+    );
+    border-right: 1px solid rgba(212, 175, 55, 0.3);
+    pointer-events: none;
 }
 
 .right-page {
-    border-right: none;
-    border-radius: 0 10px 10px 0;
-    box-shadow: inset 5px 0 15px rgba(0, 0, 0, 0.05);
+    border-right: 3px solid #c9b896;
+    border-radius: 0 8px 8px 0;
+    box-shadow: 
+        inset 8px 0 20px rgba(0, 0, 0, 0.08),
+        inset 2px 0 5px rgba(0, 0, 0, 0.05),
+        5px 0 15px rgba(0, 0, 0, 0.1);
+    background: 
+        linear-gradient(90deg, transparent 0%, transparent 97%, rgba(212, 175, 55, 0.08) 100%),
+        radial-gradient(circle at 50% 50%, #fdfcfa 0%, #f8f6f0 50%, #f0ede3 100%);
+}
+
+.right-page::after {
+    content: '';
+    position: absolute;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    width: 30px;
+    background: linear-gradient(90deg, 
+        transparent 0%, 
+        rgba(212, 175, 55, 0.05) 50%, 
+        rgba(212, 175, 55, 0.15) 100%
+    );
+    border-left: 1px solid rgba(212, 175, 55, 0.3);
+    pointer-events: none;
+}
+
+/* Page Flip Animation */
+.page.flipping {
+    animation: pageFlip 0.8s ease-in-out;
+}
+
+@keyframes pageFlip {
+    0% {
+        transform: rotateY(0deg);
+    }
+    50% {
+        transform: rotateY(-90deg);
+    }
+    100% {
+        transform: rotateY(-180deg);
+    }
 }
 
 .page-content {
     height: 100%;
     display: flex;
     flex-direction: column;
-    padding: 2rem;
+    padding: 3rem 2.5rem;
+    position: relative;
+    z-index: 2;
+}
+
+.page-content::before {
+    content: '';
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    right: 15px;
+    bottom: 15px;
+    border: 2px solid rgba(212, 175, 55, 0.3);
+    border-radius: 5px;
+    pointer-events: none;
+}
+
+.page-content::after {
+    content: '';
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    right: 20px;
+    bottom: 20px;
+    border: 1px solid rgba(30, 90, 62, 0.2);
+    border-radius: 3px;
+    pointer-events: none;
 }
 
 /* Page Header */
@@ -168,8 +308,15 @@
     justify-content: space-between;
     align-items: center;
     padding-bottom: 1rem;
-    border-bottom: 2px solid var(--secondary-color);
+    border-bottom: 3px double var(--secondary-color);
     margin-bottom: 1.5rem;
+    background: linear-gradient(to bottom,
+        transparent 0%,
+        rgba(212, 175, 55, 0.05) 50%,
+        transparent 100%
+    );
+    padding: 0.8rem 1rem;
+    border-radius: 5px;
 }
 
 .surah-name {
@@ -242,25 +389,74 @@
 
 .basmala {
     text-align: center;
-    font-size: 2rem;
+    font-size: 2.3rem;
     color: var(--primary-color);
-    margin: 2rem 0;
-    padding: 1rem;
-    border-top: 2px solid var(--secondary-color);
-    border-bottom: 2px solid var(--secondary-color);
+    margin: 2.5rem 0;
+    padding: 1.5rem 1rem;
+    border-top: 3px double var(--secondary-color);
+    border-bottom: 3px double var(--secondary-color);
+    background: linear-gradient(to right,
+        transparent 0%,
+        rgba(212, 175, 55, 0.08) 20%,
+        rgba(30, 90, 62, 0.05) 50%,
+        rgba(212, 175, 55, 0.08) 80%,
+        transparent 100%
+    );
+    position: relative;
+}
+
+.basmala::before {
+    content: '﷽';
+    display: block;
+    font-size: 3rem;
+    margin-bottom: 0.5rem;
+    color: var(--secondary-color);
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
 }
 
 .surah-header {
     text-align: center;
-    font-size: 2.2rem;
+    font-size: 2.5rem;
     color: var(--primary-color);
-    margin: 2rem 0 1.5rem;
-    padding: 1.5rem;
-    background: linear-gradient(135deg, rgba(30, 90, 62, 0.05), rgba(212, 175, 55, 0.05));
-    border: 2px solid var(--secondary-color);
-    border-radius: 15px;
+    margin: 2rem 0 2rem;
+    padding: 2rem 1.5rem;
+    background: 
+        radial-gradient(ellipse at center, rgba(212, 175, 55, 0.15) 0%, rgba(30, 90, 62, 0.08) 50%, transparent 100%),
+        linear-gradient(135deg, rgba(30, 90, 62, 0.05), rgba(212, 175, 55, 0.05));
+    border: 3px double var(--secondary-color);
+    border-radius: 20px;
     font-weight: 700;
+    box-shadow: 
+        0 5px 15px rgba(0, 0, 0, 0.1),
+        inset 0 2px 5px rgba(255, 255, 255, 0.5);
+    position: relative;
 }
+
+.surah-header::before,
+.surah-header::after {
+    content: '۩';
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 2rem;
+    color: var(--secondary-color);
+    opacity: 0.7;
+}
+
+.surah-header::before {
+    left: 20px;
+}
+
+.surah-header::after {
+    right: 20pxdouble var(--secondary-color);
+    margin-top: 1rem;
+    background: linear-gradient(to top,
+        transparent 0%,
+        rgba(212, 175, 55, 0.05) 50%,
+        transparent 100%
+    );
+    padding: 0.8rem 1rem;
+    border-radius: 5px
 
 /* Page Footer */
 .page-footer {
@@ -285,18 +481,56 @@
 .book-spine {
     position: absolute;
     left: 50%;
-    top: 0;
-    bottom: 0;
-    width: 4px;
-    background: linear-gradient(to bottom, 
-        rgba(0, 0, 0, 0.2) 0%, 
-        rgba(0, 0, 0, 0.3) 50%, 
-        rgba(0, 0, 0, 0.2) 100%
-    );
+    top: -5px;
+    bottom: -5px;
+    width: 15px;
+    background: 
+        linear-gradient(to right,
+            rgba(0, 0, 0, 0.3) 0%,
+            rgba(139, 69, 19, 0.6) 20%,
+            rgba(160, 82, 45, 0.8) 50%,
+            rgba(139, 69, 19, 0.6) 80%,
+            rgba(0, 0, 0, 0.3) 100%
+        );
     transform: translateX(-50%);
     box-shadow: 
-        -2px 0 5px rgba(0, 0, 0, 0.2),
-        2px 0 5px rgba(0, 0, 0, 0.2);
+        -3px 0 8px rgba(0, 0, 0, 0.4),
+        3px 0 8px rgba(0, 0, 0, 0.4),
+        inset 0 0 10px rgba(0, 0, 0, 0.3);
+    border-radius: 2px;
+    z-index: 10;
+}
+
+.book-spine::before {
+    content: '';
+    position: absolute;
+    top: 10%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 2px;
+    height: 80%;
+    background: repeating-linear-gradient(
+        to bottom,
+        transparent,
+        transparent 20px,
+        rgba(212, 175, 55, 0.5) 20px,
+        rgba(212, 175, 55, 0.5) 21px
+    );
+}
+
+.book-spine::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 8px;
+    height: 100%;
+    background: linear-gradient(to right,
+        transparent 0%,
+        rgba(212, 175, 55, 0.2) 50%,
+        transparent 100%
+    );
 }
 
 /* Loading */

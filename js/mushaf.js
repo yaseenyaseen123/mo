@@ -323,13 +323,15 @@ function getJuzByPage(pageNum) {
 // Navigation Functions
 function nextPage() {
     if (currentPage < totalPages) {
-        goToPage(currentPage + (window.innerWidth > 768 ? 2 : 1));
+        const increment = window.innerWidth > 768 ? 2 : 1;
+        animatePageTurn('next', currentPage + increment);
     }
 }
 
 function previousPage() {
     if (currentPage > 1) {
-        goToPage(currentPage - (window.innerWidth > 768 ? 2 : 1));
+        const decrement = window.innerWidth > 768 ? 2 : 1;
+        animatePageTurn('prev', currentPage - decrement);
     }
 }
 
@@ -339,7 +341,45 @@ function goToPage(pageNum) {
         pageNum--;
     }
     
-    loadPage(Math.max(1, Math.min(pageNum, totalPages)));
+    const newPage = Math.max(1, Math.min(pageNum, totalPages));
+    
+    if (newPage !== currentPage) {
+        const direction = newPage > currentPage ? 'next' : 'prev';
+        animatePageTurn(direction, newPage);
+    }
+}
+
+// Animate Page Turn
+function animatePageTurn(direction, targetPage) {
+    const pages = document.querySelectorAll('.page');
+    
+    // Add flip animation
+    pages.forEach(page => {
+        page.classList.add('flipping');
+    });
+    
+    // Play page turn sound (optional - can add audio)
+    playPageSound();
+    
+    // Load new page after animation starts
+    setTimeout(() => {
+        loadPage(targetPage);
+        
+        // Remove animation class
+        setTimeout(() => {
+            pages.forEach(page => {
+                page.classList.remove('flipping');
+            });
+        }, 100);
+    }, 400);
+}
+
+// Play page turn sound (optional)
+function playPageSound() {
+    // You can add an audio element for page turn sound
+    // const audio = new Audio('sounds/page-turn.mp3');
+    // audio.volume = 0.3;
+    // audio.play();
 }
 
 function gotoPageFromInput() {
