@@ -61,12 +61,8 @@ document.addEventListener('DOMContentLoaded', function() {
                     try {
                         const userData = await FirebaseAuth.getUserData(user.uid);
                         if (userData.success && userData.data.active) {
-                            // Redirect based on role
-                            if (userData.data.role === 'admin' || userData.data.role === 'moderator') {
-                                window.location.href = 'dashboard.html';
-                            } else {
-                                window.location.href = '../index.html';
-                            }
+                            // Redirect to Quran page
+                            window.location.href = 'quran.html';
                         }
                     } catch (error) {
                         console.error('Error checking user:', error);
@@ -113,13 +109,9 @@ document.addEventListener('DOMContentLoaded', function() {
 
                         showNotification(`مرحباً ${userData.data.displayName}! تم تسجيل الدخول بنجاح`, 'success');
                         
-                        // Redirect based on role
+                        // Redirect to Quran page
                         setTimeout(() => {
-                            if (userData.data.role === 'admin' || userData.data.role === 'moderator') {
-                                window.location.href = 'dashboard.html';
-                            } else {
-                                window.location.href = '../index.html';
-                            }
+                            window.location.href = 'quran.html';
                         }, 1500);
                     } else {
                         showNotification('حدث خطأ في جلب بيانات المستخدم', 'error');
