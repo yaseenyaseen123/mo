@@ -1,17 +1,19 @@
 // Firebase Configuration
-// ⚠️ استبدل هذه القيم ببيانات مشروعك من Firebase Console
+// Ramadan Qalqilya Project
 const firebaseConfig = {
-    apiKey: "YOUR_API_KEY_HERE",
-    authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
-    projectId: "YOUR_PROJECT_ID",
-    storageBucket: "YOUR_PROJECT_ID.appspot.com",
-    messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
-    appId: "YOUR_APP_ID"
+    apiKey: "AIzaSyBYawGRectZWAaCSADTIJzZWZ1NgKY0g-k",
+    authDomain: "ramadan-qalqilya.firebaseapp.com",
+    projectId: "ramadan-qalqilya",
+    storageBucket: "ramadan-qalqilya.firebasestorage.app",
+    messagingSenderId: "969700595208",
+    appId: "1:969700595208:web:7a29c2a0b061e6b27123bd",
+    measurementId: "G-P5ZY7M36HZ"
 };
 
 // متغيرات Firebase العامة
 let auth = null;
 let db = null;
+let analytics = null;
 let isFirebaseEnabled = false;
 
 // تهيئة Firebase
