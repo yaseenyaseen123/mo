@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>اختبار Firebase</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .test-box {
+            background: white;
+            padding: 20px;
+            margin: 10px 0;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .success { color: #27ae60; }
+        .error { color: #e74c3c; }
+        .warning { color: #f39c12; }
+        button {
+            background: #3498db;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 5px;
+        }
+        button:hover { background: #2980b9; }
+        input {
+            padding: 10px;
+            margin: 5px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            width: 300px;
+        }
+    </style>
+</head>
+<body>
+    <h1>🔍 اختبار نظام Firebase</h1>
+    
+    <div class="test-box">
+        <h2>1. فحص تحميل المكتبات</h2>
+        <p id="firebase-check">⏳ جاري الفحص...</p>
+        <p id="firebaseauth-check">⏳ جاري الفحص...</p>
+        <p id="firebaseauth-obj-check">⏳ جاري الفحص...</p>
+    </div>
+
+    <div class="test-box">
+        <h2>2. اختبار تسجيل الدخول</h2>
+        <input type="email" id="test-email" placeholder="البريد الإلكتروني" value="fal3stinYaseen123@@gmail.com"><br>
+        <input type="password" id="test-password" placeholder="كلمة المرور"><br>
+        <button onclick="testLogin()">اختبار تسجيل الدخول</button>
+        <p id="login-result"></p>
+    </div>
+
+    <div class="test-box">
+        <h2>3. سجل الأحداث (Console)</h2>
+        <div id="console-log" style="background: #000; color: #0f0; padding: 10px; font-family: monospace; max-height: 300px; overflow-y: auto;">
+        </div>
+    </div>
+
+    <!-- Firebase SDKs -->
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-analytics.js"></script>
+    
+    <!-- Firebase Configuration & Auth -->
+    <script src="js/firebase-config.js"></script>
+    <script src="js/firebase-auth.js"></script>
+
+    <script>
+        // Console logger
+        const logDiv = document.getElementById('console-log');
+        const originalLog = console.log;
+        const originalError = console.error;
+        const originalWarn = console.warn;
+
+        function addLog(type, ...args) {
+            const msg = args.map(a => typeof a === 'object' ? JSON.stringify(a) : a).join(' ');
+            const time = new Date().toLocaleTimeString();
+            logDiv.innerHTML += `<div style="color: ${type === 'error' ? '#f00' : type === 'warn' ? '#ff0' : '#0f0'}">[${time}] ${type.toUpperCase()}: ${msg}</div>`;
+            logDiv.scrollTop = logDiv.scrollHeight;
+        }
+
+        console.log = function(...args) {
+            originalLog.apply(console, args);
+            addLog('log', ...args);
+        };
+
+        console.error = function(...args) {
+            originalError.apply(console, args);
+            addLog('error', ...args);
+        };
+
+        console.warn = function(...args) {
+            originalWarn.apply(console, args);
+            addLog('warn', ...args);
+        };
+
+        // Check Firebase loading
+        setTimeout(() => {
+            const firebaseCheck = document.getElementById('firebase-check');
+            const firebaseauthCheck = document.getElementById('firebaseauth-check');
+            const firebaseauthObjCheck = document.getElementById('firebaseauth-obj-check');
+
+            if (typeof firebase !== 'undefined') {
+                firebaseCheck.innerHTML = '<span class="success">✅ Firebase SDK محمّل</span>';
+                console.log('Firebase version:', firebase.SDK_VERSION);
+            } else {
+                firebaseCheck.innerHTML = '<span class="error">❌ Firebase SDK غير محمّل</span>';
+            }
+
+            if (typeof FirebaseAuth !== 'undefined') {
+                firebaseauthCheck.innerHTML = '<span class="success">✅ FirebaseAuth object محمّل</span>';
+                console.log('FirebaseAuth methods:', Object.keys(FirebaseAuth));
+            } else {
+                firebaseauthCheck.innerHTML = '<span class="error">❌ FirebaseAuth object غير محمّل</span>';
+            }
+
+            if (window.firebaseAuth) {
+                firebaseauthObjCheck.innerHTML = '<span class="success">✅ window.firebaseAuth مهيأ</span>';
+                console.log('firebaseAuth type:', typeof window.firebaseAuth);
+            } else {
+                firebaseauthObjCheck.innerHTML = '<span class="error">❌ window.firebaseAuth غير مهيأ</span>';
+            }
+        }, 1000);
+
+        // Test login
+        async function testLogin() {
+            const email = document.getElementById('test-email').value;
+            const password = document.getElementById('test-password').value;
+            const resultDiv = document.getElementById('login-result');
+
+            if (!email || !password) {
+                resultDiv.innerHTML = '<span class="error">❌ الرجاء إدخال البريد وكلمة المرور</span>';
+                return;
+            }
+
+            resultDiv.innerHTML = '<span class="warning">⏳ جاري تسجيل الدخول...</span>';
+            console.log('Attempting login for:', email);
+
+            try {
+                console.log('Calling FirebaseAuth.loginUser...');
+                const result = await FirebaseAuth.loginUser(email, password, false);
+                console.log('Login result:', result);
+
+                if (result.success) {
+                    console.log('Getting user data...');
+                    const userData = await FirebaseAuth.getUserData(result.user.uid);
+                    console.log('User data:', userData);
+                    
+                    resultDiv.innerHTML = `<span class="success">✅ تم تسجيل الدخول بنجاح!<br>الاسم: ${userData.data.displayName}<br>الدور: ${userData.data.role}</span>`;
+                } else {
+                    resultDiv.innerHTML = `<span class="error">❌ فشل تسجيل الدخول: ${result.error}</span>`;
+                }
+            } catch (error) {
+                console.error('Login error:', error);
+                resultDiv.innerHTML = `<span class="error">❌ خطأ: ${error.message}</span>`;
+            }
+        }
+    </script>
+</body>
+</html>
