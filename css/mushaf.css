@@ -1,0 +1,580 @@
+/* ====================================
+   Mushaf (Digital Quran Book) Styles
+   ==================================== */
+
+/* Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Amiri+Quran&family=Scheherazade+New:wght@400;700&display=swap');
+
+/* Body */
+.mushaf-body {
+    background: linear-gradient(135deg, #0f3d2a 0%, #1a5c42 100%);
+    min-height: 100vh;
+    padding-bottom: 2rem;
+}
+
+/* Header */
+.mushaf-header {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    padding: 2rem 0;
+    text-align: center;
+    color: white;
+    border-bottom: 2px solid rgba(212, 175, 55, 0.3);
+}
+
+.mushaf-header h1 {
+    font-family: 'Amiri', serif;
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+    color: var(--secondary-color);
+}
+
+.mushaf-header p {
+    font-family: 'Amiri Quran', serif;
+    font-size: 1.3rem;
+    opacity: 0.9;
+}
+
+/* Controls */
+.mushaf-controls {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    padding: 1.5rem 0;
+    margin-bottom: 2rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.mushaf-controls .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.control-group {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.control-btn {
+    background: var(--secondary-color);
+    color: white;
+    border: none;
+    padding: 0.8rem 1.2rem;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1.2rem;
+    transition: all 0.3s ease;
+}
+
+.control-btn:hover {
+    background: #c4a02e;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(212, 175, 55, 0.4);
+}
+
+.control-btn:active {
+    transform: translateY(0);
+}
+
+.control-btn-secondary {
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    padding: 0.7rem 1.2rem;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.control-btn-secondary:hover {
+    background: rgba(255, 255, 255, 0.3);
+    border-color: var(--secondary-color);
+}
+
+.page-info {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 0.8rem 1.5rem;
+    border-radius: 8px;
+    color: white;
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+
+/* Book Container */
+.book-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem;
+    perspective: 2000px;
+}
+
+.book {
+    position: relative;
+    width: 90%;
+    max-width: 1200px;
+    height: 800px;
+    display: flex;
+    box-shadow: 
+        0 20px 60px rgba(0, 0, 0, 0.5),
+        0 10px 30px rgba(0, 0, 0, 0.3);
+    border-radius: 10px;
+    overflow: hidden;
+    background: #f5f1e8;
+    transition: transform 0.3s ease;
+}
+
+.book:hover {
+    transform: scale(1.02);
+}
+
+/* Pages */
+.page {
+    flex: 1;
+    background: linear-gradient(to bottom, #faf8f3 0%, #f5f1e8 100%);
+    position: relative;
+    border: 1px solid #d4c5a9;
+}
+
+.left-page {
+    border-left: none;
+    border-radius: 10px 0 0 10px;
+    box-shadow: inset -5px 0 15px rgba(0, 0, 0, 0.05);
+}
+
+.right-page {
+    border-right: none;
+    border-radius: 0 10px 10px 0;
+    box-shadow: inset 5px 0 15px rgba(0, 0, 0, 0.05);
+}
+
+.page-content {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    padding: 2rem;
+}
+
+/* Page Header */
+.page-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 1rem;
+    border-bottom: 2px solid var(--secondary-color);
+    margin-bottom: 1.5rem;
+}
+
+.surah-name {
+    font-family: 'Amiri', serif;
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--primary-color);
+}
+
+.juz-number {
+    font-family: 'Amiri', serif;
+    font-size: 1rem;
+    color: var(--text-light);
+    background: rgba(30, 90, 62, 0.1);
+    padding: 0.3rem 0.8rem;
+    border-radius: 20px;
+}
+
+/* Page Text */
+.page-text {
+    flex: 1;
+    overflow-y: auto;
+    font-family: 'Amiri Quran', 'Scheherazade New', serif;
+    font-size: 1.8rem;
+    line-height: 2.8;
+    text-align: justify;
+    color: #1a1a1a;
+    padding: 1rem;
+    direction: rtl;
+}
+
+.page-text::-webkit-scrollbar {
+    width: 6px;
+}
+
+.page-text::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.05);
+    border-radius: 3px;
+}
+
+.page-text::-webkit-scrollbar-thumb {
+    background: var(--secondary-color);
+    border-radius: 3px;
+}
+
+.page-text p {
+    margin-bottom: 1.5rem;
+    text-indent: 2rem;
+}
+
+.aya {
+    display: inline;
+}
+
+.aya-number {
+    display: inline-block;
+    font-family: 'Amiri', serif;
+    font-size: 0.9rem;
+    color: var(--secondary-color);
+    background: rgba(212, 175, 55, 0.15);
+    border: 1px solid var(--secondary-color);
+    border-radius: 50%;
+    width: 28px;
+    height: 28px;
+    line-height: 26px;
+    text-align: center;
+    margin: 0 5px;
+    vertical-align: middle;
+}
+
+.basmala {
+    text-align: center;
+    font-size: 2rem;
+    color: var(--primary-color);
+    margin: 2rem 0;
+    padding: 1rem;
+    border-top: 2px solid var(--secondary-color);
+    border-bottom: 2px solid var(--secondary-color);
+}
+
+.surah-header {
+    text-align: center;
+    font-size: 2.2rem;
+    color: var(--primary-color);
+    margin: 2rem 0 1.5rem;
+    padding: 1.5rem;
+    background: linear-gradient(135deg, rgba(30, 90, 62, 0.05), rgba(212, 175, 55, 0.05));
+    border: 2px solid var(--secondary-color);
+    border-radius: 15px;
+    font-weight: 700;
+}
+
+/* Page Footer */
+.page-footer {
+    text-align: center;
+    padding-top: 1rem;
+    border-top: 2px solid var(--secondary-color);
+    margin-top: 1rem;
+}
+
+.page-number {
+    font-family: 'Amiri', serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--primary-color);
+    background: rgba(212, 175, 55, 0.15);
+    padding: 0.5rem 1.5rem;
+    border-radius: 20px;
+    display: inline-block;
+}
+
+/* Book Spine */
+.book-spine {
+    position: absolute;
+    left: 50%;
+    top: 0;
+    bottom: 0;
+    width: 4px;
+    background: linear-gradient(to bottom, 
+        rgba(0, 0, 0, 0.2) 0%, 
+        rgba(0, 0, 0, 0.3) 50%, 
+        rgba(0, 0, 0, 0.2) 100%
+    );
+    transform: translateX(-50%);
+    box-shadow: 
+        -2px 0 5px rgba(0, 0, 0, 0.2),
+        2px 0 5px rgba(0, 0, 0, 0.2);
+}
+
+/* Loading */
+.loading {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    color: var(--text-light);
+}
+
+.loading i {
+    font-size: 3rem;
+    color: var(--secondary-color);
+    margin-bottom: 1rem;
+}
+
+/* Modals */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(5px);
+    z-index: 2000;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal.active {
+    display: flex;
+}
+
+.modal-content {
+    background: white;
+    border-radius: 15px;
+    max-width: 500px;
+    width: 90%;
+    max-height: 90vh;
+    overflow-y: auto;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+}
+
+.modal-large {
+    max-width: 900px;
+}
+
+.modal-header {
+    background: linear-gradient(135deg, var(--primary-color), var(--dark-green));
+    color: white;
+    padding: 1.5rem;
+    border-radius: 15px 15px 0 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.modal-header h3 {
+    margin: 0;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 1.3rem;
+}
+
+.close-modal {
+    background: rgba(255, 255, 255, 0.2);
+    border: none;
+    color: white;
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 1.2rem;
+    transition: all 0.3s ease;
+}
+
+.close-modal:hover {
+    background: rgba(255, 255, 255, 0.3);
+    transform: rotate(90deg);
+}
+
+.modal-body {
+    padding: 2rem;
+}
+
+.modal-body label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+    color: var(--primary-color);
+}
+
+.modal-body input {
+    width: 100%;
+    padding: 0.8rem;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    font-size: 1rem;
+    margin-bottom: 1rem;
+    transition: border-color 0.3s ease;
+}
+
+.modal-body input:focus {
+    outline: none;
+    border-color: var(--primary-color);
+}
+
+/* Surah Grid */
+.surah-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 1rem;
+}
+
+.surah-item {
+    background: linear-gradient(135deg, rgba(30, 90, 62, 0.05), rgba(212, 175, 55, 0.05));
+    border: 2px solid transparent;
+    padding: 1rem;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-align: center;
+}
+
+.surah-item:hover {
+    border-color: var(--secondary-color);
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.surah-item .number {
+    display: inline-block;
+    background: var(--secondary-color);
+    color: white;
+    width: 30px;
+    height: 30px;
+    line-height: 30px;
+    border-radius: 50%;
+    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
+    font-weight: 700;
+}
+
+.surah-item .name {
+    font-family: 'Amiri', serif;
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--primary-color);
+    margin-bottom: 0.3rem;
+}
+
+.surah-item .info {
+    font-size: 0.85rem;
+    color: var(--text-light);
+}
+
+/* Juz Grid */
+.juz-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    gap: 1rem;
+}
+
+.juz-item {
+    background: linear-gradient(135deg, var(--primary-color), var(--dark-green));
+    color: white;
+    padding: 2rem 1rem;
+    border-radius: 10px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.juz-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+}
+
+.juz-item .number {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+}
+
+.juz-item .label {
+    font-size: 0.9rem;
+    opacity: 0.9;
+}
+
+/* Footer */
+.mushaf-footer {
+    background: rgba(0, 0, 0, 0.3);
+    color: white;
+    text-align: center;
+    padding: 2rem;
+    margin-top: 3rem;
+}
+
+.mushaf-footer p {
+    margin: 0.5rem 0;
+    opacity: 0.8;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+    .book {
+        height: 700px;
+    }
+    
+    .page-text {
+        font-size: 1.6rem;
+        line-height: 2.5;
+    }
+}
+
+@media (max-width: 768px) {
+    .mushaf-controls .container {
+        flex-direction: column;
+    }
+    
+    .book {
+        flex-direction: column;
+        height: auto;
+        min-height: 600px;
+    }
+    
+    .left-page,
+    .right-page {
+        border-radius: 0;
+    }
+    
+    .left-page {
+        display: none; /* Hide left page on mobile */
+    }
+    
+    .book-spine {
+        display: none;
+    }
+    
+    .page-text {
+        font-size: 1.4rem;
+        line-height: 2.3;
+    }
+    
+    .surah-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .juz-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media (max-width: 480px) {
+    .mushaf-header h1 {
+        font-size: 1.8rem;
+    }
+    
+    .mushaf-header p {
+        font-size: 1.1rem;
+    }
+    
+    .page-content {
+        padding: 1rem;
+    }
+    
+    .page-text {
+        font-size: 1.2rem;
+        line-height: 2.1;
+    }
+    
+    .control-btn {
+        padding: 0.6rem 1rem;
+        font-size: 1rem;
+    }
+}
