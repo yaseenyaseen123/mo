@@ -2630,9 +2630,10 @@ p {
     position: absolute;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%) rotate(var(--kaaba-rotation, 0deg));
     text-align: center;
     pointer-events: none;
+    --kaaba-rotation: 0deg;
 }
 
 .kaaba-icon i {

@@ -249,9 +249,9 @@ function updateCompass(heading) {
     // Update heading display
     headingValue.textContent = Math.round(heading) + '°';
     
-    // Keep Kaaba icon pointing to Qibla
+    // Keep Kaaba icon pointing to Qibla using CSS variable
     if (kaabaIcon) {
-        kaabaIcon.style.transform = `rotate(${qiblaAngle}deg)`;
+        kaabaIcon.style.setProperty('--kaaba-rotation', `${qiblaAngle}deg`);
     }
 }
 
@@ -264,9 +264,9 @@ function updateLocationInfo(location, qiblaAngle) {
     document.getElementById('qiblaDirection').textContent = Math.round(qiblaAngle) + '°';
     document.getElementById('distanceToKaaba').textContent = distance.toLocaleString('ar-EG') + ' كم';
     
-    // Position Kaaba icon
+    // Position Kaaba icon using CSS variable
     if (kaabaIcon) {
-        kaabaIcon.style.transform = `rotate(${qiblaAngle}deg)`;
+        kaabaIcon.style.setProperty('--kaaba-rotation', `${qiblaAngle}deg`);
     }
 }
 
