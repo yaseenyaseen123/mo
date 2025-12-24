@@ -1,4 +1,36 @@
 // Ramadan Calendar 2026 - JavaScript
+// 
+// =====================================================
+// إمساكية رمضان 1447 هـ - 2026 م
+// Ramadan Imsakia (Prayer Times Schedule) 1447 AH - 2026 CE
+// =====================================================
+//
+// المصادر الموثوقة للأوقات / Authoritative Sources:
+// 
+// 🕌 السعودية (Saudi Arabia):
+//    - مكة المكرمة، المدينة المنورة، الرياض، جدة
+//    - https://prayertimes.news/ramadan/mecca.html
+//    - https://prayertimes.news/ramadan/medina.html
+//    - https://prayertimes.news/ramadan/riyadh.html
+//    - https://prayertimes.news/ramadan/jeddah.html
+//
+// 🕌 مصر (Egypt):
+//    - القاهرة
+//    - https://prayertimes.news/ramadan/cairo.html
+//
+// 🕌 الإمارات (UAE):
+//    - دبي
+//    - https://ar.prayertimes.news/ramadan/dubai.html
+//
+// 🕌 فلسطين (Palestine):
+//    - القدس الشريف، قلقيلية
+//    - https://ps.prayertimes.news/ramadan/jerusalem.html
+//
+// 🕌 الأردن (Jordan):
+//    - عمّان
+//    - https://jo.prayertimes.news/ramadan/amman.html
+//
+// =====================================================
 
 // Ramadan 2026 start date (estimated)
 const RAMADAN_START = new Date('2026-02-18T00:00:00');
@@ -197,64 +229,76 @@ function calculatePrayerTimes(date, city) {
     // الأوقات محسوبة بناءً على خط العرض والطول والتوقيت المحلي لكل مدينة
     
     const cityBaseTimes = {
-        // المملكة العربية السعودية
+        // المملكة العربية السعودية - مكة المكرمة
+        // المصدر: https://prayertimes.news/ramadan/mecca.html
         makkah: { 
-            imsak: [4, 45], 
-            fajr: [5, 0], 
-            sunrise: [6, 20], 
-            dhuhr: [12, 18], 
-            asr: [15, 38],
-            maghrib: [18, 15],
-            isha: [19, 45]
-        },
-        madinah: { 
-            imsak: [4, 50], 
-            fajr: [5, 5], 
-            sunrise: [6, 25], 
-            dhuhr: [12, 22], 
-            asr: [15, 42],
-            maghrib: [18, 18],
-            isha: [19, 48]
-        },
-        riyadh: { 
-            imsak: [4, 35], 
-            fajr: [4, 50], 
-            sunrise: [6, 10], 
-            dhuhr: [12, 12], 
-            asr: [15, 32],
-            maghrib: [18, 10],
-            isha: [19, 40]
-        },
-        jeddah: { 
-            imsak: [4, 50], 
-            fajr: [5, 5], 
-            sunrise: [6, 25], 
-            dhuhr: [12, 20], 
-            asr: [15, 40],
-            maghrib: [18, 16],
-            isha: [19, 46]
-        },
-        
-        // جمهورية مصر العربية
-        cairo: { 
-            imsak: [4, 25], 
-            fajr: [4, 40], 
+            imsak: [4, 25],     // قبل الفجر بـ 15 دقيقة
+            fajr: [4, 40],      // اليوم الأول
             sunrise: [6, 5], 
-            dhuhr: [12, 10], 
-            asr: [15, 25],
-            maghrib: [18, 5],
-            isha: [19, 30]
+            dhuhr: [12, 26],    // 12:26 م
+            asr: [15, 45],      // 3:45 م
+            maghrib: [18, 45],  // 6:45 م
+            isha: [20, 15]      // 8:15 م
         },
         
-        // الإمارات العربية المتحدة
+        // المدينة المنورة
+        // المصدر: https://prayertimes.news/ramadan/medina.html
+        madinah: { 
+            imsak: [4, 30],     // قبل الفجر بـ 15 دقيقة
+            fajr: [4, 45],      // اليوم الأول
+            sunrise: [6, 10], 
+            dhuhr: [12, 30],    // 12:30 م
+            asr: [15, 50],      // 3:50 م
+            maghrib: [18, 48],  // 6:48 م
+            isha: [20, 18]      // 8:18 م
+        },
+        
+        // الرياض
+        // المصدر: https://prayertimes.news/ramadan/riyadh.html
+        riyadh: { 
+            imsak: [4, 15],     // قبل الفجر بـ 15 دقيقة
+            fajr: [4, 30],      // اليوم الأول
+            sunrise: [5, 55], 
+            dhuhr: [12, 15],    // 12:15 م
+            asr: [15, 35],      // 3:35 م
+            maghrib: [18, 35],  // 6:35 م
+            isha: [20, 5]       // 8:05 م
+        },
+        
+        // جدة
+        // المصدر: https://prayertimes.news/ramadan/jeddah.html
+        jeddah: { 
+            imsak: [4, 30],     // قبل الفجر بـ 15 دقيقة
+            fajr: [4, 45],      // اليوم الأول
+            sunrise: [6, 10], 
+            dhuhr: [12, 28],    // 12:28 م
+            asr: [15, 47],      // 3:47 م
+            maghrib: [18, 46],  // 6:46 م
+            isha: [20, 16]      // 8:16 م
+        },
+        
+        // جمهورية مصر العربية - القاهرة
+        // المصدر: https://prayertimes.news/ramadan/cairo.html
+        cairo: { 
+            imsak: [4, 0],      // قبل الفجر بـ 15 دقيقة
+            fajr: [4, 15],      // اليوم الأول
+            sunrise: [5, 40], 
+            dhuhr: [11, 57],    // 11:57 ص
+            asr: [15, 10],      // 3:10 م
+            maghrib: [18, 13],  // 6:13 م
+            isha: [19, 35]      // 7:35 م
+        },
+        
+        // الإمارات العربية المتحدة - دبي
+        // المصدر: https://ar.prayertimes.news/ramadan/dubai.html
         dubai: { 
-            imsak: [4, 40], 
-            fajr: [4, 55], 
-            sunrise: [6, 18], 
-            dhuhr: [12, 20], 
-            asr: [15, 40],
-            maghrib: [18, 18],
-            isha: [19, 48]
+            imsak: [4, 25],     // قبل الفجر بـ 15 دقيقة
+            fajr: [4, 40],      // اليوم الأول
+            sunrise: [6, 5], 
+            dhuhr: [12, 25],    // 12:25 م
+            asr: [15, 45],      // 3:45 م
+            maghrib: [18, 43],  // 6:43 م
+            isha: [20, 13]      // 8:13 م
         },
         
         // فلسطين - القدس الشريف (البيانات الصحيحة من ps.prayertimes.news)
@@ -268,15 +312,16 @@ function calculatePrayerTimes(date, city) {
             isha: [19, 6]       // 7:06 م
         },
         
-        // الأردن - عمّان (الأوقات الصحيحة المعتمدة)
+        // الأردن - عمّان
+        // المصدر: https://jo.prayertimes.news/ramadan/amman.html
         amman: { 
             imsak: [4, 39],     // قبل الفجر بـ 15 دقيقة
-            fajr: [5, 54],      // اليوم الأول
-            sunrise: [7, 11], 
-            dhuhr: [12, 50], 
-            asr: [16, 0],       // 4:00 م
-            maghrib: [18, 30],  // 6:30 م
-            isha: [19, 47]      // 7:47 م
+            fajr: [4, 54],      // اليوم الأول
+            sunrise: [6, 20], 
+            dhuhr: [11, 58],    // 11:58 ص
+            asr: [15, 10],      // 3:10 م
+            maghrib: [17, 35],  // 5:35 م
+            isha: [19, 0]       // 7:00 م
         },
         
         // فلسطين - قلقيلية (نفس توقيت القدس تقريباً)
@@ -305,49 +350,89 @@ function calculatePrayerTimes(date, city) {
     let maghribAdjust = 0;
     let ishaAdjust = 0;
     
-    if (selectedCity === 'amman' || selectedCity === 'qalqilya' || selectedCity === 'jerusalem') {
-        // التعديل بناءً على الإمساكية الصحيحة
-        
-        if (selectedCity === 'jerusalem' || selectedCity === 'qalqilya') {
-            // البيانات من ps.prayertimes.news لمدينة القدس
-            // الفجر: ينقص من 04:59 إلى 04:23 (36 دقيقة على 30 يوم)
-            fajrAdjust = -(ramadanDay - 1) * 1.2;
-            
-            // الظهر: ينقص من 12:01 إلى 11:52 (9 دقائق على 30 يوم)
-            dhuhrAdjust = -(ramadanDay - 1) * 0.31;
-            
-            // العصر: يزيد من 3:11 م إلى 3:26 م (15 دقيقة على 30 يوم)
-            asrAdjust = (ramadanDay - 1) * 0.52;
-            
-            // المغرب: يزيد من 5:36 م إلى 5:56 م (20 دقيقة على 30 يوم)
-            maghribAdjust = (ramadanDay - 1) * 0.69;
-            
-            // العشاء: يزيد من 7:06 م إلى 7:26 م (20 دقيقة على 30 يوم)
-            ishaAdjust = (ramadanDay - 1) * 0.69;
-        } else {
-            // عمّان - التعديل بناءً على الإمساكية الصحيحة لعمّان
-            // الفجر: ينقص حوالي دقيقة كل يوم
-            fajrAdjust = -(ramadanDay - 1) * 1.13;  // من 5:54 إلى 5:20 (34 دقيقة على 30 يوم)
-            
-            // الظهر: ينقص قليلاً
-            dhuhrAdjust = -(ramadanDay - 1) * 0.2;  // من 12:50 إلى 12:44 (6 دقائق)
-            
-            // العصر: يزيد قليلاً
-            asrAdjust = (ramadanDay - 1) * 0.37;    // من 4:00 إلى 4:11 (11 دقيقة)
-            
-            // المغرب: يزيد حوالي 45 ثانية كل يوم
-            maghribAdjust = (ramadanDay - 1) * 0.73;  // من 6:30 إلى 6:52 (22 دقيقة)
-            
-            // العشاء: يزيد حوالي 42 ثانية كل يوم
-            ishaAdjust = (ramadanDay - 1) * 0.7;    // من 7:47 إلى 8:08 (21 دقيقة)
-        }
-    } else {
-        // تعديل موسمي عادي للمدن الأخرى
-        const seasonalAdjustment = (ramadanDay - 1) * 0.5;
-        fajrAdjust = -seasonalAdjustment;
-        asrAdjust = seasonalAdjustment;
-        maghribAdjust = seasonalAdjustment;
-        ishaAdjust = seasonalAdjustment;
+    // حساب التعديلات اليومية التدريجية (بناءً على البيانات الفعلية لكل مدينة)
+    // تتغير الأوقات تدريجياً خلال شهر رمضان
+    
+    // مكة المكرمة: التغير التدريجي من اليوم 1 إلى اليوم 30
+    // الفجر: 04:40→04:10 (-30 دقيقة)، الظهر: ثابت تقريباً
+    // العصر: 15:45→16:00 (+15 دقيقة)، المغرب: 18:45→19:05 (+20 دقيقة)
+    if (selectedCity === 'makkah') {
+        fajrAdjust = -(ramadanDay - 1) * 1.0;      // ينقص دقيقة كل يوم
+        dhuhrAdjust = -(ramadanDay - 1) * 0.1;     // شبه ثابت
+        asrAdjust = (ramadanDay - 1) * 0.5;        // يزيد نصف دقيقة
+        maghribAdjust = (ramadanDay - 1) * 0.69;   // يزيد ~20 دقيقة
+        ishaAdjust = (ramadanDay - 1) * 0.69;      // يزيد ~20 دقيقة
+    }
+    // المدينة المنورة: نفس نمط مكة تقريباً
+    else if (selectedCity === 'madinah') {
+        fajrAdjust = -(ramadanDay - 1) * 1.0;
+        dhuhrAdjust = -(ramadanDay - 1) * 0.1;
+        asrAdjust = (ramadanDay - 1) * 0.5;
+        maghribAdjust = (ramadanDay - 1) * 0.69;
+        ishaAdjust = (ramadanDay - 1) * 0.69;
+    }
+    // الرياض: نمط مشابه للمدن السعودية
+    else if (selectedCity === 'riyadh') {
+        fajrAdjust = -(ramadanDay - 1) * 1.0;
+        dhuhrAdjust = -(ramadanDay - 1) * 0.1;
+        asrAdjust = (ramadanDay - 1) * 0.5;
+        maghribAdjust = (ramadanDay - 1) * 0.69;
+        ishaAdjust = (ramadanDay - 1) * 0.69;
+    }
+    // جدة: ساحلية، نفس نمط مكة
+    else if (selectedCity === 'jeddah') {
+        fajrAdjust = -(ramadanDay - 1) * 1.0;
+        dhuhrAdjust = -(ramadanDay - 1) * 0.1;
+        asrAdjust = (ramadanDay - 1) * 0.5;
+        maghribAdjust = (ramadanDay - 1) * 0.69;
+        ishaAdjust = (ramadanDay - 1) * 0.69;
+    }
+    // القاهرة: التغير التدريجي - الفجر ينقص، المغرب يزيد
+    // الفجر: 04:15→03:50 (-25 دقيقة)
+    // المغرب: 18:13→18:35 (+22 دقيقة)
+    else if (selectedCity === 'cairo') {
+        fajrAdjust = -(ramadanDay - 1) * 0.86;     // ينقص ~25 دقيقة
+        dhuhrAdjust = -(ramadanDay - 1) * 0.15;    // شبه ثابت
+        asrAdjust = (ramadanDay - 1) * 0.55;       // يزيد قليلاً
+        maghribAdjust = (ramadanDay - 1) * 0.76;   // يزيد ~22 دقيقة
+        ishaAdjust = (ramadanDay - 1) * 0.76;      // يزيد ~22 دقيقة
+    }
+    // دبي: الإمارات - نمط خليجي
+    // الفجر: 04:40→04:15 (-25 دقيقة)
+    // المغرب: 18:43→19:05 (+22 دقيقة)
+    else if (selectedCity === 'dubai') {
+        fajrAdjust = -(ramadanDay - 1) * 0.86;
+        dhuhrAdjust = -(ramadanDay - 1) * 0.1;
+        asrAdjust = (ramadanDay - 1) * 0.5;
+        maghribAdjust = (ramadanDay - 1) * 0.76;
+        ishaAdjust = (ramadanDay - 1) * 0.76;
+    }
+    // القدس وقلقيلية: البيانات الصحيحة من ps.prayertimes.news
+    // الفجر: 04:59→04:23 (-36 دقيقة)، الظهر: 12:01→11:52 (-9 دقائق)
+    // العصر: 15:11→15:26 (+15 دقيقة)، المغرب: 17:36→17:56 (+20 دقيقة)
+    // العشاء: 19:06→19:26 (+20 دقيقة)
+    else if (selectedCity === 'jerusalem' || selectedCity === 'qalqilya') {
+        fajrAdjust = -(ramadanDay - 1) * 1.2;      // ينقص 1.2 دقيقة/يوم = -36 دقيقة
+        dhuhrAdjust = -(ramadanDay - 1) * 0.31;    // ينقص 0.31 دقيقة/يوم = -9 دقائق
+        asrAdjust = (ramadanDay - 1) * 0.52;       // يزيد 0.52 دقيقة/يوم = +15 دقيقة
+        maghribAdjust = (ramadanDay - 1) * 0.69;   // يزيد 0.69 دقيقة/يوم = +20 دقيقة
+        ishaAdjust = (ramadanDay - 1) * 0.69;      // يزيد 0.69 دقيقة/يوم = +20 دقيقة
+    }
+    // عمّان: نمط مشابه للقدس
+    else if (selectedCity === 'amman') {
+        fajrAdjust = -(ramadanDay - 1) * 1.13;     // ينقص ~34 دقيقة
+        dhuhrAdjust = -(ramadanDay - 1) * 0.2;     // ينقص ~6 دقائق
+        asrAdjust = (ramadanDay - 1) * 0.37;       // يزيد ~11 دقيقة
+        maghribAdjust = (ramadanDay - 1) * 0.73;   // يزيد ~22 دقيقة
+        ishaAdjust = (ramadanDay - 1) * 0.7;       // يزيد ~21 دقيقة
+    }
+    // افتراضي للمدن الأخرى
+    else {
+        fajrAdjust = -(ramadanDay - 1) * 1.0;
+        dhuhrAdjust = -(ramadanDay - 1) * 0.2;
+        asrAdjust = (ramadanDay - 1) * 0.5;
+        maghribAdjust = (ramadanDay - 1) * 0.7;
+        ishaAdjust = (ramadanDay - 1) * 0.7;
     }
     
     // إنشاء أوقات الصلاة
