@@ -2718,11 +2718,20 @@ p {
     cursor: pointer;
     transition: var(--transition);
     box-shadow: 0 5px 20px rgba(30, 90, 62, 0.4);
+    min-height: 56px;
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
+    user-select: none;
 }
 
-.find-qibla-btn:hover {
+.find-qibla-btn:hover,
+.find-qibla-btn:active {
     transform: translateY(-2px);
     box-shadow: 0 8px 30px rgba(30, 90, 62, 0.5);
+}
+
+.find-qibla-btn:active {
+    transform: translateY(-1px);
 }
 
 .find-qibla-btn i {
