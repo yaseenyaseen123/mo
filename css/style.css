@@ -2432,7 +2432,7 @@ p {
     padding: 3rem;
     box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
     position: relative;
-    overflow: hidden;
+    overflow: visible;
 }
 
 .compass-card::before {
@@ -2444,6 +2444,8 @@ p {
     height: 200%;
     background: radial-gradient(circle, rgba(212, 175, 55, 0.1) 0%, transparent 70%);
     animation: rotatePattern 30s linear infinite;
+    pointer-events: none;
+    z-index: 0;
 }
 
 @keyframes rotatePattern {
@@ -2722,6 +2724,9 @@ p {
     -webkit-tap-highlight-color: transparent;
     touch-action: manipulation;
     user-select: none;
+    position: relative;
+    z-index: 100;
+    pointer-events: auto;
 }
 
 .find-qibla-btn:hover,
