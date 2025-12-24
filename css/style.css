@@ -2305,3 +2305,1073 @@ p {
         grid-template-columns: 1fr;
     }
 }
+
+/* ====================================
+   Qibla Finder Styles - Islamic Heritage Design
+   ==================================== */
+
+.qibla-container {
+    min-height: 100vh;
+    background: linear-gradient(135deg, #0f3d2a 0%, #1e5a3e 50%, #2c7a5c 100%);
+    padding: 100px 0 50px;
+    position: relative;
+    overflow: hidden;
+}
+
+.qibla-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: 
+        repeating-linear-gradient(45deg, transparent, transparent 35px, rgba(212, 175, 55, 0.03) 35px, rgba(212, 175, 55, 0.03) 70px);
+    pointer-events: none;
+}
+
+.islamic-header {
+    text-align: center;
+    margin-bottom: 3rem;
+    position: relative;
+}
+
+.decorative-line {
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--secondary-color), transparent);
+    margin: 1.5rem auto;
+    width: 80%;
+    max-width: 600px;
+    position: relative;
+}
+
+.decorative-line::before,
+.decorative-line::after {
+    content: '✦';
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--secondary-color);
+    font-size: 1.5rem;
+}
+
+.decorative-line::before {
+    left: -20px;
+}
+
+.decorative-line::after {
+    right: -20px;
+}
+
+.islamic-header .header-content {
+    color: var(--white);
+}
+
+.islamic-header i {
+    font-size: 3rem;
+    color: var(--secondary-color);
+    margin-bottom: 1rem;
+    filter: drop-shadow(0 0 10px rgba(212, 175, 55, 0.5));
+}
+
+.islamic-header h1 {
+    font-family: 'Amiri', serif;
+    font-size: 2.5rem;
+    color: var(--white);
+    margin: 1rem 0;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.arabic-verse {
+    font-family: 'Amiri', serif;
+    font-size: 1.8rem;
+    color: var(--secondary-color);
+    margin: 1.5rem 0 0.5rem;
+    line-height: 2;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.verse-source {
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.7);
+    font-style: italic;
+}
+
+.compass-section {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.compass-card {
+    background: var(--white);
+    border-radius: 30px;
+    padding: 3rem;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    position: relative;
+    overflow: hidden;
+}
+
+.compass-card::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(212, 175, 55, 0.1) 0%, transparent 70%);
+    animation: rotatePattern 30s linear infinite;
+}
+
+@keyframes rotatePattern {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+.status-message {
+    text-align: center;
+    padding: 2rem;
+    background: var(--light-green);
+    border-radius: 15px;
+    margin-bottom: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+}
+
+.status-message i {
+    font-size: 2rem;
+    color: var(--primary-color);
+}
+
+.status-message.error {
+    background: #fee;
+    color: #c33;
+}
+
+.status-message.error i {
+    color: #c33;
+}
+
+.location-info {
+    display: flex;
+    justify-content: space-around;
+    gap: 1rem;
+    margin-bottom: 2rem;
+    flex-wrap: wrap;
+}
+
+.location-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem 1.5rem;
+    background: var(--light-green);
+    border-radius: 15px;
+    flex: 1;
+    min-width: 200px;
+}
+
+.location-item i {
+    font-size: 1.8rem;
+    color: var(--primary-color);
+}
+
+.location-details {
+    display: flex;
+    flex-direction: column;
+}
+
+.location-label {
+    font-size: 0.85rem;
+    color: var(--text-light);
+}
+
+.location-value {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--primary-color);
+}
+
+.compass-wrapper {
+    position: relative;
+    margin: 3rem auto;
+    max-width: 500px;
+}
+
+.compass-outer-ring {
+    position: relative;
+    width: 100%;
+    padding-bottom: 100%;
+    background: radial-gradient(circle, #f8f9fa 0%, #e8f5e9 100%);
+    border-radius: 50%;
+    box-shadow: 
+        inset 0 0 30px rgba(30, 90, 62, 0.1),
+        0 10px 40px rgba(0, 0, 0, 0.2);
+}
+
+.compass-directions {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.compass-directions .dir {
+    position: absolute;
+    font-weight: 700;
+    color: var(--primary-color);
+    font-size: 1.2rem;
+}
+
+.dir.north {
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.dir.east {
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.dir.south {
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.dir.west {
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.compass-circle {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 85%;
+    height: 85%;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    background: linear-gradient(135deg, #fff 0%, #f0f8f0 100%);
+    box-shadow: 0 0 20px rgba(30, 90, 62, 0.3);
+    transition: transform 0.3s ease;
+}
+
+.compass-rose {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background-image: conic-gradient(
+        from 0deg,
+        var(--primary-color) 0deg 45deg,
+        transparent 45deg 90deg,
+        var(--primary-color) 90deg 135deg,
+        transparent 135deg 180deg,
+        var(--primary-color) 180deg 225deg,
+        transparent 225deg 270deg,
+        var(--primary-color) 270deg 315deg,
+        transparent 315deg 360deg
+    );
+    opacity: 0.1;
+}
+
+.degree-markers {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+
+.degree-markers span {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--text-light);
+    transform-origin: center;
+    transform: translate(-50%, -50%) rotate(calc(var(--i) * 1deg)) translateY(-170px) rotate(calc(var(--i) * -1deg));
+}
+
+.kaaba-icon {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    pointer-events: none;
+}
+
+.kaaba-icon i {
+    font-size: 3rem;
+    color: var(--secondary-color);
+    filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3));
+    display: block;
+    margin-bottom: 0.5rem;
+}
+
+.kaaba-icon span {
+    display: block;
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--primary-color);
+    background: rgba(255, 255, 255, 0.9);
+    padding: 0.3rem 0.8rem;
+    border-radius: 20px;
+}
+
+.north-arrow {
+    position: absolute;
+    top: 5%;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+}
+
+.arrow-pointer {
+    width: 0;
+    height: 0;
+    border-left: 15px solid transparent;
+    border-right: 15px solid transparent;
+    border-bottom: 30px solid #c33;
+    margin: 0 auto 5px;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+}
+
+.north-arrow span {
+    font-weight: 700;
+    color: #c33;
+    font-size: 1.2rem;
+}
+
+.compass-center {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 1rem;
+    color: var(--primary-color);
+}
+
+.heading-display {
+    text-align: center;
+    margin-top: 2rem;
+}
+
+.heading-value {
+    font-size: 3rem;
+    font-weight: 700;
+    color: var(--primary-color);
+    font-family: 'Cairo', sans-serif;
+}
+
+.heading-label {
+    font-size: 1rem;
+    color: var(--text-light);
+    margin-top: 0.5rem;
+}
+
+.find-qibla-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    width: 100%;
+    max-width: 400px;
+    margin: 2rem auto;
+    padding: 1.2rem 2rem;
+    background: linear-gradient(135deg, var(--primary-color), #2c7a5c);
+    color: var(--white);
+    border: none;
+    border-radius: 50px;
+    font-size: 1.2rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: var(--transition);
+    box-shadow: 0 5px 20px rgba(30, 90, 62, 0.4);
+}
+
+.find-qibla-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 30px rgba(30, 90, 62, 0.5);
+}
+
+.find-qibla-btn i {
+    font-size: 1.5rem;
+}
+
+.qibla-instructions {
+    background: var(--light-green);
+    padding: 2rem;
+    border-radius: 20px;
+    margin-top: 3rem;
+}
+
+.qibla-instructions h3 {
+    color: var(--primary-color);
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.qibla-instructions ol {
+    padding-right: 1.5rem;
+    line-height: 2;
+}
+
+.qibla-instructions li {
+    margin-bottom: 0.8rem;
+    color: var(--text-dark);
+}
+
+.kaaba-info-card {
+    background: linear-gradient(135deg, var(--light-green), rgba(212, 175, 55, 0.1));
+    padding: 2rem;
+    border-radius: 20px;
+    margin-top: 2rem;
+    border: 2px solid rgba(212, 175, 55, 0.3);
+}
+
+.kaaba-info-card .info-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.kaaba-info-card .info-header i {
+    font-size: 2rem;
+    color: var(--secondary-color);
+}
+
+.kaaba-info-card .info-header h3 {
+    color: var(--primary-color);
+    margin: 0;
+}
+
+.kaaba-info-card .info-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+}
+
+.kaaba-info-card .info-item {
+    display: flex;
+    flex-direction: column;
+}
+
+.kaaba-info-card .info-label {
+    font-size: 0.9rem;
+    color: var(--text-light);
+    margin-bottom: 0.3rem;
+}
+
+.kaaba-info-card .info-value {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--primary-color);
+}
+
+/* ====================================
+   Ramadan Calendar Styles - Heritage Design
+   ==================================== */
+
+.ramadan-container {
+    min-height: 100vh;
+    background: linear-gradient(135deg, #0f3d2a 0%, #1e5a3e 30%, #2c7a5c 100%);
+    padding: 100px 0 50px;
+    position: relative;
+    overflow: hidden;
+}
+
+.ramadan-container::before {
+    content: '☪';
+    position: absolute;
+    font-size: 40rem;
+    color: rgba(212, 175, 55, 0.03);
+    top: -10rem;
+    right: -10rem;
+    pointer-events: none;
+    animation: floatMoon 20s ease-in-out infinite;
+}
+
+@keyframes floatMoon {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(30px); }
+}
+
+.ramadan-header {
+    text-align: center;
+    margin-bottom: 3rem;
+    position: relative;
+}
+
+.decorative-pattern-top,
+.decorative-pattern-bottom {
+    height: 4px;
+    background: linear-gradient(90deg, transparent, var(--secondary-color) 20%, var(--secondary-color) 80%, transparent);
+    margin: 2rem auto;
+    width: 60%;
+    position: relative;
+}
+
+.decorative-pattern-top::before,
+.decorative-pattern-top::after,
+.decorative-pattern-bottom::before,
+.decorative-pattern-bottom::after {
+    content: '✦';
+    position: absolute;
+    color: var(--secondary-color);
+    font-size: 1.5rem;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.decorative-pattern-top::before,
+.decorative-pattern-bottom::before {
+    left: -25px;
+}
+
+.decorative-pattern-top::after,
+.decorative-pattern-bottom::after {
+    right: -25px;
+}
+
+.moon-stars {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.moon-stars i {
+    color: var(--secondary-color);
+    font-size: 2.5rem;
+    filter: drop-shadow(0 0 15px rgba(212, 175, 55, 0.6));
+    animation: twinkle 3s ease-in-out infinite;
+}
+
+.moon-stars .fa-moon {
+    font-size: 3.5rem;
+}
+
+@keyframes twinkle {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.5; }
+}
+
+.ramadan-title {
+    font-family: 'Amiri', serif;
+    font-size: 3rem;
+    color: var(--white);
+    text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.4);
+    margin-bottom: 1rem;
+}
+
+.hijri-year {
+    font-size: 1.3rem;
+    color: var(--secondary-color);
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+}
+
+.ramadan-verse {
+    font-family: 'Amiri', serif;
+    font-size: 2rem;
+    color: var(--secondary-color);
+    margin: 1.5rem 0 0.5rem;
+    line-height: 2.2;
+}
+
+.countdown-section {
+    max-width: 900px;
+    margin: 0 auto 3rem;
+}
+
+.countdown-card {
+    background: var(--white);
+    border-radius: 25px;
+    padding: 3rem;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    text-align: center;
+}
+
+.countdown-card h2 {
+    color: var(--primary-color);
+    margin-bottom: 2rem;
+    font-size: 1.8rem;
+}
+
+.countdown-timer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    margin: 2rem 0;
+}
+
+.time-unit {
+    background: linear-gradient(135deg, var(--light-green), rgba(212, 175, 55, 0.1));
+    border-radius: 15px;
+    padding: 1.5rem;
+    min-width: 100px;
+    border: 2px solid var(--secondary-color);
+}
+
+.time-value {
+    font-size: 3rem;
+    font-weight: 700;
+    color: var(--primary-color);
+    font-family: 'Cairo', sans-serif;
+}
+
+.time-label {
+    font-size: 0.9rem;
+    color: var(--text-light);
+    margin-top: 0.5rem;
+}
+
+.time-separator {
+    font-size: 3rem;
+    font-weight: 700;
+    color: var(--secondary-color);
+}
+
+.countdown-message {
+    font-size: 1.2rem;
+    color: var(--text-dark);
+    margin-top: 1.5rem;
+}
+
+.ramadan-stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+    max-width: 1000px;
+    margin: 0 auto 3rem;
+}
+
+.stat-card {
+    background: var(--white);
+    border-radius: 20px;
+    padding: 2rem;
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    transition: var(--transition);
+}
+
+.stat-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+}
+
+.stat-card i {
+    font-size: 2.5rem;
+    color: var(--secondary-color);
+    margin-bottom: 1rem;
+}
+
+.stat-value {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--primary-color);
+    margin: 1rem 0;
+}
+
+.stat-label {
+    color: var(--text-light);
+    font-size: 0.95rem;
+}
+
+.city-selector-card {
+    background: var(--white);
+    border-radius: 25px;
+    padding: 2.5rem;
+    margin-bottom: 3rem;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+}
+
+.selector-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 2rem;
+    justify-content: center;
+}
+
+.selector-header i {
+    font-size: 1.8rem;
+    color: var(--primary-color);
+}
+
+.selector-header h3 {
+    color: var(--primary-color);
+    margin: 0;
+}
+
+.city-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+}
+
+.city-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 1.5rem;
+    background: var(--bg-light);
+    border: 2px solid transparent;
+    border-radius: 15px;
+    cursor: pointer;
+    transition: var(--transition);
+    font-family: 'Cairo', sans-serif;
+    font-size: 1rem;
+}
+
+.city-btn i {
+    font-size: 2rem;
+    color: var(--primary-color);
+}
+
+.city-btn:hover {
+    background: var(--light-green);
+    border-color: var(--primary-color);
+    transform: translateY(-2px);
+}
+
+.city-btn.active {
+    background: var(--primary-color);
+    border-color: var(--secondary-color);
+    color: var(--white);
+}
+
+.city-btn.active i {
+    color: var(--secondary-color);
+}
+
+.schedule-section {
+    background: var(--white);
+    border-radius: 25px;
+    padding: 3rem;
+    margin-bottom: 3rem;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+}
+
+.schedule-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.schedule-header h2 {
+    color: var(--primary-color);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.selected-city {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.8rem 1.5rem;
+    background: var(--light-green);
+    border-radius: 25px;
+    color: var(--primary-color);
+    font-weight: 600;
+}
+
+.table-controls {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 2rem;
+    flex-wrap: wrap;
+}
+
+.control-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.8rem 1.5rem;
+    background: var(--light-green);
+    border: 2px solid var(--primary-color);
+    border-radius: 10px;
+    color: var(--primary-color);
+    cursor: pointer;
+    transition: var(--transition);
+    font-family: 'Cairo', sans-serif;
+    font-weight: 600;
+}
+
+.control-btn:hover {
+    background: var(--primary-color);
+    color: var(--white);
+}
+
+.schedule-table-wrapper {
+    overflow-x: auto;
+    border-radius: 15px;
+}
+
+.ramadan-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: 'Cairo', sans-serif;
+}
+
+.ramadan-table thead {
+    background: linear-gradient(135deg, var(--primary-color), #2c7a5c);
+    color: var(--white);
+}
+
+.ramadan-table th {
+    padding: 1.2rem;
+    text-align: center;
+    font-weight: 700;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.ramadan-table th i {
+    margin-left: 0.3rem;
+}
+
+.ramadan-table tbody tr {
+    transition: var(--transition);
+    border-bottom: 1px solid #eee;
+}
+
+.ramadan-table tbody tr:hover {
+    background: var(--light-green);
+}
+
+.ramadan-table tbody tr.friday-row {
+    background: rgba(212, 175, 55, 0.1);
+}
+
+.ramadan-table tbody tr.last-ten-days {
+    background: rgba(30, 90, 62, 0.05);
+}
+
+.ramadan-table tbody tr.current-day {
+    background: var(--secondary-color) !important;
+    color: var(--white);
+    font-weight: 700;
+}
+
+.ramadan-table td {
+    padding: 1rem;
+    text-align: center;
+    border: 1px solid #eee;
+}
+
+.day-name {
+    font-weight: 600;
+    color: var(--primary-color);
+}
+
+.hijri-date {
+    font-family: 'Amiri', serif;
+    color: var(--text-dark);
+}
+
+.imsak-time,
+.fajr-time {
+    font-weight: 600;
+    color: #0066cc;
+}
+
+.maghrib-time {
+    font-weight: 600;
+    color: #ff6600;
+}
+
+.fasting-hours {
+    font-weight: 700;
+    color: var(--primary-color);
+}
+
+.ramadan-tips {
+    margin-bottom: 3rem;
+}
+
+.ramadan-tips h2 {
+    text-align: center;
+    color: var(--white);
+    margin-bottom: 2rem;
+    font-size: 2rem;
+}
+
+.tips-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+}
+
+.tip-card {
+    background: var(--white);
+    border-radius: 20px;
+    padding: 2rem;
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    transition: var(--transition);
+}
+
+.tip-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+}
+
+.tip-card i {
+    font-size: 3rem;
+    color: var(--secondary-color);
+    margin-bottom: 1rem;
+}
+
+.tip-card h3 {
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+}
+
+.tip-card p {
+    color: var(--text-dark);
+    line-height: 1.8;
+}
+
+.duas-section {
+    margin-bottom: 3rem;
+}
+
+.duas-section h2 {
+    text-align: center;
+    color: var(--white);
+    margin-bottom: 2rem;
+    font-size: 2rem;
+}
+
+.duas-cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+}
+
+.dua-card {
+    background: var(--white);
+    border-radius: 20px;
+    padding: 2.5rem;
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    border-top: 4px solid var(--secondary-color);
+}
+
+.dua-icon {
+    font-size: 3rem;
+    color: var(--secondary-color);
+    margin-bottom: 1rem;
+}
+
+.dua-card h3 {
+    color: var(--primary-color);
+    margin-bottom: 1.5rem;
+}
+
+.dua-text {
+    font-family: 'Amiri', serif;
+    font-size: 1.3rem;
+    line-height: 2;
+    color: var(--text-dark);
+    margin-bottom: 0.8rem;
+}
+
+.ramadan-greeting {
+    color: var(--secondary-color);
+    font-size: 1.1rem;
+    margin-top: 1rem;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+    .ramadan-stats,
+    .tips-grid,
+    .duas-cards {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .city-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .ramadan-title {
+        font-size: 2rem;
+    }
+    
+    .ramadan-verse {
+        font-size: 1.5rem;
+    }
+    
+    .ramadan-stats,
+    .city-grid,
+    .tips-grid,
+    .duas-cards {
+        grid-template-columns: 1fr;
+    }
+    
+    .countdown-timer {
+        flex-wrap: wrap;
+    }
+    
+    .time-unit {
+        min-width: 80px;
+        padding: 1rem;
+    }
+    
+    .time-value {
+        font-size: 2rem;
+    }
+    
+    .compass-card,
+    .countdown-card,
+    .schedule-section {
+        padding: 2rem 1.5rem;
+    }
+    
+    .islamic-header h1 {
+        font-size: 2rem;
+    }
+    
+    .arabic-verse {
+        font-size: 1.4rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .ramadan-title {
+        font-size: 1.5rem;
+    }
+    
+    .schedule-section {
+        padding: 1.5rem 1rem;
+    }
+    
+    .ramadan-table {
+        font-size: 0.85rem;
+    }
+    
+    .ramadan-table th,
+    .ramadan-table td {
+        padding: 0.6rem 0.4rem;
+    }
+}

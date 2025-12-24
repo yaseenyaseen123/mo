@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>إمساكية رمضان 2026 - التطبيق الإسلامي</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-brand">
+                <i class="fas fa-mosque"></i>
+                <span>التطبيق الإسلامي</span>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="../index.html"><i class="fas fa-home"></i> الرئيسية</a></li>
+                <li><a href="quran.html"><i class="fas fa-book-quran"></i> القرآن الكريم</a></li>
+                <li><a href="hadith.html"><i class="fas fa-book"></i> الأحاديث</a></li>
+                <li><a href="qibla.html"><i class="fas fa-kaaba"></i> القبلة</a></li>
+                <li><a href="ramadan.html" class="active"><i class="fas fa-moon"></i> رمضان</a></li>
+            </ul>
+            <div class="menu-toggle">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Ramadan Container -->
+    <div class="ramadan-container">
+        <div class="container">
+            <!-- Islamic Header -->
+            <div class="ramadan-header">
+                <div class="decorative-pattern-top"></div>
+                <div class="header-content">
+                    <div class="moon-stars">
+                        <i class="fas fa-moon"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <h1 class="ramadan-title">إمساكية رمضان المبارك</h1>
+                    <div class="hijri-year">1447 هـ - 2026 م</div>
+                    <p class="ramadan-verse">﴿ شَهْرُ رَمَضَانَ الَّذِي أُنزِلَ فِيهِ الْقُرْآنُ ﴾</p>
+                    <span class="verse-source">سورة البقرة - آية 185</span>
+                </div>
+                <div class="decorative-pattern-bottom"></div>
+            </div>
+
+            <!-- Countdown Timer -->
+            <div class="countdown-section">
+                <div class="countdown-card">
+                    <h2><i class="fas fa-clock"></i> العد التنازلي لرمضان 2026</h2>
+                    <div id="countdown" class="countdown-timer">
+                        <div class="time-unit">
+                            <div class="time-value" id="days">--</div>
+                            <div class="time-label">يوم</div>
+                        </div>
+                        <div class="time-separator">:</div>
+                        <div class="time-unit">
+                            <div class="time-value" id="hours">--</div>
+                            <div class="time-label">ساعة</div>
+                        </div>
+                        <div class="time-separator">:</div>
+                        <div class="time-unit">
+                            <div class="time-value" id="minutes">--</div>
+                            <div class="time-label">دقيقة</div>
+                        </div>
+                        <div class="time-separator">:</div>
+                        <div class="time-unit">
+                            <div class="time-value" id="seconds">--</div>
+                            <div class="time-label">ثانية</div>
+                        </div>
+                    </div>
+                    <p class="countdown-message" id="countdownMessage">باقي على حلول شهر رمضان المبارك</p>
+                </div>
+            </div>
+
+            <!-- Quick Stats -->
+            <div class="ramadan-stats">
+                <div class="stat-card">
+                    <i class="fas fa-calendar-alt"></i>
+                    <div class="stat-value">30</div>
+                    <div class="stat-label">يوماً مباركاً</div>
+                </div>
+                <div class="stat-card">
+                    <i class="fas fa-moon"></i>
+                    <div class="stat-value">18 فبراير</div>
+                    <div class="stat-label">بداية رمضان 2026</div>
+                </div>
+                <div class="stat-card">
+                    <i class="fas fa-mosque"></i>
+                    <div class="stat-value">19 مارس</div>
+                    <div class="stat-label">عيد الفطر المبارك</div>
+                </div>
+            </div>
+
+            <!-- City Selector -->
+            <div class="city-selector-card">
+                <div class="selector-header">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <h3>اختر مدينتك لعرض الإمساكية</h3>
+                </div>
+                <div class="city-grid">
+                    <button class="city-btn active" data-city="makkah">
+                        <i class="fas fa-kaaba"></i>
+                        <span>مكة المكرمة</span>
+                    </button>
+                    <button class="city-btn" data-city="madinah">
+                        <i class="fas fa-mosque"></i>
+                        <span>المدينة المنورة</span>
+                    </button>
+                    <button class="city-btn" data-city="riyadh">
+                        <i class="fas fa-building"></i>
+                        <span>الرياض</span>
+                    </button>
+                    <button class="city-btn" data-city="jeddah">
+                        <i class="fas fa-city"></i>
+                        <span>جدة</span>
+                    </button>
+                    <button class="city-btn" data-city="cairo">
+                        <i class="fas fa-landmark"></i>
+                        <span>القاهرة</span>
+                    </button>
+                    <button class="city-btn" data-city="dubai">
+                        <i class="fas fa-building"></i>
+                        <span>دبي</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Ramadan Schedule Table -->
+            <div class="schedule-section">
+                <div class="schedule-header">
+                    <h2><i class="fas fa-table"></i> إمساكية شهر رمضان المبارك</h2>
+                    <div class="selected-city">
+                        <i class="fas fa-location-dot"></i>
+                        <span id="cityName">مكة المكرمة</span>
+                    </div>
+                </div>
+
+                <div class="table-controls">
+                    <button class="control-btn" id="printBtn">
+                        <i class="fas fa-print"></i>
+                        <span>طباعة</span>
+                    </button>
+                    <button class="control-btn" id="downloadBtn">
+                        <i class="fas fa-download"></i>
+                        <span>تحميل PDF</span>
+                    </button>
+                    <button class="control-btn" id="shareBtn">
+                        <i class="fas fa-share-alt"></i>
+                        <span>مشاركة</span>
+                    </button>
+                </div>
+
+                <div class="schedule-table-wrapper">
+                    <table class="ramadan-table" id="ramadanTable">
+                        <thead>
+                            <tr>
+                                <th><i class="fas fa-calendar-day"></i> اليوم</th>
+                                <th><i class="fas fa-calendar"></i> التاريخ الميلادي</th>
+                                <th><i class="fas fa-moon"></i> التاريخ الهجري</th>
+                                <th><i class="fas fa-sun"></i> الإمساك</th>
+                                <th><i class="fas fa-cloud-sun"></i> الفجر</th>
+                                <th><i class="fas fa-sun"></i> الشروق</th>
+                                <th><i class="fas fa-utensils"></i> المغرب</th>
+                                <th><i class="fas fa-clock"></i> عدد الساعات</th>
+                            </tr>
+                        </thead>
+                        <tbody id="scheduleBody">
+                            <!-- سيتم ملء الجدول ديناميكياً -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Ramadan Tips -->
+            <div class="ramadan-tips">
+                <h2><i class="fas fa-lightbulb"></i> نصائح رمضانية</h2>
+                <div class="tips-grid">
+                    <div class="tip-card">
+                        <i class="fas fa-book-quran"></i>
+                        <h3>ختم القرآن</h3>
+                        <p>احرص على قراءة جزء واحد يومياً لتختم القرآن في رمضان</p>
+                    </div>
+                    <div class="tip-card">
+                        <i class="fas fa-hands-praying"></i>
+                        <h3>قيام الليل</h3>
+                        <p>من قام رمضان إيماناً واحتساباً غُفر له ما تقدم من ذنبه</p>
+                    </div>
+                    <div class="tip-card">
+                        <i class="fas fa-hand-holding-heart"></i>
+                        <h3>الصدقة</h3>
+                        <p>كان رسول الله أجود الناس، وكان أجود ما يكون في رمضان</p>
+                    </div>
+                    <div class="tip-card">
+                        <i class="fas fa-moon"></i>
+                        <h3>العشر الأواخر</h3>
+                        <p>تحرَّ ليلة القدر في العشر الأواخر من رمضان</p>
+                    </div>
+                    <div class="tip-card">
+                        <i class="fas fa-apple-alt"></i>
+                        <h3>الإفطار الصحي</h3>
+                        <p>ابدأ إفطارك بالتمر والماء، واعتدل في الطعام</p>
+                    </div>
+                    <div class="tip-card">
+                        <i class="fas fa-users"></i>
+                        <h3>صلة الرحم</h3>
+                        <p>استغل رمضان لتوطيد الروابط الأسرية وصلة الأرحام</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Duas Section -->
+            <div class="duas-section">
+                <h2><i class="fas fa-hands"></i> أدعية مأثورة في رمضان</h2>
+                <div class="duas-cards">
+                    <div class="dua-card">
+                        <div class="dua-icon"><i class="fas fa-utensils"></i></div>
+                        <h3>دعاء الإفطار</h3>
+                        <p class="dua-text">اللَّهُمَّ لَكَ صُمْتُ وَعَلَى رِزْقِكَ أَفْطَرْتُ</p>
+                        <p class="dua-text">ذَهَبَ الظَّمَأُ وَابْتَلَّتِ الْعُرُوقُ وَثَبَتَ الأَجْرُ إِنْ شَاءَ اللَّهُ</p>
+                    </div>
+                    <div class="dua-card">
+                        <div class="dua-icon"><i class="fas fa-moon"></i></div>
+                        <h3>دعاء ليلة القدر</h3>
+                        <p class="dua-text">اللَّهُمَّ إِنَّكَ عَفُوٌّ تُحِبُّ الْعَفْوَ فَاعْفُ عَنِّي</p>
+                    </div>
+                    <div class="dua-card">
+                        <div class="dua-icon"><i class="fas fa-sun"></i></div>
+                        <h3>دعاء السحور</h3>
+                        <p class="dua-text">اللَّهُمَّ إِنِّي أَسْأَلُكَ مِنْ فَضْلِكَ</p>
+                        <p class="dua-text">وَنَوَيْتُ مِنَ اللَّيْلِ الصِّيَامَ فَتَقَبَّلْ مِنِّي</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 التطبيق الإسلامي. جميع الحقوق محفوظة.</p>
+            <p class="ramadan-greeting">تقبل الله منا ومنكم صالح الأعمال 🌙</p>
+        </div>
+    </footer>
+
+    <script src="../js/ramadan.js"></script>
+    <script src="../js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,324 @@
+// Ramadan Calendar 2026 - JavaScript
+
+// Ramadan 2026 start date (estimated)
+const RAMADAN_START = new Date('2026-02-18T00:00:00');
+const RAMADAN_END = new Date('2026-03-19T00:00:00');
+
+// Prayer times for different cities (sample data)
+const CITY_TIMES = {
+    makkah: {
+        name: 'مكة المكرمة',
+        timezone: 'Asia/Riyadh',
+        lat: 21.4225,
+        lng: 39.8262
+    },
+    madinah: {
+        name: 'المدينة المنورة',
+        timezone: 'Asia/Riyadh',
+        lat: 24.5247,
+        lng: 39.5692
+    },
+    riyadh: {
+        name: 'الرياض',
+        timezone: 'Asia/Riyadh',
+        lat: 24.7136,
+        lng: 46.6753
+    },
+    jeddah: {
+        name: 'جدة',
+        timezone: 'Asia/Riyadh',
+        lat: 21.5433,
+        lng: 39.1728
+    },
+    cairo: {
+        name: 'القاهرة',
+        timezone: 'Africa/Cairo',
+        lat: 30.0444,
+        lng: 31.2357
+    },
+    dubai: {
+        name: 'دبي',
+        timezone: 'Asia/Dubai',
+        lat: 25.2048,
+        lng: 55.2708
+    }
+};
+
+let selectedCity = 'makkah';
+let countdownInterval = null;
+
+// Initialize when page loads
+document.addEventListener('DOMContentLoaded', function() {
+    initCountdown();
+    initCitySelector();
+    generateRamadanSchedule();
+    initControls();
+});
+
+// Initialize countdown timer
+function initCountdown() {
+    updateCountdown();
+    countdownInterval = setInterval(updateCountdown, 1000);
+}
+
+// Update countdown display
+function updateCountdown() {
+    const now = new Date();
+    const diff = RAMADAN_START - now;
+    
+    if (diff <= 0) {
+        clearInterval(countdownInterval);
+        showRamadanMessage();
+        return;
+    }
+    
+    const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+    const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+    
+    document.getElementById('days').textContent = padZero(days);
+    document.getElementById('hours').textContent = padZero(hours);
+    document.getElementById('minutes').textContent = padZero(minutes);
+    document.getElementById('seconds').textContent = padZero(seconds);
+}
+
+// Show message when Ramadan starts
+function showRamadanMessage() {
+    const countdownEl = document.getElementById('countdown');
+    const messageEl = document.getElementById('countdownMessage');
+    
+    countdownEl.innerHTML = '<div class="ramadan-mubarak"><i class="fas fa-moon"></i> رمضان مبارك!</div>';
+    messageEl.textContent = 'كل عام وأنتم بخير';
+}
+
+// Initialize city selector
+function initCitySelector() {
+    const cityButtons = document.querySelectorAll('.city-btn');
+    
+    cityButtons.forEach(btn => {
+        btn.addEventListener('click', function() {
+            cityButtons.forEach(b => b.classList.remove('active'));
+            this.classList.add('active');
+            
+            selectedCity = this.dataset.city;
+            document.getElementById('cityName').textContent = CITY_TIMES[selectedCity].name;
+            
+            generateRamadanSchedule();
+        });
+    });
+}
+
+// Generate Ramadan schedule table
+function generateRamadanSchedule() {
+    const tbody = document.getElementById('scheduleBody');
+    tbody.innerHTML = '';
+    
+    const city = CITY_TIMES[selectedCity];
+    const startDate = new Date(RAMADAN_START);
+    
+    for (let day = 1; day <= 30; day++) {
+        const currentDate = new Date(startDate);
+        currentDate.setDate(startDate.getDate() + day - 1);
+        
+        const row = createDayRow(day, currentDate, city);
+        tbody.appendChild(row);
+    }
+    
+    // Highlight current day if in Ramadan
+    highlightCurrentDay();
+}
+
+// Create table row for each day
+function createDayRow(dayNumber, date, city) {
+    const row = document.createElement('tr');
+    
+    // Day name
+    const dayName = getDayName(date);
+    
+    // Gregorian date
+    const gregorianDate = formatGregorianDate(date);
+    
+    // Hijri date
+    const hijriDate = `${dayNumber} رمضان 1447`;
+    
+    // Prayer times (calculated based on location)
+    const times = calculatePrayerTimes(date, city);
+    
+    // Fasting hours
+    const fastingHours = calculateFastingHours(times);
+    
+    row.innerHTML = `
+        <td class="day-name">${dayName}</td>
+        <td>${gregorianDate}</td>
+        <td class="hijri-date">${hijriDate}</td>
+        <td class="imsak-time">${times.imsak}</td>
+        <td class="fajr-time">${times.fajr}</td>
+        <td class="sunrise-time">${times.sunrise}</td>
+        <td class="maghrib-time">${times.maghrib}</td>
+        <td class="fasting-hours">${fastingHours}</td>
+    `;
+    
+    // Add special styling for Fridays
+    if (date.getDay() === 5) {
+        row.classList.add('friday-row');
+    }
+    
+    // Add special styling for last 10 days
+    if (dayNumber >= 21) {
+        row.classList.add('last-ten-days');
+    }
+    
+    row.dataset.day = dayNumber;
+    
+    return row;
+}
+
+// Calculate prayer times for a specific date and city
+function calculatePrayerTimes(date, city) {
+    // This is a simplified calculation
+    // In production, use a proper prayer times library
+    
+    const baseImsak = new Date(date);
+    baseImsak.setHours(4, 30, 0);
+    
+    const baseFajr = new Date(date);
+    baseFajr.setHours(4, 45, 0);
+    
+    const baseSunrise = new Date(date);
+    baseSunrise.setHours(6, 15, 0);
+    
+    const baseMaghrib = new Date(date);
+    baseMaghrib.setHours(18, 30, 0);
+    
+    // Adjust based on day of year (simplified)
+    const dayOfYear = getDayOfYear(date);
+    const adjustment = Math.sin((dayOfYear / 365) * Math.PI * 2) * 30; // ±30 minutes variation
+    
+    return {
+        imsak: formatTime(addMinutes(baseImsak, adjustment - 15)),
+        fajr: formatTime(addMinutes(baseFajr, adjustment - 15)),
+        sunrise: formatTime(addMinutes(baseSunrise, adjustment)),
+        maghrib: formatTime(addMinutes(baseMaghrib, adjustment + 15))
+    };
+}
+
+// Calculate fasting hours
+function calculateFastingHours(times) {
+    const fajr = parseTime(times.fajr);
+    const maghrib = parseTime(times.maghrib);
+    
+    const diff = maghrib - fajr;
+    const hours = Math.floor(diff / (1000 * 60 * 60));
+    const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+    
+    return `${hours} س ${minutes} د`;
+}
+
+// Highlight current day
+function highlightCurrentDay() {
+    const now = new Date();
+    
+    if (now >= RAMADAN_START && now <= RAMADAN_END) {
+        const daysDiff = Math.floor((now - RAMADAN_START) / (1000 * 60 * 60 * 24)) + 1;
+        
+        const currentRow = document.querySelector(`tr[data-day="${daysDiff}"]`);
+        if (currentRow) {
+            currentRow.classList.add('current-day');
+            currentRow.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+    }
+}
+
+// Initialize control buttons
+function initControls() {
+    document.getElementById('printBtn').addEventListener('click', printSchedule);
+    document.getElementById('downloadBtn').addEventListener('click', downloadPDF);
+    document.getElementById('shareBtn').addEventListener('click', shareSchedule);
+}
+
+// Print schedule
+function printSchedule() {
+    window.print();
+}
+
+// Download as PDF (simplified - would need a library like jsPDF)
+function downloadPDF() {
+    showNotification('جاري تجهيز ملف PDF...');
+    // In production, use jsPDF or similar library
+    setTimeout(() => {
+        showNotification('سيتم إضافة هذه الميزة قريباً');
+    }, 1000);
+}
+
+// Share schedule
+async function shareSchedule() {
+    const shareData = {
+        title: 'إمساكية رمضان 2026',
+        text: `إمساكية شهر رمضان المبارك 1447 هـ - 2026 م\n${CITY_TIMES[selectedCity].name}`,
+        url: window.location.href
+    };
+    
+    if (navigator.share) {
+        try {
+            await navigator.share(shareData);
+            showNotification('تم المشاركة بنجاح');
+        } catch (err) {
+            console.error('Error sharing:', err);
+        }
+    } else {
+        // Fallback: copy link
+        navigator.clipboard.writeText(window.location.href);
+        showNotification('تم نسخ الرابط');
+    }
+}
+
+// Helper functions
+function getDayName(date) {
+    const days = ['الأحد', 'الإثنين', 'الثلاثاء', 'الأربعاء', 'الخميس', 'الجمعة', 'السبت'];
+    return days[date.getDay()];
+}
+
+function formatGregorianDate(date) {
+    const day = date.getDate();
+    const month = date.getMonth() + 1;
+    const year = date.getFullYear();
+    return `${day}/${month}/${year}`;
+}
+
+function formatTime(date) {
+    const hours = padZero(date.getHours());
+    const minutes = padZero(date.getMinutes());
+    return `${hours}:${minutes}`;
+}
+
+function parseTime(timeStr) {
+    const [hours, minutes] = timeStr.split(':').map(Number);
+    const date = new Date();
+    date.setHours(hours, minutes, 0, 0);
+    return date;
+}
+
+function addMinutes(date, minutes) {
+    return new Date(date.getTime() + minutes * 60000);
+}
+
+function getDayOfYear(date) {
+    const start = new Date(date.getFullYear(), 0, 0);
+    const diff = date - start;
+    const oneDay = 1000 * 60 * 60 * 24;
+    return Math.floor(diff / oneDay);
+}
+
+function padZero(num) {
+    return num.toString().padStart(2, '0');
+}
+
+function showNotification(message) {
+    // Use existing notification system
+    if (typeof window.showNotification === 'function') {
+        window.showNotification(message);
+    } else {
+        alert(message);
+    }
+}

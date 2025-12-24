@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>بوصلة القبلة - التطبيق الإسلامي</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-brand">
+                <i class="fas fa-mosque"></i>
+                <span>التطبيق الإسلامي</span>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="../index.html"><i class="fas fa-home"></i> الرئيسية</a></li>
+                <li><a href="quran.html"><i class="fas fa-book-quran"></i> القرآن الكريم</a></li>
+                <li><a href="hadith.html"><i class="fas fa-book"></i> الأحاديث</a></li>
+                <li><a href="qibla.html" class="active"><i class="fas fa-kaaba"></i> القبلة</a></li>
+                <li><a href="ramadan.html"><i class="fas fa-moon"></i> رمضان</a></li>
+            </ul>
+            <div class="menu-toggle">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Qibla Container -->
+    <div class="qibla-container">
+        <div class="container">
+            <!-- Islamic Header -->
+            <div class="islamic-header">
+                <div class="decorative-line"></div>
+                <div class="header-content">
+                    <i class="fas fa-kaaba"></i>
+                    <h1>بوصلة القبلة الشريفة</h1>
+                    <p class="arabic-verse">﴿ فَوَلِّ وَجْهَكَ شَطْرَ الْمَسْجِدِ الْحَرَامِ ﴾</p>
+                    <span class="verse-source">سورة البقرة - آية 144</span>
+                </div>
+                <div class="decorative-line"></div>
+            </div>
+
+            <!-- Main Compass Section -->
+            <div class="compass-section">
+                <div class="compass-card">
+                    <!-- Status Messages -->
+                    <div id="statusMessage" class="status-message">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <p>اضغط على الزر أدناه لتحديد موقعك واكتشاف اتجاه القبلة</p>
+                    </div>
+
+                    <!-- Location Info -->
+                    <div id="locationInfo" class="location-info" style="display: none;">
+                        <div class="location-item">
+                            <i class="fas fa-map-pin"></i>
+                            <div class="location-details">
+                                <span class="location-label">الموقع الحالي</span>
+                                <span class="location-value" id="cityName">جاري التحميل...</span>
+                            </div>
+                        </div>
+                        <div class="location-item">
+                            <i class="fas fa-compass"></i>
+                            <div class="location-details">
+                                <span class="location-label">اتجاه القبلة</span>
+                                <span class="location-value" id="qiblaDirection">---°</span>
+                            </div>
+                        </div>
+                        <div class="location-item">
+                            <i class="fas fa-road"></i>
+                            <div class="location-details">
+                                <span class="location-label">المسافة إلى الكعبة</span>
+                                <span class="location-value" id="distanceToKaaba">--- كم</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Compass Circle -->
+                    <div class="compass-wrapper">
+                        <div class="compass-outer-ring">
+                            <div class="compass-directions">
+                                <span class="dir north">شمال</span>
+                                <span class="dir east">شرق</span>
+                                <span class="dir south">جنوب</span>
+                                <span class="dir west">غرب</span>
+                            </div>
+                            
+                            <div id="compass" class="compass-circle">
+                                <!-- Compass Rose Background -->
+                                <div class="compass-rose">
+                                    <div class="rose-pattern"></div>
+                                </div>
+                                
+                                <!-- Degree Markers -->
+                                <div class="degree-markers">
+                                    <span style="--i: 0">0°</span>
+                                    <span style="--i: 45">45°</span>
+                                    <span style="--i: 90">90°</span>
+                                    <span style="--i: 135">135°</span>
+                                    <span style="--i: 180">180°</span>
+                                    <span style="--i: 225">225°</span>
+                                    <span style="--i: 270">270°</span>
+                                    <span style="--i: 315">315°</span>
+                                </div>
+
+                                <!-- Kaaba Icon (Qibla Direction) -->
+                                <div id="kaabaIcon" class="kaaba-icon">
+                                    <i class="fas fa-kaaba"></i>
+                                    <span>القبلة</span>
+                                </div>
+
+                                <!-- North Arrow -->
+                                <div class="north-arrow">
+                                    <div class="arrow-pointer"></div>
+                                    <span>N</span>
+                                </div>
+
+                                <!-- Center Dot -->
+                                <div class="compass-center">
+                                    <i class="fas fa-circle"></i>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Current Heading Display -->
+                        <div class="heading-display">
+                            <div class="heading-value" id="headingValue">---°</div>
+                            <div class="heading-label">الاتجاه الحالي</div>
+                        </div>
+                    </div>
+
+                    <!-- Action Button -->
+                    <button id="findQiblaBtn" class="find-qibla-btn">
+                        <i class="fas fa-location-crosshairs"></i>
+                        <span>تحديد اتجاه القبلة</span>
+                    </button>
+
+                    <!-- Instructions -->
+                    <div class="qibla-instructions">
+                        <h3><i class="fas fa-info-circle"></i> تعليمات الاستخدام</h3>
+                        <ol>
+                            <li>اسمح للمتصفح بالوصول إلى موقعك الجغرافي</li>
+                            <li>امسك هاتفك بشكل أفقي (مسطح)</li>
+                            <li>حرك هاتفك حتى تتطابق السهم مع أيقونة الكعبة</li>
+                            <li>اتجه نحو القبلة للصلاة بإذن الله</li>
+                        </ol>
+                    </div>
+
+                    <!-- Kaaba Info -->
+                    <div class="kaaba-info-card">
+                        <div class="info-header">
+                            <i class="fas fa-kaaba"></i>
+                            <h3>معلومات عن الكعبة المشرفة</h3>
+                        </div>
+                        <div class="info-grid">
+                            <div class="info-item">
+                                <span class="info-label">الموقع</span>
+                                <span class="info-value">مكة المكرمة، السعودية</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">خط العرض</span>
+                                <span class="info-value">21.4225° شمال</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">خط الطول</span>
+                                <span class="info-value">39.8262° شرق</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">الارتفاع</span>
+                                <span class="info-value">277 متر فوق سطح البحر</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 التطبيق الإسلامي. جميع الحقوق محفوظة.</p>
+        </div>
+    </footer>
+
+    <script src="../js/qibla.js"></script>
+    <script src="../js/main.js"></script>
+</body>
+</html>
