@@ -65,6 +65,67 @@ const reciters = {
     hudhaifi: {
         name: 'علي الحذيفي',
         server: 'https://server12.mp3quran.net/hthfi'
+    },
+    // قراء جدد - 15 قارئ إضافي
+    bandar_baleelah: {
+        name: 'بندر بليلة',
+        server: 'https://server13.mp3quran.net/bandar'
+    },
+    abdullah_matroud: {
+        name: 'عبد الله المطرود',
+        server: 'https://server13.mp3quran.net/matroud'
+    },
+    nasser_alqatami: {
+        name: 'ناصر القطامي',
+        server: 'https://server6.mp3quran.net/qtm'
+    },
+    fares_abbad: {
+        name: 'فارس عباد',
+        server: 'https://server8.mp3quran.net/frs_a'
+    },
+    khalid_aljalil: {
+        name: 'خالد الجليل',
+        server: 'https://server11.mp3quran.net/khalid'
+    },
+    abdullah_awad: {
+        name: 'عبد الله عواد الجهني',
+        server: 'https://server12.mp3quran.net/jhn'
+    },
+    emad_zuhair: {
+        name: 'عماد زهير حافظ',
+        server: 'https://server13.mp3quran.net/imad'
+    },
+    salah_bukhatir: {
+        name: 'صلاح البدير',
+        server: 'https://server11.mp3quran.net/s_bdr'
+    },
+    abdulaziz_zahrani: {
+        name: 'عبد العزيز الزهراني',
+        server: 'https://server13.mp3quran.net/zahrani'
+    },
+    mohammed_jibreel: {
+        name: 'محمد جبريل',
+        server: 'https://server10.mp3quran.net/jbrl'
+    },
+    ibrahim_akhdar: {
+        name: 'إبراهيم الأخضر',
+        server: 'https://server12.mp3quran.net/akdr'
+    },
+    abdulwadood_haneef: {
+        name: 'عبد الودود حنيف',
+        server: 'https://server10.mp3quran.net/hanf'
+    },
+    saad_nomani: {
+        name: 'سعد النعماني',
+        server: 'https://server13.mp3quran.net/nomani'
+    },
+    mohamed_ayyub: {
+        name: 'محمد أيوب',
+        server: 'https://server12.mp3quran.net/ayyub'
+    },
+    ali_jaber: {
+        name: 'علي جابر',
+        server: 'https://server11.mp3quran.net/a_jbr'
     }
 };
 
