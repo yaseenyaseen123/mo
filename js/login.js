@@ -1,4 +1,4 @@
-// Login Page JavaScript
+// Login Page JavaScript - Firebase Version
 
 // Toggle Password Visibility
 function togglePassword() {
@@ -19,45 +19,98 @@ function togglePassword() {
 // Login Form Submission
 document.addEventListener('DOMContentLoaded', function() {
     const loginForm = document.getElementById('loginForm');
-    const registerForm = document.getElementById('registerForm');
+    
+    // Check if Firebase is loaded
+    if (typeof firebase === 'undefined') {
+        showNotification('جاري تحميل Firebase...', 'info');
+        setTimeout(() => {
+            if (typeof firebase === 'undefined') {
+                showNotification('فشل تحميل Firebase. تحقق من الاتصال بالإنترنت', 'error');
+            }
+        }, 3000);
+        return;
+    }
+
+    // Check if already logged in
+    if (window.firebaseAuth) {
+        window.firebaseAuth.onAuthStateChanged(async (user) => {
+            if (user) {
+                // User is signed in, check if active
+                try {
+                    const userData = await FirebaseAuth.getUserData(user.uid);
+                    if (userData.success && userData.data.active) {
+                        // Redirect based on role
+                        if (userData.data.role === 'admin' || userData.data.role === 'moderator') {
+                            window.location.href = 'dashboard.html';
+                        } else {
+                            window.location.href = '../index.html';
+                        }
+                    }
+                } catch (error) {
+                    console.error('Error checking user:', error);
+                }
+            }
+        });
+    }
     
     if (loginForm) {
         loginForm.addEventListener('submit', async function(e) {
             e.preventDefault();
             
-            const email = document.getElementById('email').value;
+            const email = document.getElementById('email').value.trim();
             const password = document.getElementById('password').value;
-            const remember = document.getElementById('remember')?.checked;
+            const remember = document.getElementById('remember')?.checked || false;
+            
+            // Validation
+            if (!email || !password) {
+                showNotification('الرجاء إدخال البريد الإلكتروني وكلمة المرور', 'error');
+                return;
+            }
             
             try {
-                showNotification('جاري تسجيل الدخول...');
+                showNotification('جاري تسجيل الدخول...', 'info');
                 
-                // استخدام نظام المصادقة الجديد
-                if (typeof loginUser === 'function') {
-                    const user = await loginUser(email, password, remember);
+                // Check if FirebaseAuth is available
+                if (typeof FirebaseAuth === 'undefined' || typeof window.firebaseAuth === 'undefined') {
+                    throw new Error('نظام المصادقة غير محمّل. يرجى تحديث الصفحة.');
+                }
+                
+                // Login with Firebase
+                const result = await FirebaseAuth.loginUser(email, password, remember);
+                
+                if (result.success) {
+                    // Get user data
+                    const userData = await FirebaseAuth.getUserData(result.user.uid);
                     
-                    showNotification(`مرحباً ${user.name}! تم تسجيل الدخول بنجاح`);
-                    
-                    // التوجيه حسب الصلاحية
-                    setTimeout(() => {
-                        if (user.role === 'admin' || user.role === 'moderator') {
-                            window.location.href = 'dashboard.html';
-                        } else {
-                            window.location.href = '../index.html';
+                    if (userData.success) {
+                        if (!userData.data.active) {
+                            showNotification('حسابك غير نشط. يرجى الاتصال بالإدارة', 'error');
+                            await FirebaseAuth.logoutUser();
+                            return;
                         }
-                    }, 1500);
+
+                        showNotification(`مرحباً ${userData.data.displayName}! تم تسجيل الدخول بنجاح`, 'success');
+                        
+                        // Redirect based on role
+                        setTimeout(() => {
+                            if (userData.data.role === 'admin' || userData.data.role === 'moderator') {
+                                window.location.href = 'dashboard.html';
+                            } else {
+                                window.location.href = '../index.html';
+                            }
+                        }, 1500);
+                    } else {
+                        showNotification('حدث خطأ في جلب بيانات المستخدم', 'error');
+                    }
                 } else {
-                    throw new Error('نظام المصادقة غير متاح');
+                    showNotification(result.error || 'فشل تسجيل الدخول', 'error');
                 }
             } catch (error) {
+                console.error('Login error:', error);
                 showNotification(error.message || 'حدث خطأ في تسجيل الدخول', 'error');
             }
         });
     }
-    
-    if (registerForm) {
-        registerForm.addEventListener('submit', async function(e) {
-            e.preventDefault();
             
             const fullname = document.getElementById('fullname').value;
             const email = document.getElementById('email').value;
