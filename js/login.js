@@ -88,17 +88,20 @@ document.addEventListener('DOMContentLoaded', function() {
             try {
                 showNotification('جاري تسجيل الدخول...', 'info');
                 
-                // Check if FirebaseAuth is available
-                if (typeof FirebaseAuth === 'undefined' || typeof window.firebaseAuth === 'undefined') {
-                    throw new Error('نظام المصادقة غير محمّل. يرجى تحديث الصفحة.');
-                }
+                console.log('Attempting login for:', email);
                 
                 // Login with Firebase
                 const result = await FirebaseAuth.loginUser(email, password, remember);
                 
+                console.log('Login result:', result);
+                
                 if (result.success) {
+                    console.log('✅ Login successful!');
+                    
                     // Get user data
                     const userData = await FirebaseAuth.getUserData(result.user.uid);
+                    
+                    console.log('User data:', userData);
                     
                     if (userData.success) {
                         if (!userData.data.active) {
@@ -109,14 +112,16 @@ document.addEventListener('DOMContentLoaded', function() {
 
                         showNotification(`مرحباً ${userData.data.displayName}! تم تسجيل الدخول بنجاح`, 'success');
                         
-                        // Redirect to Quran page
-                        setTimeout(() => {
-                            window.location.href = 'quran.html';
-                        }, 1500);
+                        console.log('🚀 Redirecting to quran.html...');
+                        
+                        // Redirect to Quran page immediately
+                        window.location.href = 'quran.html';
                     } else {
+                        console.error('❌ Failed to get user data');
                         showNotification('حدث خطأ في جلب بيانات المستخدم', 'error');
                     }
                 } else {
+                    console.error('❌ Login failed:', result.error);
                     showNotification(result.error || 'فشل تسجيل الدخول', 'error');
                 }
             } catch (error) {
