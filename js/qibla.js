@@ -243,8 +243,8 @@ function handleOrientation(event) {
 function updateCompass(heading) {
     if (!compassCircle || qiblaAngle === null) return;
     
-    // Rotate compass circle - keep centered
-    compassCircle.style.transform = `translate(-50%, -50%) rotate(${-heading}deg)`;
+    // Set rotation using CSS variable - keeps translate intact
+    compassCircle.style.setProperty('--compass-rotation', `${-heading}deg`);
     
     // Update heading display
     headingValue.textContent = Math.round(heading) + '°';

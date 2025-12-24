@@ -2581,12 +2581,13 @@ p {
     left: 50%;
     width: 85%;
     height: 85%;
-    transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%) rotate(var(--compass-rotation, 0deg));
     border-radius: 50%;
     background: linear-gradient(135deg, #fff 0%, #f0f8f0 100%);
     box-shadow: 0 0 20px rgba(30, 90, 62, 0.3);
     transition: transform 0.5s cubic-bezier(0.4, 0.0, 0.2, 1);
     transform-origin: center center;
+    --compass-rotation: 0deg;
 }
 
 .compass-rose {
