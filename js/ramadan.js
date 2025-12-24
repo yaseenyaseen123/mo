@@ -193,7 +193,7 @@ function createDayRow(dayNumber, date, city) {
 
 // Calculate prayer times for a specific date and city
 function calculatePrayerTimes(date, city) {
-    // أوقات الصلاة الدقيقة لكل مدينة في فبراير-مارس 2026 (رمضان 1447 هـ)
+    // أوقات الصلاة الدقيقة لكل مدينة في رمضان 1447 هـ - 2026 م
     // الأوقات محسوبة بناءً على خط العرض والطول والتوقيت المحلي لكل مدينة
     
     const cityBaseTimes = {
@@ -203,36 +203,36 @@ function calculatePrayerTimes(date, city) {
             fajr: [5, 0], 
             sunrise: [6, 20], 
             dhuhr: [12, 18], 
-            asr: [15, 38],  // 3:38 م
-            maghrib: [18, 15],  // 6:15 م
-            isha: [19, 45]  // 7:45 م
+            asr: [15, 38],
+            maghrib: [18, 15],
+            isha: [19, 45]
         },
         madinah: { 
             imsak: [4, 50], 
             fajr: [5, 5], 
             sunrise: [6, 25], 
             dhuhr: [12, 22], 
-            asr: [15, 42],  // 3:42 م
-            maghrib: [18, 18],  // 6:18 م
-            isha: [19, 48]  // 7:48 م
+            asr: [15, 42],
+            maghrib: [18, 18],
+            isha: [19, 48]
         },
         riyadh: { 
             imsak: [4, 35], 
             fajr: [4, 50], 
             sunrise: [6, 10], 
             dhuhr: [12, 12], 
-            asr: [15, 32],  // 3:32 م
-            maghrib: [18, 10],  // 6:10 م
-            isha: [19, 40]  // 7:40 م
+            asr: [15, 32],
+            maghrib: [18, 10],
+            isha: [19, 40]
         },
         jeddah: { 
             imsak: [4, 50], 
             fajr: [5, 5], 
             sunrise: [6, 25], 
             dhuhr: [12, 20], 
-            asr: [15, 40],  // 3:40 م
-            maghrib: [18, 16],  // 6:16 م
-            isha: [19, 46]  // 7:46 م
+            asr: [15, 40],
+            maghrib: [18, 16],
+            isha: [19, 46]
         },
         
         // جمهورية مصر العربية
@@ -241,9 +241,9 @@ function calculatePrayerTimes(date, city) {
             fajr: [4, 40], 
             sunrise: [6, 5], 
             dhuhr: [12, 10], 
-            asr: [15, 25],  // 3:25 م
-            maghrib: [18, 5],  // 6:05 م
-            isha: [19, 30]  // 7:30 م
+            asr: [15, 25],
+            maghrib: [18, 5],
+            isha: [19, 30]
         },
         
         // الإمارات العربية المتحدة
@@ -252,69 +252,103 @@ function calculatePrayerTimes(date, city) {
             fajr: [4, 55], 
             sunrise: [6, 18], 
             dhuhr: [12, 20], 
-            asr: [15, 40],  // 3:40 م
-            maghrib: [18, 18],  // 6:18 م
-            isha: [19, 48]  // 7:48 م
+            asr: [15, 40],
+            maghrib: [18, 18],
+            isha: [19, 48]
         },
         
         // فلسطين - القدس الشريف
         jerusalem: { 
-            imsak: [4, 20], 
-            fajr: [4, 35], 
-            sunrise: [6, 0], 
-            dhuhr: [12, 15], 
-            asr: [15, 28],  // 3:28 م
-            maghrib: [18, 2],  // 6:02 م
-            isha: [19, 27]  // 7:27 م
+            imsak: [4, 39], 
+            fajr: [5, 54], 
+            sunrise: [7, 11], 
+            dhuhr: [12, 50], 
+            asr: [16, 0],
+            maghrib: [18, 30],
+            isha: [19, 47]
         },
         
-        // الأردن - عمّان
+        // الأردن - عمّان (الأوقات الصحيحة المعتمدة)
         amman: { 
-            imsak: [4, 25], 
-            fajr: [4, 40], 
-            sunrise: [6, 5], 
-            dhuhr: [12, 18], 
-            asr: [15, 30],  // 3:30 م
-            maghrib: [18, 6],  // 6:06 م
-            isha: [19, 31]  // 7:31 م
+            imsak: [4, 39],     // قبل الفجر بـ 15 دقيقة
+            fajr: [5, 54],      // اليوم الأول
+            sunrise: [7, 11], 
+            dhuhr: [12, 50], 
+            asr: [16, 0],       // 4:00 م
+            maghrib: [18, 30],  // 6:30 م
+            isha: [19, 47]      // 7:47 م
         },
         
-        // فلسطين - قلقيلية (المدينة المميزة)
+        // فلسطين - قلقيلية (نفس توقيت القدس تقريباً)
         qalqilya: { 
-            imsak: [4, 22], 
-            fajr: [4, 37], 
-            sunrise: [6, 2], 
-            dhuhr: [12, 16], 
-            asr: [15, 29],  // 3:29 م
-            maghrib: [18, 3],  // 6:03 م
-            isha: [19, 28]  // 7:28 م
+            imsak: [4, 39], 
+            fajr: [5, 54], 
+            sunrise: [7, 11], 
+            dhuhr: [12, 50], 
+            asr: [16, 0],
+            maghrib: [18, 30],
+            isha: [19, 47]
         }
     };
     
     const baseTimes = cityBaseTimes[selectedCity] || cityBaseTimes.makkah;
     
-    // تعديل بسيط بناءً على يوم من الشهر (تغير الأوقات خلال رمضان)
+    // تعديل دقيق بناءً على اليوم من الشهر (الأوقات تتغير تدريجياً)
+    // البيانات مأخوذة من إمساكية عمّان الرسمية 2026
     const dayOfMonth = date.getDate();
-    const dayOfYear = getDayOfYear(date);
+    const ramadanDay = Math.floor((date - RAMADAN_START) / (1000 * 60 * 60 * 24)) + 1;
     
-    // تغيير تدريجي في الأوقات (الربيع - الأيام تطول)
-    const seasonalAdjustment = Math.floor((dayOfMonth - 18) * 0.5); // نصف دقيقة كل يوم
+    // التعديل التدريجي لكل صلاة (بالدقائق)
+    let fajrAdjust = 0;
+    let dhuhrAdjust = 0;
+    let asrAdjust = 0;
+    let maghribAdjust = 0;
+    let ishaAdjust = 0;
+    
+    if (selectedCity === 'amman' || selectedCity === 'qalqilya' || selectedCity === 'jerusalem') {
+        // التعديل بناءً على الإمساكية الصحيحة لعمّان
+        // الفجر: ينقص حوالي دقيقة كل يوم
+        fajrAdjust = -(ramadanDay - 1) * 1.13;  // من 5:54 إلى 5:20 (34 دقيقة على 30 يوم)
+        
+        // الشروق: ينقص حوالي دقيقة كل يوم
+        // sunrise adjustment handled similarly
+        
+        // الظهر: ينقص قليلاً
+        dhuhrAdjust = -(ramadanDay - 1) * 0.2;  // من 12:50 إلى 12:44 (6 دقائق)
+        
+        // العصر: يزيد قليلاً
+        asrAdjust = (ramadanDay - 1) * 0.37;    // من 4:00 إلى 4:11 (11 دقيقة)
+        
+        // المغرب: يزيد حوالي 45 ثانية كل يوم
+        maghribAdjust = (ramadanDay - 1) * 0.73;  // من 6:30 إلى 6:52 (22 دقيقة)
+        
+        // العشاء: يزيد حوالي 42 ثانية كل يوم
+        ishaAdjust = (ramadanDay - 1) * 0.7;    // من 7:47 إلى 8:08 (21 دقيقة)
+    } else {
+        // تعديل موسمي عادي للمدن الأخرى
+        const seasonalAdjustment = (ramadanDay - 1) * 0.5;
+        fajrAdjust = -seasonalAdjustment;
+        asrAdjust = seasonalAdjustment;
+        maghribAdjust = seasonalAdjustment;
+        ishaAdjust = seasonalAdjustment;
+    }
     
     // إنشاء أوقات الصلاة
     const createTime = (hours, mins, adjustment = 0) => {
         const d = new Date(date);
-        d.setHours(hours, mins + adjustment, 0, 0);
+        const totalMins = mins + Math.round(adjustment);
+        d.setHours(hours, totalMins, 0, 0);
         return formatTime(d);
     };
     
     return {
-        imsak: createTime(baseTimes.imsak[0], baseTimes.imsak[1], seasonalAdjustment),
-        fajr: createTime(baseTimes.fajr[0], baseTimes.fajr[1], seasonalAdjustment),
-        sunrise: createTime(baseTimes.sunrise[0], baseTimes.sunrise[1], seasonalAdjustment),
-        dhuhr: createTime(baseTimes.dhuhr[0], baseTimes.dhuhr[1], 0), // الظهر ثابت نسبياً
-        asr: createTime(baseTimes.asr[0], baseTimes.asr[1], -seasonalAdjustment),
-        maghrib: createTime(baseTimes.maghrib[0], baseTimes.maghrib[1], -seasonalAdjustment),
-        isha: createTime(baseTimes.isha[0], baseTimes.isha[1], -seasonalAdjustment)
+        imsak: createTime(baseTimes.imsak[0], baseTimes.imsak[1], fajrAdjust),
+        fajr: createTime(baseTimes.fajr[0], baseTimes.fajr[1], fajrAdjust),
+        sunrise: createTime(baseTimes.sunrise[0], baseTimes.sunrise[1], fajrAdjust),
+        dhuhr: createTime(baseTimes.dhuhr[0], baseTimes.dhuhr[1], dhuhrAdjust),
+        asr: createTime(baseTimes.asr[0], baseTimes.asr[1], asrAdjust),
+        maghrib: createTime(baseTimes.maghrib[0], baseTimes.maghrib[1], maghribAdjust),
+        isha: createTime(baseTimes.isha[0], baseTimes.isha[1], ishaAdjust)
     };
 }
 
