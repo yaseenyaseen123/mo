@@ -20,14 +20,12 @@ document.addEventListener('DOMContentLoaded', function() {
     
     const findQiblaBtn = document.getElementById('findQiblaBtn');
     
-    // Add click listener with proper mobile support
+    // Add click listener - works on both desktop and mobile
     if (findQiblaBtn) {
-        // Use both click and touchend for mobile devices
-        findQiblaBtn.addEventListener('click', handleFindQibla);
-        findQiblaBtn.addEventListener('touchend', function(e) {
+        findQiblaBtn.addEventListener('click', function(e) {
             e.preventDefault();
             handleFindQibla();
-        });
+        }, { passive: false });
     }
     
     // Check if device supports orientation
