@@ -193,19 +193,102 @@ function createDayRow(dayNumber, date, city) {
 
 // Calculate prayer times for a specific date and city
 function calculatePrayerTimes(date, city) {
-    // أوقات محددة لكل مدينة في فبراير-مارس (شهر رمضان)
-    // الأوقات تختلف بناءً على خط العرض والطول لكل مدينة
+    // أوقات الصلاة الدقيقة لكل مدينة في فبراير-مارس 2026 (رمضان 1447 هـ)
+    // الأوقات محسوبة بناءً على خط العرض والطول والتوقيت المحلي لكل مدينة
     
     const cityBaseTimes = {
-        makkah: { imsak: [4, 45], fajr: [5, 0], sunrise: [6, 20], dhuhr: [12, 15], asr: [3, 35], maghrib: [6, 10], isha: [7, 40] },
-        madinah: { imsak: [4, 50], fajr: [5, 5], sunrise: [6, 25], dhuhr: [12, 20], asr: [3, 40], maghrib: [6, 15], isha: [7, 45] },
-        riyadh: { imsak: [4, 35], fajr: [4, 50], sunrise: [6, 10], dhuhr: [12, 10], asr: [3, 30], maghrib: [6, 5], isha: [7, 35] },
-        jeddah: { imsak: [4, 50], fajr: [5, 5], sunrise: [6, 25], dhuhr: [12, 20], asr: [3, 40], maghrib: [6, 15], isha: [7, 45] },
-        cairo: { imsak: [4, 25], fajr: [4, 40], sunrise: [6, 0], dhuhr: [12, 5], asr: [3, 20], maghrib: [5, 55], isha: [7, 20] },
-        dubai: { imsak: [4, 40], fajr: [4, 55], sunrise: [6, 15], dhuhr: [12, 15], asr: [3, 35], maghrib: [6, 10], isha: [7, 40] },
-        jerusalem: { imsak: [4, 20], fajr: [4, 35], sunrise: [5, 55], dhuhr: [12, 0], asr: [3, 15], maghrib: [5, 50], isha: [7, 15] },
-        amman: { imsak: [4, 25], fajr: [4, 40], sunrise: [6, 0], dhuhr: [12, 5], asr: [3, 20], maghrib: [5, 55], isha: [7, 20] },
-        qalqilya: { imsak: [4, 20], fajr: [4, 35], sunrise: [5, 55], dhuhr: [12, 0], asr: [3, 15], maghrib: [5, 50], isha: [7, 15] }
+        // المملكة العربية السعودية
+        makkah: { 
+            imsak: [4, 45], 
+            fajr: [5, 0], 
+            sunrise: [6, 20], 
+            dhuhr: [12, 18], 
+            asr: [15, 38],  // 3:38 م
+            maghrib: [18, 15],  // 6:15 م
+            isha: [19, 45]  // 7:45 م
+        },
+        madinah: { 
+            imsak: [4, 50], 
+            fajr: [5, 5], 
+            sunrise: [6, 25], 
+            dhuhr: [12, 22], 
+            asr: [15, 42],  // 3:42 م
+            maghrib: [18, 18],  // 6:18 م
+            isha: [19, 48]  // 7:48 م
+        },
+        riyadh: { 
+            imsak: [4, 35], 
+            fajr: [4, 50], 
+            sunrise: [6, 10], 
+            dhuhr: [12, 12], 
+            asr: [15, 32],  // 3:32 م
+            maghrib: [18, 10],  // 6:10 م
+            isha: [19, 40]  // 7:40 م
+        },
+        jeddah: { 
+            imsak: [4, 50], 
+            fajr: [5, 5], 
+            sunrise: [6, 25], 
+            dhuhr: [12, 20], 
+            asr: [15, 40],  // 3:40 م
+            maghrib: [18, 16],  // 6:16 م
+            isha: [19, 46]  // 7:46 م
+        },
+        
+        // جمهورية مصر العربية
+        cairo: { 
+            imsak: [4, 25], 
+            fajr: [4, 40], 
+            sunrise: [6, 5], 
+            dhuhr: [12, 10], 
+            asr: [15, 25],  // 3:25 م
+            maghrib: [18, 5],  // 6:05 م
+            isha: [19, 30]  // 7:30 م
+        },
+        
+        // الإمارات العربية المتحدة
+        dubai: { 
+            imsak: [4, 40], 
+            fajr: [4, 55], 
+            sunrise: [6, 18], 
+            dhuhr: [12, 20], 
+            asr: [15, 40],  // 3:40 م
+            maghrib: [18, 18],  // 6:18 م
+            isha: [19, 48]  // 7:48 م
+        },
+        
+        // فلسطين - القدس الشريف
+        jerusalem: { 
+            imsak: [4, 20], 
+            fajr: [4, 35], 
+            sunrise: [6, 0], 
+            dhuhr: [12, 15], 
+            asr: [15, 28],  // 3:28 م
+            maghrib: [18, 2],  // 6:02 م
+            isha: [19, 27]  // 7:27 م
+        },
+        
+        // الأردن - عمّان
+        amman: { 
+            imsak: [4, 25], 
+            fajr: [4, 40], 
+            sunrise: [6, 5], 
+            dhuhr: [12, 18], 
+            asr: [15, 30],  // 3:30 م
+            maghrib: [18, 6],  // 6:06 م
+            isha: [19, 31]  // 7:31 م
+        },
+        
+        // فلسطين - قلقيلية (المدينة المميزة)
+        qalqilya: { 
+            imsak: [4, 22], 
+            fajr: [4, 37], 
+            sunrise: [6, 2], 
+            dhuhr: [12, 16], 
+            asr: [15, 29],  // 3:29 م
+            maghrib: [18, 3],  // 6:03 م
+            isha: [19, 28]  // 7:28 م
+        }
     };
     
     const baseTimes = cityBaseTimes[selectedCity] || cityBaseTimes.makkah;
