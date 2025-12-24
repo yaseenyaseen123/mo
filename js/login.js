@@ -71,8 +71,8 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         }
     
-    if (loginForm) {
-        loginForm.addEventListener('submit', async function(e) {
+        if (loginForm) {
+            loginForm.addEventListener('submit', async function(e) {
             e.preventDefault();
             
             const email = document.getElementById('email').value.trim();
@@ -166,9 +166,11 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Animate elements on load
     animateLogin();
-}
-
-// Animate Login Elements
+    }
+});
+    
+    // Social Login Buttons
+    const socialBtns = document.querySelectorAll('.social-btn');
 function animateLogin() {
     const formGroups = document.querySelectorAll('.form-group-login');
     formGroups.forEach((group, index) => {
