@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>إنشاء حساب المدير - رمضان قلقيلية</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .setup-container {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 2rem;
+        }
+
+        .setup-card {
+            background: white;
+            padding: 3rem;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            max-width: 500px;
+            width: 100%;
+        }
+
+        .setup-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .setup-header i {
+            font-size: 4rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .setup-header h1 {
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .setup-header p {
+            color: #666;
+            font-size: 0.95rem;
+        }
+
+        .warning-box {
+            background: #fff3cd;
+            border: 2px solid #ffc107;
+            border-radius: 10px;
+            padding: 1rem;
+            margin-bottom: 2rem;
+            color: #856404;
+        }
+
+        .warning-box i {
+            color: #ffc107;
+            margin-left: 0.5rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--primary-color);
+            font-weight: 600;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 0.8rem;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: all 0.3s;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: var(--primary-color);
+        }
+
+        .success-message {
+            background: #d4edda;
+            border: 2px solid #28a745;
+            color: #155724;
+            padding: 1rem;
+            border-radius: 10px;
+            margin-bottom: 1rem;
+            display: none;
+        }
+
+        .error-message {
+            background: #f8d7da;
+            border: 2px solid #dc3545;
+            color: #721c24;
+            padding: 1rem;
+            border-radius: 10px;
+            margin-bottom: 1rem;
+            display: none;
+        }
+
+        .create-btn {
+            width: 100%;
+            padding: 1rem;
+            background: linear-gradient(135deg, var(--primary-color), #2c7a5c);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .create-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(30, 90, 62, 0.4);
+        }
+
+        .create-btn:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+        }
+
+        .login-link {
+            text-align: center;
+            margin-top: 1.5rem;
+            color: #666;
+        }
+
+        .login-link a {
+            color: var(--primary-color);
+            font-weight: 600;
+            text-decoration: none;
+        }
+
+        #status {
+            text-align: center;
+            margin-top: 1rem;
+            font-size: 0.9rem;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <div class="setup-container">
+        <div class="setup-card">
+            <div class="setup-header">
+                <i class="fas fa-user-shield"></i>
+                <h1>إعداد حساب المدير</h1>
+                <p>قم بإنشاء حساب المدير الأول للتطبيق</p>
+            </div>
+
+            <div class="warning-box">
+                <i class="fas fa-exclamation-triangle"></i>
+                <strong>تنبيه:</strong> هذه الصفحة لإنشاء حساب المدير الأول فقط. 
+                بعد إنشاء الحساب، احذف هذه الصفحة من الخادم لأسباب أمنية.
+            </div>
+
+            <div class="success-message" id="successMsg"></div>
+            <div class="error-message" id="errorMsg"></div>
+
+            <form id="setupForm">
+                <div class="form-group">
+                    <label for="adminName">
+                        <i class="fas fa-user"></i> الاسم الكامل
+                    </label>
+                    <input 
+                        type="text" 
+                        id="adminName" 
+                        placeholder="أدخل اسمك الكامل"
+                        required
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label for="adminEmail">
+                        <i class="fas fa-envelope"></i> البريد الإلكتروني
+                    </label>
+                    <input 
+                        type="email" 
+                        id="adminEmail" 
+                        placeholder="admin@ramadan-qalqilya.com"
+                        required
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label for="adminPassword">
+                        <i class="fas fa-lock"></i> كلمة المرور
+                    </label>
+                    <input 
+                        type="password" 
+                        id="adminPassword" 
+                        placeholder="كلمة مرور قوية (6 أحرف على الأقل)"
+                        required
+                        minlength="6"
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label for="confirmPassword">
+                        <i class="fas fa-lock"></i> تأكيد كلمة المرور
+                    </label>
+                    <input 
+                        type="password" 
+                        id="confirmPassword" 
+                        placeholder="أعد إدخال كلمة المرور"
+                        required
+                        minlength="6"
+                    >
+                </div>
+
+                <button type="submit" class="create-btn" id="createBtn">
+                    <i class="fas fa-user-plus"></i> إنشاء حساب المدير
+                </button>
+            </form>
+
+            <div id="status"></div>
+
+            <div class="login-link">
+                تم الإنشاء بالفعل؟ 
+                <a href="login.html">تسجيل الدخول</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Firebase SDKs -->
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+    
+    <!-- Firebase Configuration -->
+    <script src="../js/firebase-config.js"></script>
+    <script src="../js/firebase-auth.js"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const form = document.getElementById('setupForm');
+            const nameInput = document.getElementById('adminName');
+            const emailInput = document.getElementById('adminEmail');
+            const passwordInput = document.getElementById('adminPassword');
+            const confirmPasswordInput = document.getElementById('confirmPassword');
+            const createBtn = document.getElementById('createBtn');
+            const successMsg = document.getElementById('successMsg');
+            const errorMsg = document.getElementById('errorMsg');
+            const statusDiv = document.getElementById('status');
+
+            // Check if Firebase is loaded
+            if (typeof firebase === 'undefined') {
+                showError('Firebase غير محمّل. تأكد من الاتصال بالإنترنت.');
+                createBtn.disabled = true;
+                return;
+            }
+
+            // Initialize Firebase
+            if (!firebase.apps.length) {
+                try {
+                    firebase.initializeApp(firebaseConfig);
+                    window.firebaseAuth = firebase.auth();
+                    window.firebaseDb = firebase.firestore();
+                    console.log('✅ Firebase initialized');
+                    statusDiv.textContent = '✓ Firebase متصل';
+                    statusDiv.style.color = '#28a745';
+                } catch (error) {
+                    console.error('Firebase init error:', error);
+                    showError('فشل الاتصال بـ Firebase');
+                    createBtn.disabled = true;
+                    return;
+                }
+            }
+
+            form.addEventListener('submit', async function(e) {
+                e.preventDefault();
+
+                const name = nameInput.value.trim();
+                const email = emailInput.value.trim();
+                const password = passwordInput.value;
+                const confirmPassword = confirmPasswordInput.value;
+
+                // Validation
+                if (!name || !email || !password) {
+                    showError('الرجاء ملء جميع الحقول');
+                    return;
+                }
+
+                if (password !== confirmPassword) {
+                    showError('كلمات المرور غير متطابقة');
+                    return;
+                }
+
+                if (password.length < 6) {
+                    showError('كلمة المرور يجب أن تكون 6 أحرف على الأقل');
+                    return;
+                }
+
+                // Disable button
+                createBtn.disabled = true;
+                createBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> جاري الإنشاء...';
+
+                try {
+                    // Create user in Firebase Auth
+                    const userCredential = await firebase.auth().createUserWithEmailAndPassword(email, password);
+                    const user = userCredential.user;
+
+                    // Update profile
+                    await user.updateProfile({ displayName: name });
+
+                    // Create admin document in Firestore
+                    await firebase.firestore().collection('users').doc(user.uid).set({
+                        uid: user.uid,
+                        email: email,
+                        displayName: name,
+                        role: 'admin',
+                        active: true,
+                        createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+                        lastLogin: firebase.firestore.FieldValue.serverTimestamp()
+                    });
+
+                    // Success!
+                    showSuccess(`تم إنشاء حساب المدير بنجاح! 🎉<br>البريد: ${email}<br>سيتم توجيهك لتسجيل الدخول...`);
+
+                    // Redirect after 3 seconds
+                    setTimeout(() => {
+                        window.location.href = 'login.html';
+                    }, 3000);
+
+                } catch (error) {
+                    console.error('Error:', error);
+                    let errorMessage = 'حدث خطأ غير متوقع';
+                    
+                    switch(error.code) {
+                        case 'auth/email-already-in-use':
+                            errorMessage = 'هذا البريد الإلكتروني مستخدم بالفعل';
+                            break;
+                        case 'auth/invalid-email':
+                            errorMessage = 'البريد الإلكتروني غير صالح';
+                            break;
+                        case 'auth/weak-password':
+                            errorMessage = 'كلمة المرور ضعيفة جداً';
+                            break;
+                        case 'auth/network-request-failed':
+                            errorMessage = 'خطأ في الاتصال بالإنترنت';
+                            break;
+                        default:
+                            errorMessage = error.message;
+                    }
+                    
+                    showError(errorMessage);
+                    createBtn.disabled = false;
+                    createBtn.innerHTML = '<i class="fas fa-user-plus"></i> إنشاء حساب المدير';
+                }
+            });
+
+            function showSuccess(message) {
+                successMsg.innerHTML = '<i class="fas fa-check-circle"></i> ' + message;
+                successMsg.style.display = 'block';
+                errorMsg.style.display = 'none';
+            }
+
+            function showError(message) {
+                errorMsg.innerHTML = '<i class="fas fa-exclamation-circle"></i> ' + message;
+                errorMsg.style.display = 'block';
+                successMsg.style.display = 'none';
+            }
+        });
+    </script>
+</body>
+</html>
