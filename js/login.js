@@ -113,6 +113,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         showNotification(`مرحباً ${userData.data.displayName}! تم تسجيل الدخول بنجاح`, 'success');
                         
                         console.log('🚀 Redirecting to quran.html...');
+                        alert('سيتم الانتقال إلى صفحة القرآن الآن!');
                         
                         // Redirect to Quran page immediately
                         window.location.href = 'quran.html';
