@@ -1,0 +1,402 @@
+/* Dark Mode Styles - التصميم المظلم */
+
+:root {
+    /* Light Mode Colors - ألوان الوضع العادي */
+    --bg-primary: #ffffff;
+    --bg-secondary: #f5f5f5;
+    --bg-card: #ffffff;
+    --text-primary: #333333;
+    --text-secondary: #666666;
+    --text-light: #999999;
+    --border-color: #e0e0e0;
+    --shadow-color: rgba(0, 0, 0, 0.1);
+    --shadow-hover: rgba(0, 0, 0, 0.15);
+    
+    /* Islamic Colors - الألوان الإسلامية */
+    --islamic-green: #1e5a3e;
+    --islamic-green-dark: #0f3d2a;
+    --islamic-green-light: #2d7a56;
+    --islamic-gold: #d4af37;
+    --islamic-gold-dark: #b8941f;
+    --islamic-cream: #f8f6f0;
+}
+
+/* Dark Mode Variables */
+body.dark-mode {
+    --bg-primary: #1a1a1a;
+    --bg-secondary: #242424;
+    --bg-card: #2d2d2d;
+    --text-primary: #e0e0e0;
+    --text-secondary: #b0b0b0;
+    --text-light: #888888;
+    --border-color: #404040;
+    --shadow-color: rgba(0, 0, 0, 0.3);
+    --shadow-hover: rgba(0, 0, 0, 0.5);
+    
+    /* Adjust Islamic colors for dark mode */
+    --islamic-green: #2d7a56;
+    --islamic-green-dark: #1e5a3e;
+    --islamic-green-light: #3a9668;
+    --islamic-gold: #f4d03f;
+    --islamic-gold-dark: #d4af37;
+}
+
+/* Apply Variables to Elements */
+body {
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Cards and Containers */
+.card,
+.feature-card,
+.prayer-card,
+.hadith-card,
+.city-btn,
+.dashboard-card,
+.login-container,
+.register-container {
+    background-color: var(--bg-card);
+    color: var(--text-primary);
+    box-shadow: 0 4px 6px var(--shadow-color);
+    border-color: var(--border-color);
+}
+
+.card:hover,
+.feature-card:hover,
+.hadith-card:hover {
+    box-shadow: 0 6px 12px var(--shadow-hover);
+}
+
+/* Headers and Sections */
+.hero,
+.section,
+.ramadan-header,
+.dashboard-header {
+    background-color: var(--bg-secondary);
+}
+
+/* Text Colors */
+h1, h2, h3, h4, h5, h6 {
+    color: var(--text-primary);
+}
+
+p, span, li {
+    color: var(--text-secondary);
+}
+
+/* Inputs and Forms */
+input,
+textarea,
+select {
+    background-color: var(--bg-card);
+    color: var(--text-primary);
+    border-color: var(--border-color);
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+    border-color: var(--islamic-green);
+    background-color: var(--bg-card);
+}
+
+/* Tables */
+table {
+    background-color: var(--bg-card);
+    color: var(--text-primary);
+}
+
+thead {
+    background-color: var(--islamic-green);
+    color: white;
+}
+
+tbody tr {
+    border-bottom: 1px solid var(--border-color);
+}
+
+tbody tr:hover {
+    background-color: var(--bg-secondary);
+}
+
+/* Dark Mode Toggle Button */
+.dark-mode-toggle {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--islamic-green), var(--islamic-green-dark));
+    border: 3px solid var(--islamic-gold);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    color: white;
+    box-shadow: 0 4px 15px var(--shadow-color);
+    transition: all 0.3s ease;
+    z-index: 9999;
+    user-select: none;
+}
+
+.dark-mode-toggle:hover {
+    transform: scale(1.1) rotate(15deg);
+    box-shadow: 0 6px 20px var(--shadow-hover);
+}
+
+.dark-mode-toggle:active {
+    transform: scale(0.95);
+}
+
+/* Icons for toggle */
+.dark-mode-toggle .icon-sun,
+.dark-mode-toggle .icon-moon {
+    position: absolute;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.dark-mode-toggle .icon-sun {
+    opacity: 1;
+    transform: rotate(0deg);
+}
+
+.dark-mode-toggle .icon-moon {
+    opacity: 0;
+    transform: rotate(180deg);
+}
+
+body.dark-mode .dark-mode-toggle .icon-sun {
+    opacity: 0;
+    transform: rotate(180deg);
+}
+
+body.dark-mode .dark-mode-toggle .icon-moon {
+    opacity: 1;
+    transform: rotate(0deg);
+}
+
+/* Navigation Bar */
+.navbar {
+    background-color: var(--bg-card);
+    box-shadow: 0 2px 10px var(--shadow-color);
+}
+
+.navbar a {
+    color: var(--text-primary);
+}
+
+.navbar a:hover {
+    color: var(--islamic-green);
+}
+
+/* Buttons */
+.btn-primary {
+    background: linear-gradient(135deg, var(--islamic-green), var(--islamic-green-dark));
+    color: white;
+}
+
+.btn-primary:hover {
+    background: linear-gradient(135deg, var(--islamic-green-light), var(--islamic-green));
+}
+
+.btn-secondary {
+    background-color: var(--bg-secondary);
+    color: var(--text-primary);
+    border: 2px solid var(--border-color);
+}
+
+.btn-secondary:hover {
+    background-color: var(--bg-card);
+    border-color: var(--islamic-green);
+}
+
+/* Prayer Times Cards */
+.prayer-times-grid {
+    background-color: var(--bg-secondary);
+}
+
+.prayer-card.next-prayer {
+    background: linear-gradient(135deg, var(--islamic-green), var(--islamic-green-light));
+    border-color: var(--islamic-gold);
+}
+
+/* Ramadan Schedule */
+.ramadan-schedule {
+    background-color: var(--bg-card);
+}
+
+.schedule-table {
+    background-color: var(--bg-card);
+}
+
+.friday-row {
+    background-color: var(--bg-secondary);
+}
+
+.last-ten-days {
+    border-right: 4px solid var(--islamic-gold);
+}
+
+.current-day {
+    background: linear-gradient(90deg, var(--islamic-green), transparent);
+    border-left: 5px solid var(--islamic-gold);
+}
+
+/* Qibla Compass */
+.qibla-compass {
+    background-color: var(--bg-card);
+    box-shadow: 0 0 30px var(--shadow-color);
+}
+
+.compass-ring {
+    border-color: var(--islamic-gold);
+}
+
+/* Quran Page */
+.surah-card {
+    background-color: var(--bg-card);
+    border-color: var(--border-color);
+}
+
+.surah-card:hover {
+    border-color: var(--islamic-green);
+    box-shadow: 0 4px 12px var(--shadow-hover);
+}
+
+/* Hadith Page */
+.hadith-filters {
+    background-color: var(--bg-secondary);
+}
+
+.filter-btn {
+    background-color: var(--bg-card);
+    color: var(--text-secondary);
+    border: 2px solid var(--border-color);
+}
+
+.filter-btn.active,
+.filter-btn:hover {
+    background-color: var(--islamic-green);
+    color: white;
+    border-color: var(--islamic-green);
+}
+
+/* Modals and Dialogs */
+.modal,
+.dialog {
+    background-color: var(--bg-card);
+}
+
+.modal-overlay {
+    background-color: rgba(0, 0, 0, 0.7);
+}
+
+body.dark-mode .modal-overlay {
+    background-color: rgba(0, 0, 0, 0.85);
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+    width: 12px;
+    background-color: var(--bg-secondary);
+}
+
+::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, var(--islamic-green), var(--islamic-green-dark));
+    border-radius: 6px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(180deg, var(--islamic-green-light), var(--islamic-green));
+}
+
+/* Footer */
+footer {
+    background-color: var(--bg-secondary);
+    color: var(--text-secondary);
+    border-top: 1px solid var(--border-color);
+}
+
+/* Special Elements for Dark Mode */
+body.dark-mode .islamic-pattern {
+    opacity: 0.03;
+}
+
+body.dark-mode .golden-accent {
+    color: var(--islamic-gold);
+}
+
+body.dark-mode .verse-arabic {
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+/* Loading Spinner */
+.spinner {
+    border-color: var(--border-color);
+    border-top-color: var(--islamic-green);
+}
+
+/* Tooltips */
+.tooltip {
+    background-color: var(--bg-card);
+    color: var(--text-primary);
+    box-shadow: 0 2px 8px var(--shadow-color);
+}
+
+/* Stats and Badges */
+.stat-number {
+    color: var(--islamic-green);
+}
+
+.badge {
+    background-color: var(--islamic-gold);
+    color: var(--bg-primary);
+}
+
+body.dark-mode .badge {
+    background-color: var(--islamic-gold-dark);
+    color: var(--text-primary);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .dark-mode-toggle {
+        bottom: 20px;
+        right: 20px;
+        width: 50px;
+        height: 50px;
+        font-size: 20px;
+    }
+}
+
+/* Animation for Mode Switch */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+body.dark-mode * {
+    animation: fadeIn 0.3s ease;
+}
+
+/* Print Styles - إخفاء زر الوضع المظلم عند الطباعة */
+@media print {
+    .dark-mode-toggle {
+        display: none !important;
+    }
+    
+    body {
+        background-color: white !important;
+        color: black !important;
+    }
+}
