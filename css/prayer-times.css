@@ -1,0 +1,374 @@
+/* Prayer Times Styles - تنسيقات مواقيت الصلاة */
+
+/* Location Permission Dialog */
+.location-permission-dialog {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 10000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation: fadeIn 0.3s ease;
+}
+
+.dialog-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(5px);
+}
+
+.dialog-content {
+    position: relative;
+    background: white;
+    border-radius: 20px;
+    padding: 2.5rem;
+    max-width: 500px;
+    width: 90%;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    animation: slideUp 0.4s ease;
+    text-align: center;
+}
+
+.dialog-icon {
+    width: 80px;
+    height: 80px;
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--dark-green) 100%);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1.5rem;
+    box-shadow: 0 10px 30px rgba(30, 90, 62, 0.3);
+}
+
+.dialog-icon i {
+    font-size: 2.5rem;
+    color: white;
+}
+
+.dialog-content h2 {
+    font-size: 1.8rem;
+    color: var(--text-dark);
+    margin-bottom: 1rem;
+    font-weight: 700;
+}
+
+.dialog-content > p {
+    color: #666;
+    font-size: 1rem;
+    line-height: 1.6;
+    margin-bottom: 2rem;
+}
+
+.dialog-features {
+    display: grid;
+    gap: 1rem;
+    margin-bottom: 2rem;
+    text-align: right;
+}
+
+.feature-item {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.75rem;
+    background: #f8f9fa;
+    border-radius: 10px;
+}
+
+.feature-item i {
+    color: var(--primary-color);
+    font-size: 1.2rem;
+}
+
+.feature-item span {
+    color: var(--text-dark);
+    font-weight: 600;
+}
+
+.dialog-buttons {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.dialog-buttons .btn {
+    flex: 1;
+    padding: 1rem;
+    font-size: 1rem;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+.dialog-buttons .btn-primary {
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--dark-green) 100%);
+    color: white;
+}
+
+.dialog-buttons .btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 30px rgba(30, 90, 62, 0.3);
+}
+
+.dialog-buttons .btn-secondary {
+    background: #f8f9fa;
+    color: #666;
+}
+
+.dialog-buttons .btn-secondary:hover {
+    background: #e9ecef;
+}
+
+.dialog-note {
+    color: #999;
+    font-size: 0.85rem;
+    margin-top: 1rem;
+}
+
+.dialog-note i {
+    color: var(--primary-color);
+}
+
+/* Prayer Times Enhanced Styles */
+.prayer-times {
+    position: relative;
+}
+
+.prayer-card {
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+.prayer-card.next-prayer {
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--dark-green) 100%);
+    color: white;
+    transform: scale(1.05);
+    box-shadow: 0 15px 40px rgba(30, 90, 62, 0.4);
+}
+
+.prayer-card.next-prayer i {
+    color: var(--gold-color);
+}
+
+.prayer-card.next-prayer h3,
+.prayer-card.next-prayer .time {
+    color: white;
+}
+
+.next-badge {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background: var(--gold-color);
+    color: var(--text-dark);
+    padding: 0.25rem 0.75rem;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    animation: pulse 2s infinite;
+}
+
+/* Location Info */
+.location-info {
+    margin-top: 2rem;
+    padding: 1.5rem;
+    background: #f8f9fa;
+    border-radius: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.location-info i {
+    color: var(--primary-color);
+    font-size: 1.2rem;
+}
+
+.location-info span {
+    color: #666;
+    font-weight: 600;
+    flex: 1;
+}
+
+.btn-refresh {
+    background: var(--primary-color);
+    color: white;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 10px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: all 0.3s ease;
+    font-weight: 600;
+}
+
+.btn-refresh:hover {
+    background: var(--dark-green);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(30, 90, 62, 0.3);
+}
+
+.btn-refresh i {
+    transition: transform 0.3s ease;
+}
+
+.btn-refresh:hover i {
+    transform: rotate(180deg);
+}
+
+/* Notification Styles */
+.notification {
+    position: fixed;
+    top: 100px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 1rem 2rem;
+    border-radius: 10px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    min-width: 300px;
+    animation: slideDown 0.3s ease;
+}
+
+.notification-success {
+    background: #27ae60;
+    color: white;
+}
+
+.notification-error {
+    background: #e74c3c;
+    color: white;
+}
+
+.notification-warning {
+    background: #f39c12;
+    color: white;
+}
+
+.notification-info {
+    background: #3498db;
+    color: white;
+}
+
+.notification i {
+    font-size: 1.2rem;
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateX(-50%) translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(-50%) translateY(0);
+    }
+}
+
+@keyframes pulse {
+    0%, 100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+    50% {
+        transform: scale(1.05);
+        opacity: 0.9;
+    }
+}
+
+/* Hijri Date Display */
+#hijriDate {
+    display: inline-block;
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--dark-green) 100%);
+    color: white;
+    padding: 0.5rem 1.5rem;
+    border-radius: 20px;
+    font-weight: 600;
+    margin: 1rem auto;
+    box-shadow: 0 5px 15px rgba(30, 90, 62, 0.2);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .dialog-content {
+        padding: 2rem 1.5rem;
+    }
+    
+    .dialog-content h2 {
+        font-size: 1.5rem;
+    }
+    
+    .dialog-buttons {
+        flex-direction: column;
+    }
+    
+    .location-info {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .location-info span {
+        text-align: center;
+    }
+    
+    .btn-refresh {
+        width: 100%;
+        justify-content: center;
+    }
+    
+    .notification {
+        min-width: auto;
+        width: 90%;
+        max-width: 350px;
+    }
+}
+
+/* Print Styles */
+@media print {
+    .location-permission-dialog,
+    .notification,
+    .btn-refresh {
+        display: none !important;
+    }
+}

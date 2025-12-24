@@ -42,33 +42,10 @@ document.addEventListener('DOMContentLoaded', function() {
     document.querySelectorAll('.feature-card, .prayer-card, .stat-card').forEach(card => {
         observer.observe(card);
     });
-
-    // Update Prayer Times (Example - would need real API)
-    updatePrayerTimes();
-    
-    // Update every hour
-    setInterval(updatePrayerTimes, 3600000);
 });
 
-// Prayer Times Function (Placeholder)
-function updatePrayerTimes() {
-    // This would connect to a real prayer times API
-    // For now, it's just a placeholder
-    const prayerTimes = {
-        fajr: '05:15',
-        sunrise: '06:42',
-        dhuhr: '12:05',
-        asr: '15:10',
-        maghrib: '17:28',
-        isha: '18:52'
-    };
-    
-    // Update times in the DOM if elements exist
-    console.log('Prayer times updated:', prayerTimes);
-}
-
 // Notification Function
-function showNotification(message, type = 'success') {
+window.showNotification = function(message, type = 'success') {
     const notification = document.createElement('div');
     notification.className = `notification notification-${type}`;
     notification.textContent = message;
