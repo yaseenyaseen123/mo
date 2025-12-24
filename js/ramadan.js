@@ -53,6 +53,12 @@ const CITY_TIMES = {
         timezone: 'Asia/Amman',
         lat: 31.9454,
         lng: 35.9284
+    },
+    qalqilya: {
+        name: 'قلقيلية',
+        timezone: 'Asia/Hebron',
+        lat: 32.1895,
+        lng: 34.9706
     }
 };
 
@@ -298,9 +304,15 @@ function formatGregorianDate(date) {
 }
 
 function formatTime(date) {
-    const hours = padZero(date.getHours());
+    let hours = date.getHours();
     const minutes = padZero(date.getMinutes());
-    return `${hours}:${minutes}`;
+    const ampm = hours >= 12 ? 'م' : 'ص';
+    
+    // تحويل من 24 إلى 12 ساعة
+    hours = hours % 12;
+    hours = hours ? hours : 12; // الساعة '0' تصبح '12'
+    
+    return `${hours}:${minutes} ${ampm}`;
 }
 
 function parseTime(timeStr) {
