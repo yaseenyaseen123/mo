@@ -226,7 +226,7 @@ async function loadPageContent(side, pageNum) {
         return;
     }
     
-    // Show loading
+    // Show loading with spinner
     pageTextEl.innerHTML = '<div class="loading"><i class="fas fa-spinner fa-spin"></i><p>جاري تحميل الصفحة...</p></div>';
     
     // Get surah info for this page
@@ -236,68 +236,109 @@ async function loadPageContent(side, pageNum) {
     // Update header
     if (surahInfo) {
         surahNameEl.textContent = `سورة ${surahInfo.name}`;
+    } else {
+        surahNameEl.textContent = '';
     }
     if (juzInfo) {
         juzNumberEl.textContent = `الجزء ${juzInfo}`;
+    } else {
+        juzNumberEl.textContent = '';
     }
-    pageNumberEl.textContent = pageNum;
     
-    // Load content from API
+    // Update page number
+    pageNumberEl.textContent = `${pageNum}`;
+    
+    // Fetch actual Quran content
     try {
         const content = await fetchPageContent(pageNum);
         pageTextEl.innerHTML = content;
     } catch (error) {
         console.error('Error loading page:', error);
-        pageTextEl.innerHTML = `<div class="loading"><i class="fas fa-exclamation-triangle"></i><p>عذراً، حدث خطأ في التحميل</p></div>`;
+        pageTextEl.innerHTML = `
+            <div class="error-message">
+                <i class="fas fa-exclamation-triangle"></i>
+                <p>حدث خطأ في التحميل</p>
+                <button onclick="loadPage(${currentPage})" class="retry-btn">
+                    <i class="fas fa-redo"></i> إعادة المحاولة
+                </button>
+            </div>
+        `;
     }
 }
 
-// Fetch Page Content (Mock - in production use real Quran API)
+// Fetch Page Content from Real Quran API
 async function fetchPageContent(pageNum) {
-    // This is a simplified version. In production, use API like:
-    // https://api.alquran.cloud/v1/page/${pageNum}/quran-uthmani
-    
-    return new Promise((resolve) => {
-        setTimeout(() => {
-            let content = '';
-            
-            // Get surah for this page
-            const surah = getSurahByPage(pageNum);
-            
-            if (surah && surah.page === pageNum) {
-                // Surah header
-                content += `<div class="surah-header">سورة ${surah.name}</div>`;
+    try {
+        // Use Quran.com API - Uthmani script
+        const response = await fetch(`https://api.alquran.cloud/v1/page/${pageNum}/quran-uthmani`);
+        
+        if (!response.ok) {
+            throw new Error('Failed to fetch Quran page');
+        }
+        
+        const data = await response.json();
+        
+        if (data.code !== 200 || !data.data || !data.data.ayahs) {
+            throw new Error('Invalid API response');
+        }
+        
+        let content = '';
+        const ayahs = data.data.ayahs;
+        let currentSurah = null;
+        let surahStarted = false;
+        
+        ayahs.forEach((ayah, index) => {
+            // Check if this is a new Surah
+            if (!currentSurah || currentSurah !== ayah.surah.number) {
+                currentSurah = ayah.surah.number;
                 
-                // Basmala (except for Surah 9)
-                if (surah.number !== 1 && surah.number !== 9) {
-                    content += `<div class="basmala">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</div>`;
+                // Close previous paragraph if exists
+                if (surahStarted) {
+                    content += `</p>`;
                 }
+                
+                // Add Surah header (except for continuation of same surah)
+                if (ayah.numberInSurah === 1 || index === 0) {
+                    content += `<div class="surah-header">سورة ${ayah.surah.name}</div>`;
+                    
+                    // Add Basmala (except for Surah 1 which includes it, and Surah 9)
+                    if (ayah.surah.number !== 1 && ayah.surah.number !== 9 && ayah.numberInSurah === 1) {
+                        content += `<div class="basmala">بِسْمِ ٱللَّهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ</div>`;
+                    }
+                }
+                
+                // Start new paragraph
+                content += `<p class="aya">`;
+                surahStarted = true;
             }
             
-            // Sample Quranic text (in production, load from API)
-            content += `<p class="aya">`;
-            
-            if (pageNum === 1) {
-                // Al-Fatiha
-                content += `<span class="aya-text">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</span> <span class="aya-number">۝1</span> `;
-                content += `<span class="aya-text">الْحَمْدُ لِلَّهِ رَبِّ الْعَالَمِينَ</span> <span class="aya-number">۝2</span> `;
-                content += `<span class="aya-text">الرَّحْمَٰنِ الرَّحِيمِ</span> <span class="aya-number">۝3</span> `;
-                content += `<span class="aya-text">مَالِكِ يَوْمِ الدِّينِ</span> <span class="aya-number">۝4</span> `;
-                content += `<span class="aya-text">إِيَّاكَ نَعْبُدُ وَإِيَّاكَ نَسْتَعِينُ</span> <span class="aya-number">۝5</span> `;
-                content += `<span class="aya-text">اهْدِنَا الصِّرَاطَ الْمُسْتَقِيمَ</span> <span class="aya-number">۝6</span> `;
-                content += `<span class="aya-text">صِرَاطَ الَّذِينَ أَنْعَمْتَ عَلَيْهِمْ غَيْرِ الْمَغْضُوبِ عَلَيْهِمْ وَلَا الضَّالِّينَ</span> <span class="aya-number">۝7</span>`;
-            } else {
-                // Sample text for other pages
-                content += `<span class="aya-text">إِنَّ اللَّهَ لَا يَسْتَحْيِي أَن يَضْرِبَ مَثَلًا مَّا بَعُوضَةً فَمَا فَوْقَهَا</span> <span class="aya-number">۝${Math.floor(Math.random() * 100)}</span> `;
-                content += `<span class="aya-text">فَأَمَّا الَّذِينَ آمَنُوا فَيَعْلَمُونَ أَنَّهُ الْحَقُّ مِن رَّبِّهِمْ</span> <span class="aya-number">۝${Math.floor(Math.random() * 100)}</span> `;
-                content += `<span class="aya-text">وَأَمَّا الَّذِينَ كَفَرُوا فَيَقُولُونَ مَاذَا أَرَادَ اللَّهُ بِهَٰذَا مَثَلًا</span> <span class="aya-number">۝${Math.floor(Math.random() * 100)}</span>`;
-            }
-            
+            // Add the ayah text with number
+            content += `<span class="aya-text">${ayah.text}</span> `;
+            content += `<span class="aya-number">۝${ayah.numberInSurah}</span> `;
+        });
+        
+        // Close last paragraph
+        if (surahStarted) {
             content += `</p>`;
-            
-            resolve(content);
-        }, 300);
-    });
+        }
+        
+        return content;
+        
+    } catch (error) {
+        console.error('Error fetching Quran page:', error);
+        
+        // Fallback content
+        return `
+            <div class="error-message">
+                <i class="fas fa-exclamation-triangle"></i>
+                <p>عذراً، حدث خطأ في تحميل الصفحة</p>
+                <p class="error-details">يرجى التحقق من اتصالك بالإنترنت والمحاولة مرة أخرى</p>
+                <button onclick="location.reload()" class="retry-btn">
+                    <i class="fas fa-redo"></i> إعادة المحاولة
+                </button>
+            </div>
+        `;
+    }
 }
 
 // Get Surah by Page
@@ -351,27 +392,38 @@ function goToPage(pageNum) {
 
 // Animate Page Turn
 function animatePageTurn(direction, targetPage) {
-    const pages = document.querySelectorAll('.page');
+    const rightPage = document.querySelector('.right-page');
+    const leftPage = document.querySelector('.left-page');
     
-    // Add flip animation
-    pages.forEach(page => {
-        page.classList.add('flipping');
-    });
-    
-    // Play page turn sound (optional - can add audio)
-    playPageSound();
-    
-    // Load new page after animation starts
-    setTimeout(() => {
-        loadPage(targetPage);
+    // Add realistic flip animation based on direction
+    if (direction === 'next') {
+        rightPage.classList.add('flipping-right');
         
-        // Remove animation class
         setTimeout(() => {
-            pages.forEach(page => {
-                page.classList.remove('flipping');
-            });
-        }, 100);
-    }, 400);
+            loadPage(targetPage);
+            
+            setTimeout(() => {
+                rightPage.classList.remove('flipping-right');
+            }, 100);
+        }, 800);
+        
+    } else if (direction === 'prev') {
+        leftPage.classList.add('flipping-left');
+        
+        setTimeout(() => {
+            loadPage(targetPage);
+            
+            setTimeout(() => {
+                leftPage.classList.remove('flipping-left');
+            }, 100);
+        }, 800);
+    } else {
+        // Direct navigation (goto, surah, juz)
+        loadPage(targetPage);
+    }
+    
+    // Play page turn sound
+    playPageSound();
 }
 
 // Play page turn sound (optional)

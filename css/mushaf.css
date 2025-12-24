@@ -252,21 +252,120 @@
     pointer-events: none;
 }
 
-/* Page Flip Animation */
-.page.flipping {
-    animation: pageFlip 0.8s ease-in-out;
-}
-
-@keyframes pageFlip {
+/* Enhanced Page Flip Animation */
+@keyframes pageFlipRight {
     0% {
         transform: rotateY(0deg);
+        z-index: 2;
     }
     50% {
         transform: rotateY(-90deg);
+        z-index: 2;
     }
     100% {
         transform: rotateY(-180deg);
+        z-index: 1;
     }
+}
+
+@keyframes pageFlipLeft {
+    0% {
+        transform: rotateY(0deg);
+        z-index: 2;
+    }
+    50% {
+        transform: rotateY(90deg);
+        z-index: 2;
+    }
+    100% {
+        transform: rotateY(180deg);
+        z-index: 1;
+    }
+}
+
+.page.flipping-right {
+    animation: pageFlipRight 0.8s ease-in-out forwards;
+    transform-origin: left center;
+}
+
+.page.flipping-left {
+    animation: pageFlipLeft 0.8s ease-in-out forwards;
+    transform-origin: right center;
+}
+
+/* Error Message Styles */
+.error-message {
+    text-align: center;
+    padding: 3rem;
+    color: var(--text-dark);
+}
+
+.error-message i {
+    font-size: 3rem;
+    color: #d9534f;
+    margin-bottom: 1rem;
+}
+
+.error-message p {
+    margin: 0.5rem 0;
+    font-size: 1.1rem;
+}
+
+.error-details {
+    font-size: 0.95rem;
+    color: #666;
+}
+
+.retry-btn {
+    margin-top: 1.5rem;
+    padding: 0.75rem 2rem;
+    background: linear-gradient(135deg, var(--accent-gold), #b8860b);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-family: 'Cairo', sans-serif;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.retry-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(218, 165, 32, 0.3);
+}
+
+.retry-btn i {
+    margin-left: 0.5rem;
+}
+
+/* Loading State */
+.page-content.loading {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 400px;
+}
+
+.loading-spinner {
+    text-align: center;
+    color: var(--text-dark);
+}
+
+.loading-spinner i {
+    font-size: 2.5rem;
+    color: var(--accent-gold);
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+.loading-spinner p {
+    margin-top: 1rem;
+    font-size: 1rem;
+    color: #666;
 }
 
 .page-content {
@@ -365,26 +464,45 @@
 .page-text p {
     margin-bottom: 1.5rem;
     text-indent: 2rem;
+    line-height: 2.5;
+    text-align: justify;
+    font-family: 'Amiri Quran', 'Scheherazade New', 'Amiri', serif;
+    font-size: 1.5rem;
+    color: #1a1a1a;
+    direction: rtl;
 }
 
 .aya {
     display: inline;
+    font-family: 'Amiri Quran', 'Scheherazade New', 'Amiri', serif;
+    font-size: 1.5rem;
+    line-height: 2.5;
+    text-align: justify;
+    color: #1a1a1a;
+    direction: rtl;
+}
+
+.aya-text {
+    font-size: 1.5rem;
+    letter-spacing: 0.02em;
+    word-spacing: 0.1em;
 }
 
 .aya-number {
     display: inline-block;
     font-family: 'Amiri', serif;
-    font-size: 0.9rem;
-    color: var(--secondary-color);
-    background: rgba(212, 175, 55, 0.15);
-    border: 1px solid var(--secondary-color);
+    font-size: 1.1rem;
+    color: var(--accent-gold);
+    background: rgba(212, 175, 55, 0.1);
+    border: 1.5px solid var(--accent-gold);
     border-radius: 50%;
-    width: 28px;
-    height: 28px;
-    line-height: 26px;
+    width: 30px;
+    height: 30px;
+    line-height: 28px;
     text-align: center;
     margin: 0 5px;
     vertical-align: middle;
+    font-weight: bold;
 }
 
 .basmala {
