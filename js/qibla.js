@@ -19,7 +19,16 @@ document.addEventListener('DOMContentLoaded', function() {
     headingValue = document.getElementById('headingValue');
     
     const findQiblaBtn = document.getElementById('findQiblaBtn');
-    findQiblaBtn.addEventListener('click', findQibla);
+    
+    // Add click listener with proper mobile support
+    if (findQiblaBtn) {
+        // Use both click and touchend for mobile devices
+        findQiblaBtn.addEventListener('click', handleFindQibla);
+        findQiblaBtn.addEventListener('touchend', function(e) {
+            e.preventDefault();
+            handleFindQibla();
+        });
+    }
     
     // Check if device supports orientation
     if (!window.DeviceOrientationEvent) {
@@ -27,15 +36,24 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 });
 
+// Handle find qibla button click
+function handleFindQibla() {
+    console.log('Find Qibla button clicked');
+    findQibla();
+}
+
 // Find Qibla Direction
 async function findQibla() {
+    console.log('findQibla function called');
     showNotification('جاري تحديد موقعك...');
     
     // Request device orientation permission for iOS 13+
     if (typeof DeviceOrientationEvent !== 'undefined' && 
         typeof DeviceOrientationEvent.requestPermission === 'function') {
+        console.log('Requesting DeviceOrientation permission for iOS...');
         try {
             const permission = await DeviceOrientationEvent.requestPermission();
+            console.log('Permission result:', permission);
             if (permission !== 'granted') {
                 showError('يرجى السماح باستخدام البوصلة');
                 return;
@@ -52,6 +70,7 @@ async function findQibla() {
         return;
     }
     
+    console.log('Requesting geolocation...');
     navigator.geolocation.getCurrentPosition(
         handleLocationSuccess,
         handleLocationError,
