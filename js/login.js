@@ -166,7 +166,6 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Animate elements on load
     animateLogin();
-    }
 }
 
 // Animate Login Elements
