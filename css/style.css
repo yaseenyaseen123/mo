@@ -2952,9 +2952,9 @@ p {
 
 .ramadan-stats {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(4, 1fr);
     gap: 2rem;
-    max-width: 1000px;
+    max-width: 1200px;
     margin: 0 auto 3rem;
 }
 
@@ -3018,7 +3018,7 @@ p {
 
 .city-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(4, 1fr);
     gap: 1rem;
 }
 
@@ -3192,14 +3192,29 @@ p {
     color: #0066cc;
 }
 
-.maghrib-time {
+.sunrise-time {
+    font-weight: 600;
+    color: #ff9933;
+}
+
+.dhuhr-time {
     font-weight: 600;
     color: #ff6600;
 }
 
-.fasting-hours {
-    font-weight: 700;
-    color: var(--primary-color);
+.asr-time {
+    font-weight: 600;
+    color: #cc6600;
+}
+
+.maghrib-time {
+    font-weight: 600;
+    color: #ff3300;
+}
+
+.isha-time {
+    font-weight: 600;
+    color: #000099;
 }
 
 .ramadan-tips {
@@ -3302,14 +3317,17 @@ p {
 
 /* Responsive Design */
 @media (max-width: 1024px) {
-    .ramadan-stats,
+    .ramadan-stats {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
     .tips-grid,
     .duas-cards {
         grid-template-columns: repeat(2, 1fr);
     }
     
     .city-grid {
-        grid-template-columns: repeat(2, 1fr);
+        grid-template-columns: repeat(3, 1fr);
     }
 }
 
@@ -3326,7 +3344,7 @@ p {
     .city-grid,
     .tips-grid,
     .duas-cards {
-        grid-template-columns: 1fr;
+        grid-template-columns: repeat(2, 1fr);
     }
     
     .countdown-timer {
@@ -3367,11 +3385,16 @@ p {
     }
     
     .ramadan-table {
-        font-size: 0.85rem;
+        font-size: 0.75rem;
     }
     
     .ramadan-table th,
     .ramadan-table td {
-        padding: 0.6rem 0.4rem;
+        padding: 0.5rem 0.2rem;
+    }
+    
+    .ramadan-stats,
+    .city-grid {
+        grid-template-columns: 1fr;
     }
 }

@@ -41,6 +41,18 @@ const CITY_TIMES = {
         timezone: 'Asia/Dubai',
         lat: 25.2048,
         lng: 55.2708
+    },
+    jerusalem: {
+        name: 'القدس',
+        timezone: 'Asia/Jerusalem',
+        lat: 31.7683,
+        lng: 35.2137
+    },
+    amman: {
+        name: 'عمان',
+        timezone: 'Asia/Amman',
+        lat: 31.9454,
+        lng: 35.9284
     }
 };
 
@@ -145,9 +157,6 @@ function createDayRow(dayNumber, date, city) {
     // Prayer times (calculated based on location)
     const times = calculatePrayerTimes(date, city);
     
-    // Fasting hours
-    const fastingHours = calculateFastingHours(times);
-    
     row.innerHTML = `
         <td class="day-name">${dayName}</td>
         <td>${gregorianDate}</td>
@@ -155,8 +164,10 @@ function createDayRow(dayNumber, date, city) {
         <td class="imsak-time">${times.imsak}</td>
         <td class="fajr-time">${times.fajr}</td>
         <td class="sunrise-time">${times.sunrise}</td>
+        <td class="dhuhr-time">${times.dhuhr}</td>
+        <td class="asr-time">${times.asr}</td>
         <td class="maghrib-time">${times.maghrib}</td>
-        <td class="fasting-hours">${fastingHours}</td>
+        <td class="isha-time">${times.isha}</td>
     `;
     
     // Add special styling for Fridays
@@ -188,8 +199,17 @@ function calculatePrayerTimes(date, city) {
     const baseSunrise = new Date(date);
     baseSunrise.setHours(6, 15, 0);
     
+    const baseDhuhr = new Date(date);
+    baseDhuhr.setHours(12, 15, 0);
+    
+    const baseAsr = new Date(date);
+    baseAsr.setHours(15, 30, 0);
+    
     const baseMaghrib = new Date(date);
     baseMaghrib.setHours(18, 30, 0);
+    
+    const baseIsha = new Date(date);
+    baseIsha.setHours(20, 0, 0);
     
     // Adjust based on day of year (simplified)
     const dayOfYear = getDayOfYear(date);
@@ -199,20 +219,11 @@ function calculatePrayerTimes(date, city) {
         imsak: formatTime(addMinutes(baseImsak, adjustment - 15)),
         fajr: formatTime(addMinutes(baseFajr, adjustment - 15)),
         sunrise: formatTime(addMinutes(baseSunrise, adjustment)),
-        maghrib: formatTime(addMinutes(baseMaghrib, adjustment + 15))
+        dhuhr: formatTime(addMinutes(baseDhuhr, adjustment)),
+        asr: formatTime(addMinutes(baseAsr, adjustment + 10)),
+        maghrib: formatTime(addMinutes(baseMaghrib, adjustment + 15)),
+        isha: formatTime(addMinutes(baseIsha, adjustment + 15))
     };
-}
-
-// Calculate fasting hours
-function calculateFastingHours(times) {
-    const fajr = parseTime(times.fajr);
-    const maghrib = parseTime(times.maghrib);
-    
-    const diff = maghrib - fajr;
-    const hours = Math.floor(diff / (1000 * 60 * 60));
-    const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-    
-    return `${hours} س ${minutes} د`;
 }
 
 // Highlight current day
