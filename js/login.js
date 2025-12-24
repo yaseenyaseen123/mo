@@ -22,35 +22,41 @@ document.addEventListener('DOMContentLoaded', function() {
     const registerForm = document.getElementById('registerForm');
     
     if (loginForm) {
-        loginForm.addEventListener('submit', function(e) {
+        loginForm.addEventListener('submit', async function(e) {
             e.preventDefault();
             
             const email = document.getElementById('email').value;
             const password = document.getElementById('password').value;
             const remember = document.getElementById('remember')?.checked;
             
-            // Simulate login
-            showNotification('جاري تسجيل الدخول...');
-            
-            setTimeout(() => {
-                // Save to localStorage (for demo)
-                if (remember) {
-                    localStorage.setItem('userEmail', email);
+            try {
+                showNotification('جاري تسجيل الدخول...');
+                
+                // استخدام نظام المصادقة الجديد
+                if (typeof loginUser === 'function') {
+                    const user = await loginUser(email, password, remember);
+                    
+                    showNotification(`مرحباً ${user.name}! تم تسجيل الدخول بنجاح`);
+                    
+                    // التوجيه حسب الصلاحية
+                    setTimeout(() => {
+                        if (user.role === 'admin' || user.role === 'moderator') {
+                            window.location.href = 'dashboard.html';
+                        } else {
+                            window.location.href = '../index.html';
+                        }
+                    }, 1500);
+                } else {
+                    throw new Error('نظام المصادقة غير متاح');
                 }
-                localStorage.setItem('isLoggedIn', 'true');
-                
-                showNotification('تم تسجيل الدخول بنجاح!');
-                
-                // Redirect to dashboard
-                setTimeout(() => {
-                    window.location.href = 'dashboard.html';
-                }, 1500);
-            }, 1000);
+            } catch (error) {
+                showNotification(error.message || 'حدث خطأ في تسجيل الدخول', 'error');
+            }
         });
     }
     
     if (registerForm) {
-        registerForm.addEventListener('submit', function(e) {
+        registerForm.addEventListener('submit', async function(e) {
             e.preventDefault();
             
             const fullname = document.getElementById('fullname').value;
@@ -70,22 +76,25 @@ document.addEventListener('DOMContentLoaded', function() {
                 return;
             }
             
-            // Simulate registration
-            showNotification('جاري إنشاء الحساب...');
-            
-            setTimeout(() => {
-                // Save to localStorage (for demo)
-                localStorage.setItem('userName', fullname);
-                localStorage.setItem('userEmail', email);
-                localStorage.setItem('isLoggedIn', 'true');
+            try {
+                showNotification('جاري إنشاء الحساب...');
                 
-                showNotification('تم إنشاء الحساب بنجاح!');
-                
-                // Redirect to dashboard
-                setTimeout(() => {
-                    window.location.href = 'dashboard.html';
-                }, 1500);
-            }, 1000);
+                // استخدام نظام المصادقة الجديد
+                if (typeof registerUser === 'function') {
+                    const user = await registerUser(fullname, email, password);
+                    
+                    showNotification(`مرحباً ${user.name}! تم إنشاء حسابك بنجاح`);
+                    
+                    // التوجيه للصفحة الرئيسية
+                    setTimeout(() => {
+                        window.location.href = '../index.html';
+                    }, 1500);
+                } else {
+                    throw new Error('نظام التسجيل غير متاح');
+                }
+            } catch (error) {
+                showNotification(error.message || 'حدث خطأ في إنشاء الحساب', 'error');
+            }
         });
     }
     

@@ -1742,6 +1742,61 @@ p {
     margin-left: 10px;
 }
 
+/* Users Management Styles */
+.stats-mini {
+    display: flex;
+    gap: 2rem;
+    align-items: center;
+}
+
+.stats-mini .stat-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    background: var(--light-green);
+    border-radius: 8px;
+}
+
+.stats-mini .stat-item i {
+    color: var(--primary-color);
+    font-size: 1.2rem;
+}
+
+.stats-mini .stat-item strong {
+    color: var(--primary-color);
+    font-weight: 700;
+}
+
+.role-select {
+    padding: 6px 12px;
+    border: 2px solid var(--light-green);
+    border-radius: 8px;
+    font-family: 'Cairo', sans-serif;
+    font-size: 0.9rem;
+    color: var(--text-dark);
+    background: var(--white);
+    cursor: pointer;
+    transition: var(--transition);
+    margin-left: 5px;
+    outline: none;
+}
+
+.role-select:hover {
+    border-color: var(--primary-color);
+}
+
+.role-select:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(30, 90, 62, 0.1);
+}
+
+.role-select:disabled {
+    background: var(--bg-light);
+    cursor: not-allowed;
+    opacity: 0.6;
+}
+
 /* Responsive Dashboard */
 @media (max-width: 1024px) {
     .dashboard-sidebar {

@@ -1,6 +1,9 @@
 // Dashboard JavaScript
 
 document.addEventListener('DOMContentLoaded', function() {
+    // تحميل بيانات المستخدمين
+    loadUsersData();
+    
     // Sidebar Navigation
     const navItems = document.querySelectorAll('.sidebar-nav .nav-item');
     const sections = document.querySelectorAll('.dashboard-section');
@@ -127,6 +130,118 @@ document.addEventListener('DOMContentLoaded', function() {
         `;
     }
 });
+
+// تحميل بيانات المستخدمين من قاعدة البيانات
+function loadUsersData() {
+    try {
+        // جلب جميع المستخدمين من نظام المصادقة
+        const users = getAllUsers();
+        
+        // تحديث الإحصائيات
+        updateUsersStats(users);
+        
+        // عرض المستخدمين في الجدول
+        displayUsersTable(users);
+    } catch (error) {
+        console.error('خطأ في تحميل بيانات المستخدمين:', error);
+    }
+}
+
+// تحديث إحصائيات المستخدمين
+function updateUsersStats(users) {
+    const totalUsers = users.length;
+    const adminCount = users.filter(u => u.role === 'admin' || u.role === 'moderator').length;
+    const activeUsers = users.filter(u => u.isActive).length;
+    
+    const totalElement = document.getElementById('totalUsersCount');
+    const adminElement = document.getElementById('adminCount');
+    const activeElement = document.getElementById('activeUsersCount');
+    
+    if (totalElement) totalElement.textContent = totalUsers;
+    if (adminElement) adminElement.textContent = adminCount;
+    if (activeElement) activeElement.textContent = activeUsers;
+}
+
+// عرض المستخدمين في الجدول
+function displayUsersTable(users) {
+    const tbody = document.getElementById('usersTableBody');
+    if (!tbody) return;
+    
+    tbody.innerHTML = '';
+    
+    users.forEach((user, index) => {
+        const row = document.createElement('tr');
+        
+        // تحديد لون الشارة حسب الدور
+        let badgeClass = 'badge-primary';
+        let roleText = 'عضو';
+        
+        if (user.role === 'admin') {
+            badgeClass = 'badge-danger';
+            roleText = 'مدير';
+        } else if (user.role === 'moderator') {
+            badgeClass = 'badge-warning';
+            roleText = 'مشرف';
+        }
+        
+        // تحديد حالة المستخدم
+        const statusBadge = user.isActive 
+            ? '<span class="badge badge-success">نشط</span>' 
+            : '<span class="badge badge-secondary">معطل</span>';
+        
+        // تنسيق التاريخ
+        const dateFormatted = new Date(user.createdAt).toLocaleDateString('ar-EG', {
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric'
+        });
+        
+        row.innerHTML = `
+            <td>${index + 1}</td>
+            <td>${user.name}</td>
+            <td>${user.email}</td>
+            <td><span class="badge ${badgeClass}">${roleText}</span></td>
+            <td>${statusBadge}</td>
+            <td>${dateFormatted}</td>
+            <td>
+                <select class="role-select" onchange="changeUserRole('${user.email}', this.value)" ${user.role === 'admin' ? 'disabled' : ''}>
+                    <option value="user" ${user.role === 'user' ? 'selected' : ''}>عضو</option>
+                    <option value="moderator" ${user.role === 'moderator' ? 'selected' : ''}>مشرف</option>
+                    <option value="admin" ${user.role === 'admin' ? 'selected' : ''}>مدير</option>
+                </select>
+                <button class="btn-icon" onclick="toggleUserStatus('${user.email}')" title="${user.isActive ? 'تعطيل' : 'تفعيل'}">
+                    <i class="fas ${user.isActive ? 'fa-ban' : 'fa-check'}"></i>
+                </button>
+            </td>
+        `;
+        
+        tbody.appendChild(row);
+    });
+}
+
+// تغيير دور المستخدم
+window.changeUserRole = function(email, newRole) {
+    if (confirm(`هل أنت متأكد من تغيير صلاحية هذا المستخدم إلى "${newRole}"؟`)) {
+        try {
+            updateUserRole(email, newRole);
+            showNotification('تم تحديث صلاحية المستخدم بنجاح');
+            loadUsersData(); // إعادة تحميل البيانات
+        } catch (error) {
+            showNotification(error.message, 'error');
+        }
+    }
+};
+
+// تبديل حالة المستخدم (نشط/معطل)
+window.toggleUserStatus = function(email) {
+    try {
+        toggleUserStatus(email);
+        showNotification('تم تحديث حالة المستخدم بنجاح');
+        loadUsersData(); // إعادة تحميل البيانات
+    } catch (error) {
+        showNotification(error.message, 'error');
+    }
+};
 
 // Add fadeOut animation
 const style = document.createElement('style');

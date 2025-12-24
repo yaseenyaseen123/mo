@@ -326,9 +326,20 @@
             <section id="users" class="dashboard-section">
                 <div class="section-header">
                     <h2>إدارة المستخدمين</h2>
-                    <button class="btn btn-primary">
-                        <i class="fas fa-user-plus"></i> إضافة مستخدم
-                    </button>
+                    <div class="stats-mini">
+                        <span class="stat-item">
+                            <i class="fas fa-users"></i>
+                            <span>إجمالي المستخدمين: <strong id="totalUsersCount">0</strong></span>
+                        </span>
+                        <span class="stat-item">
+                            <i class="fas fa-user-shield"></i>
+                            <span>المشرفين: <strong id="adminCount">0</strong></span>
+                        </span>
+                        <span class="stat-item">
+                            <i class="fas fa-user-check"></i>
+                            <span>نشط: <strong id="activeUsersCount">0</strong></span>
+                        </span>
+                    </div>
                 </div>
 
                 <div class="table-container">
@@ -339,33 +350,13 @@
                                 <th>الاسم</th>
                                 <th>البريد الإلكتروني</th>
                                 <th>الدور</th>
+                                <th>الحالة</th>
                                 <th>تاريخ التسجيل</th>
                                 <th>الإجراءات</th>
                             </tr>
                         </thead>
-                        <tbody>
-                            <tr>
-                                <td>1</td>
-                                <td>أحمد محمد</td>
-                                <td>ahmed@example.com</td>
-                                <td><span class="badge badge-danger">مدير</span></td>
-                                <td>2025-01-15</td>
-                                <td>
-                                    <button class="btn-icon" title="تعديل"><i class="fas fa-edit"></i></button>
-                                    <button class="btn-icon" title="حذف"><i class="fas fa-trash"></i></button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>2</td>
-                                <td>فاطمة علي</td>
-                                <td>fatima@example.com</td>
-                                <td><span class="badge badge-warning">محرر</span></td>
-                                <td>2025-02-20</td>
-                                <td>
-                                    <button class="btn-icon" title="تعديل"><i class="fas fa-edit"></i></button>
-                                    <button class="btn-icon" title="حذف"><i class="fas fa-trash"></i></button>
-                                </td>
-                            </tr>
+                        <tbody id="usersTableBody">
+                            <!-- سيتم تحميل المستخدمين هنا ديناميكياً -->
                         </tbody>
                     </table>
                 </div>
@@ -481,7 +472,29 @@
         </div>
     </div>
 
+    <script src="../js/auth.js"></script>
     <script src="../js/dashboard.js"></script>
     <script src="../js/main.js"></script>
+    <script>
+        // حماية لوحة التحكم - فقط للمشرفين والمسؤولين
+        document.addEventListener('DOMContentLoaded', function() {
+            if (!isLoggedIn()) {
+                window.location.href = 'login.html?redirect=dashboard';
+                return;
+            }
+            
+            if (!isAuthorized(['admin', 'moderator'])) {
+                alert('عذراً، ليس لديك صلاحية الوصول إلى لوحة التحكم');
+                window.location.href = '../index.html';
+                return;
+            }
+            
+            // عرض معلومات المستخدم الحالي
+            const currentUser = getCurrentUser();
+            if (currentUser) {
+                console.log('مرحباً بك في لوحة التحكم،', currentUser.name);
+            }
+        });
+    </script>
 </body>
 </html>

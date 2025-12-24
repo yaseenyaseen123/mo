@@ -135,5 +135,12 @@
     </div>
 
     <script src="../js/login.js"></script>
+    <script src="../js/auth.js"></script>
+    <script>
+        // تهيئة حساب المدير الافتراضي
+        if (typeof initializeDefaultAdmin === 'function') {
+            initializeDefaultAdmin();
+        }
+    </script>
 </body>
 </html>
