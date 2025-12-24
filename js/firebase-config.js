@@ -10,192 +10,25 @@ const firebaseConfig = {
     measurementId: "G-P5ZY7M36HZ"
 };
 
-// متغيرات Firebase العامة
-let auth = null;
-let db = null;
-let analytics = null;
-let isFirebaseEnabled = false;
-
-// تهيئة Firebase
-function initFirebase() {
+// Initialize Firebase
+if (typeof firebase !== 'undefined') {
     try {
-        // التحقق من أن Firebase محمّل
-        if (typeof firebase === 'undefined') {
-            console.warn('⚠️ Firebase SDK not loaded. Using localStorage fallback.');
-            return false;
-        }
-
-        // التحقق من صحة البيانات
-        if (firebaseConfig.apiKey === 'YOUR_API_KEY_HERE') {
-            console.warn('⚠️ Firebase not configured. Please update firebase-config.js with your project credentials.');
-            return false;
-        }
-
-        // تهيئة Firebase
+        // Initialize Firebase App
         if (!firebase.apps.length) {
             firebase.initializeApp(firebaseConfig);
+            console.log('✅ Firebase App initialized');
         }
         
-        auth = firebase.auth();
-        db = firebase.firestore();
-        isFirebaseEnabled = true;
+        // Initialize Firebase services
+        window.firebaseAuth = firebase.auth();
+        window.firebaseDb = firebase.firestore();
+        window.firebaseAnalytics = firebase.analytics();
         
-        console.log('✅ Firebase initialized successfully!');
-        return true;
+        console.log('✅ Firebase services ready');
     } catch (error) {
-        console.error('❌ Error initializing Firebase:', error);
-        return false;
+        console.error('❌ Firebase initialization error:', error);
     }
+} else {
+    console.warn('⚠️ Firebase SDK not loaded');
 }
 
-// دوال المصادقة مع Firebase
-const FirebaseAuth = {
-    // تسجيل الدخول
-    async signIn(email, password) {
-        if (!isFirebaseEnabled) {
-            throw new Error('Firebase is not enabled');
-        }
-        
-        try {
-            const userCredential = await auth.signInWithEmailAndPassword(email, password);
-            const user = userCredential.user;
-            
-            // جلب بيانات المستخدم من Firestore
-            const userDoc = await db.collection('users').doc(user.uid).get();
-            
-            if (userDoc.exists) {
-                return {
-                    uid: user.uid,
-                    email: user.email,
-                    ...userDoc.data()
-                };
-            } else {
-                throw new Error('User data not found');
-            }
-        } catch (error) {
-            console.error('Login error:', error);
-            throw error;
-        }
-    },
-
-    // تسجيل مستخدم جديد
-    async signUp(email, password, userData) {
-        if (!isFirebaseEnabled) {
-            throw new Error('Firebase is not enabled');
-        }
-        
-        try {
-            // إنشاء حساب
-            const userCredential = await auth.createUserWithEmailAndPassword(email, password);
-            const user = userCredential.user;
-            
-            // حفظ بيانات المستخدم في Firestore
-            await db.collection('users').doc(user.uid).set({
-                name: userData.name,
-                email: email,
-                role: userData.role || 'user',
-                status: 'active',
-                createdAt: firebase.firestore.FieldValue.serverTimestamp(),
-                lastLogin: firebase.firestore.FieldValue.serverTimestamp()
-            });
-            
-            return {
-                uid: user.uid,
-                email: user.email,
-                name: userData.name,
-                role: userData.role || 'user',
-                status: 'active'
-            };
-        } catch (error) {
-            console.error('Registration error:', error);
-            throw error;
-        }
-    },
-
-    // تسجيل الخروج
-    async signOut() {
-        if (!isFirebaseEnabled) return;
-        await auth.signOut();
-    },
-
-    // الحصول على المستخدم الحالي
-    getCurrentUser() {
-        return auth ? auth.currentUser : null;
-    },
-
-    // مراقبة حالة المصادقة
-    onAuthStateChanged(callback) {
-        if (!isFirebaseEnabled) return () => {};
-        return auth.onAuthStateChanged(callback);
-    }
-};
-
-// دوال قاعدة البيانات
-const FirebaseDB = {
-    // جلب جميع المستخدمين (للمسؤولين)
-    async getAllUsers() {
-        if (!isFirebaseEnabled) {
-            throw new Error('Firebase is not enabled');
-        }
-        
-        try {
-            const snapshot = await db.collection('users').get();
-            return snapshot.docs.map(doc => ({
-                uid: doc.id,
-                ...doc.data()
-            }));
-        } catch (error) {
-            console.error('Error getting users:', error);
-            throw error;
-        }
-    },
-
-    // تحديث دور المستخدم
-    async updateUserRole(userId, newRole) {
-        if (!isFirebaseEnabled) {
-            throw new Error('Firebase is not enabled');
-        }
-        
-        try {
-            await db.collection('users').doc(userId).update({
-                role: newRole,
-                updatedAt: firebase.firestore.FieldValue.serverTimestamp()
-            });
-            return true;
-        } catch (error) {
-            console.error('Error updating user role:', error);
-            throw error;
-        }
-    },
-
-    // تحديث حالة المستخدم
-    async updateUserStatus(userId, status) {
-        if (!isFirebaseEnabled) {
-            throw new Error('Firebase is not enabled');
-        }
-        
-        try {
-            await db.collection('users').doc(userId).update({
-                status: status,
-                updatedAt: firebase.firestore.FieldValue.serverTimestamp()
-            });
-            return true;
-        } catch (error) {
-            console.error('Error updating user status:', error);
-            throw error;
-        }
-    },
-
-    // تحديث آخر تسجيل دخول
-    async updateLastLogin(userId) {
-        if (!isFirebaseEnabled) return;
-        
-        try {
-            await db.collection('users').doc(userId).update({
-                lastLogin: firebase.firestore.FieldValue.serverTimestamp()
-            });
-        } catch (error) {
-            console.error('Error updating last login:', error);
-        }
-    }
-};
