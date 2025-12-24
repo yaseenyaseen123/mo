@@ -135,17 +135,25 @@
         </div>
     </div>
 
-    <!-- Firebase SDKs -->
+    <!-- Firebase SDKs - Load in correct order -->
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-analytics.js"></script>
     
-    <!-- Firebase Configuration & Auth -->
+    <!-- Firebase Configuration & Auth - Must load after Firebase SDK -->
+    <script>
+        // Wait for Firebase to load before initializing
+        if (typeof firebase !== 'undefined') {
+            console.log('✅ Firebase loaded successfully');
+        } else {
+            console.error('❌ Firebase failed to load');
+        }
+    </script>
     <script src="../js/firebase-config.js"></script>
     <script src="../js/firebase-auth.js"></script>
     
-    <!-- Login Logic -->
+    <!-- Login Logic - Load last -->
     <script src="../js/login.js"></script>
 </body>
 </html>
