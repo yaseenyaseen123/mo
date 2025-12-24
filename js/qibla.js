@@ -14,18 +14,23 @@ let userLocation = null;
 
 // Initialize when page loads
 document.addEventListener('DOMContentLoaded', function() {
+    console.log('DOM loaded - initializing Qibla finder');
+    
     compassCircle = document.getElementById('compass');
     kaabaIcon = document.getElementById('kaabaIcon');
     headingValue = document.getElementById('headingValue');
     
     const findQiblaBtn = document.getElementById('findQiblaBtn');
+    console.log('Find Qibla Button:', findQiblaBtn);
     
-    // Add click listener - works on both desktop and mobile
+    // Simple click listener
     if (findQiblaBtn) {
-        findQiblaBtn.addEventListener('click', function(e) {
-            e.preventDefault();
-            handleFindQibla();
-        }, { passive: false });
+        findQiblaBtn.onclick = function() {
+            console.log('Button clicked!');
+            findQibla();
+        };
+    } else {
+        console.error('Button not found!');
     }
     
     // Check if device supports orientation
@@ -33,12 +38,6 @@ document.addEventListener('DOMContentLoaded', function() {
         showError('جهازك لا يدعم البوصلة');
     }
 });
-
-// Handle find qibla button click
-function handleFindQibla() {
-    console.log('Find Qibla button clicked');
-    findQibla();
-}
 
 // Find Qibla Direction
 async function findQibla() {
