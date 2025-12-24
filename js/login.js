@@ -111,45 +111,6 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     }
-            
-            const fullname = document.getElementById('fullname').value;
-            const email = document.getElementById('email').value;
-            const password = document.getElementById('password').value;
-            const confirmPassword = document.getElementById('confirm-password').value;
-            const terms = document.getElementById('terms').checked;
-            
-            // Validate
-            if (password !== confirmPassword) {
-                showNotification('كلمة المرور غير متطابقة', 'error');
-                return;
-            }
-            
-            if (!terms) {
-                showNotification('يجب الموافقة على الشروط والأحكام', 'error');
-                return;
-            }
-            
-            try {
-                showNotification('جاري إنشاء الحساب...');
-                
-                // استخدام نظام المصادقة الجديد
-                if (typeof registerUser === 'function') {
-                    const user = await registerUser(fullname, email, password);
-                    
-                    showNotification(`مرحباً ${user.name}! تم إنشاء حسابك بنجاح`);
-                    
-                    // التوجيه للصفحة الرئيسية
-                    setTimeout(() => {
-                        window.location.href = '../index.html';
-                    }, 1500);
-                } else {
-                    throw new Error('نظام التسجيل غير متاح');
-                }
-            } catch (error) {
-                showNotification(error.message || 'حدث خطأ في إنشاء الحساب', 'error');
-            }
-        });
-    }
     
     // Social Login Buttons
     const socialBtns = document.querySelectorAll('.social-btn');
