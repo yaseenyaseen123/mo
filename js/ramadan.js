@@ -257,15 +257,15 @@ function calculatePrayerTimes(date, city) {
             isha: [19, 48]
         },
         
-        // فلسطين - القدس الشريف
+        // فلسطين - القدس الشريف (البيانات الصحيحة من ps.prayertimes.news)
         jerusalem: { 
-            imsak: [4, 39], 
-            fajr: [5, 54], 
-            sunrise: [7, 11], 
-            dhuhr: [12, 50], 
-            asr: [16, 0],
-            maghrib: [18, 30],
-            isha: [19, 47]
+            imsak: [4, 44],     // قبل الفجر بـ 15 دقيقة
+            fajr: [4, 59],      // اليوم الأول - 18 فبراير 2026
+            sunrise: [6, 25], 
+            dhuhr: [12, 1],     // 12:01 م
+            asr: [15, 11],      // 3:11 م
+            maghrib: [17, 36],  // 5:36 م
+            isha: [19, 6]       // 7:06 م
         },
         
         // الأردن - عمّان (الأوقات الصحيحة المعتمدة)
@@ -281,13 +281,13 @@ function calculatePrayerTimes(date, city) {
         
         // فلسطين - قلقيلية (نفس توقيت القدس تقريباً)
         qalqilya: { 
-            imsak: [4, 39], 
-            fajr: [5, 54], 
-            sunrise: [7, 11], 
-            dhuhr: [12, 50], 
-            asr: [16, 0],
-            maghrib: [18, 30],
-            isha: [19, 47]
+            imsak: [4, 44],     // قبل الفجر بـ 15 دقيقة
+            fajr: [4, 59],      // اليوم الأول - نفس القدس
+            sunrise: [6, 25], 
+            dhuhr: [12, 1],     // 12:01 م
+            asr: [15, 11],      // 3:11 م
+            maghrib: [17, 36],  // 5:36 م
+            isha: [19, 6]       // 7:06 م
         }
     };
     
@@ -306,24 +306,41 @@ function calculatePrayerTimes(date, city) {
     let ishaAdjust = 0;
     
     if (selectedCity === 'amman' || selectedCity === 'qalqilya' || selectedCity === 'jerusalem') {
-        // التعديل بناءً على الإمساكية الصحيحة لعمّان
-        // الفجر: ينقص حوالي دقيقة كل يوم
-        fajrAdjust = -(ramadanDay - 1) * 1.13;  // من 5:54 إلى 5:20 (34 دقيقة على 30 يوم)
+        // التعديل بناءً على الإمساكية الصحيحة
         
-        // الشروق: ينقص حوالي دقيقة كل يوم
-        // sunrise adjustment handled similarly
-        
-        // الظهر: ينقص قليلاً
-        dhuhrAdjust = -(ramadanDay - 1) * 0.2;  // من 12:50 إلى 12:44 (6 دقائق)
-        
-        // العصر: يزيد قليلاً
-        asrAdjust = (ramadanDay - 1) * 0.37;    // من 4:00 إلى 4:11 (11 دقيقة)
-        
-        // المغرب: يزيد حوالي 45 ثانية كل يوم
-        maghribAdjust = (ramadanDay - 1) * 0.73;  // من 6:30 إلى 6:52 (22 دقيقة)
-        
-        // العشاء: يزيد حوالي 42 ثانية كل يوم
-        ishaAdjust = (ramadanDay - 1) * 0.7;    // من 7:47 إلى 8:08 (21 دقيقة)
+        if (selectedCity === 'jerusalem' || selectedCity === 'qalqilya') {
+            // البيانات من ps.prayertimes.news لمدينة القدس
+            // الفجر: ينقص من 04:59 إلى 04:23 (36 دقيقة على 30 يوم)
+            fajrAdjust = -(ramadanDay - 1) * 1.2;
+            
+            // الظهر: ينقص من 12:01 إلى 11:52 (9 دقائق على 30 يوم)
+            dhuhrAdjust = -(ramadanDay - 1) * 0.31;
+            
+            // العصر: يزيد من 3:11 م إلى 3:26 م (15 دقيقة على 30 يوم)
+            asrAdjust = (ramadanDay - 1) * 0.52;
+            
+            // المغرب: يزيد من 5:36 م إلى 5:56 م (20 دقيقة على 30 يوم)
+            maghribAdjust = (ramadanDay - 1) * 0.69;
+            
+            // العشاء: يزيد من 7:06 م إلى 7:26 م (20 دقيقة على 30 يوم)
+            ishaAdjust = (ramadanDay - 1) * 0.69;
+        } else {
+            // عمّان - التعديل بناءً على الإمساكية الصحيحة لعمّان
+            // الفجر: ينقص حوالي دقيقة كل يوم
+            fajrAdjust = -(ramadanDay - 1) * 1.13;  // من 5:54 إلى 5:20 (34 دقيقة على 30 يوم)
+            
+            // الظهر: ينقص قليلاً
+            dhuhrAdjust = -(ramadanDay - 1) * 0.2;  // من 12:50 إلى 12:44 (6 دقائق)
+            
+            // العصر: يزيد قليلاً
+            asrAdjust = (ramadanDay - 1) * 0.37;    // من 4:00 إلى 4:11 (11 دقيقة)
+            
+            // المغرب: يزيد حوالي 45 ثانية كل يوم
+            maghribAdjust = (ramadanDay - 1) * 0.73;  // من 6:30 إلى 6:52 (22 دقيقة)
+            
+            // العشاء: يزيد حوالي 42 ثانية كل يوم
+            ishaAdjust = (ramadanDay - 1) * 0.7;    // من 7:47 إلى 8:08 (21 دقيقة)
+        }
     } else {
         // تعديل موسمي عادي للمدن الأخرى
         const seasonalAdjustment = (ramadanDay - 1) * 0.5;
