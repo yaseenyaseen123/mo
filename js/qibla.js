@@ -28,8 +28,24 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 // Find Qibla Direction
-function findQibla() {
+async function findQibla() {
     showNotification('جاري تحديد موقعك...');
+    
+    // Request device orientation permission for iOS 13+
+    if (typeof DeviceOrientationEvent !== 'undefined' && 
+        typeof DeviceOrientationEvent.requestPermission === 'function') {
+        try {
+            const permission = await DeviceOrientationEvent.requestPermission();
+            if (permission !== 'granted') {
+                showError('يرجى السماح باستخدام البوصلة');
+                return;
+            }
+        } catch (error) {
+            console.error('Error requesting orientation permission:', error);
+            showError('لم نتمكن من الوصول إلى البوصلة');
+            return;
+        }
+    }
     
     if (!navigator.geolocation) {
         showError('المتصفح لا يدعم تحديد الموقع');
@@ -39,7 +55,11 @@ function findQibla() {
     navigator.geolocation.getCurrentPosition(
         handleLocationSuccess,
         handleLocationError,
-        { enableHighAccuracy: true }
+        { 
+            enableHighAccuracy: true,
+            timeout: 10000,
+            maximumAge: 0
+        }
     );
 }
 
@@ -124,27 +144,40 @@ function calculateDistance(from, to) {
 
 // Start compass with device orientation
 function startCompass() {
-    if (window.DeviceOrientationEvent) {
-        window.addEventListener('deviceorientation', handleOrientation);
-        window.addEventListener('deviceorientationabsolute', handleOrientation);
-    } else {
+    if (!window.DeviceOrientationEvent) {
         showError('البوصلة غير مدعومة على هذا الجهاز');
+        return;
     }
+    
+    // Remove any existing listeners
+    window.removeEventListener('deviceorientation', handleOrientation);
+    window.removeEventListener('deviceorientationabsolute', handleOrientation);
+    
+    // Add new listeners
+    window.addEventListener('deviceorientation', handleOrientation, true);
+    window.addEventListener('deviceorientationabsolute', handleOrientation, true);
+    
+    showNotification('قم بتحريك الهاتف لمعايرة البوصلة');
 }
 
 // Handle device orientation
 function handleOrientation(event) {
-    let heading = event.alpha || event.webkitCompassHeading;
+    let heading = null;
     
-    if (heading !== null && heading !== undefined) {
-        // For iOS devices
-        if (event.webkitCompassHeading) {
-            heading = event.webkitCompassHeading;
-        } else {
-            // For Android devices
-            heading = 360 - heading;
-        }
-        
+    // For iOS devices with webkitCompassHeading
+    if (event.webkitCompassHeading !== undefined && event.webkitCompassHeading !== null) {
+        heading = event.webkitCompassHeading;
+    }
+    // For devices with absolute orientation
+    else if (event.absolute && event.alpha !== null) {
+        heading = 360 - event.alpha;
+    }
+    // For devices with regular orientation
+    else if (event.alpha !== null) {
+        heading = 360 - event.alpha;
+    }
+    
+    if (heading !== null) {
         updateCompass(heading);
     }
 }
@@ -228,20 +261,4 @@ function showError(message) {
         statusEl.style.display = 'flex';
         statusEl.className = 'status-message error';
     }
-}
-
-// Request device orientation permission for iOS 13+
-if (typeof DeviceOrientationEvent !== 'undefined' && 
-    typeof DeviceOrientationEvent.requestPermission === 'function') {
-    
-    const findQiblaBtn = document.getElementById('findQiblaBtn');
-    findQiblaBtn.addEventListener('click', function() {
-        DeviceOrientationEvent.requestPermission()
-            .then(response => {
-                if (response === 'granted') {
-                    findQibla();
-                }
-            })
-            .catch(console.error);
-    }, { once: true });
 }
