@@ -18,40 +18,62 @@ function togglePassword() {
 
 // Login Form Submission
 document.addEventListener('DOMContentLoaded', function() {
+    console.log('🔵 Login page loaded');
+    console.log('Firebase available:', typeof firebase !== 'undefined');
+    console.log('FirebaseAuth available:', typeof FirebaseAuth !== 'undefined');
+    console.log('window.firebaseAuth available:', typeof window.firebaseAuth !== 'undefined');
+    
     const loginForm = document.getElementById('loginForm');
     
-    // Check if Firebase is loaded
-    if (typeof firebase === 'undefined') {
-        showNotification('جاري تحميل Firebase...', 'info');
-        setTimeout(() => {
-            if (typeof firebase === 'undefined') {
-                showNotification('فشل تحميل Firebase. تحقق من الاتصال بالإنترنت', 'error');
-            }
-        }, 3000);
-        return;
-    }
-
-    // Check if already logged in
-    if (window.firebaseAuth) {
-        window.firebaseAuth.onAuthStateChanged(async (user) => {
-            if (user) {
-                // User is signed in, check if active
-                try {
-                    const userData = await FirebaseAuth.getUserData(user.uid);
-                    if (userData.success && userData.data.active) {
-                        // Redirect based on role
-                        if (userData.data.role === 'admin' || userData.data.role === 'moderator') {
-                            window.location.href = 'dashboard.html';
-                        } else {
-                            window.location.href = '../index.html';
+    // Wait for all Firebase components to load
+    const checkAndInit = () => {
+        if (typeof firebase === 'undefined') {
+            console.warn('⚠️ Firebase not loaded, waiting...');
+            showNotification('جاري تحميل Firebase...', 'info');
+            setTimeout(checkAndInit, 500);
+            return;
+        }
+        
+        if (typeof FirebaseAuth === 'undefined') {
+            console.warn('⚠️ FirebaseAuth not loaded, waiting...');
+            setTimeout(checkAndInit, 500);
+            return;
+        }
+        
+        if (!window.firebaseAuth) {
+            console.warn('⚠️ Firebase Auth not initialized, waiting...');
+            setTimeout(checkAndInit, 500);
+            return;
+        }
+        
+        console.log('✅ All Firebase components ready');
+        initLoginSystem();
+    };
+    
+    checkAndInit();
+    
+    function initLoginSystem() {
+        // Check if already logged in
+        if (window.firebaseAuth) {
+            window.firebaseAuth.onAuthStateChanged(async (user) => {
+                if (user) {
+                    // User is signed in, check if active
+                    try {
+                        const userData = await FirebaseAuth.getUserData(user.uid);
+                        if (userData.success && userData.data.active) {
+                            // Redirect based on role
+                            if (userData.data.role === 'admin' || userData.data.role === 'moderator') {
+                                window.location.href = 'dashboard.html';
+                            } else {
+                                window.location.href = '../index.html';
+                            }
                         }
+                    } catch (error) {
+                        console.error('Error checking user:', error);
                     }
-                } catch (error) {
-                    console.error('Error checking user:', error);
                 }
-            }
-        });
-    }
+            });
+        }
     
     if (loginForm) {
         loginForm.addEventListener('submit', async function(e) {
@@ -120,7 +142,7 @@ document.addEventListener('DOMContentLoaded', function() {
             showNotification(`جاري التوجيه إلى ${platform}...`);
             
             setTimeout(() => {
-                showNotification('هذه الميزة ستكون متاحة قريباً', 'error');
+                showNotification('هذه الميزة ستكون متاحة قريباً', 'info');
             }, 1000);
         });
     });
@@ -128,14 +150,26 @@ document.addEventListener('DOMContentLoaded', function() {
     // Forgot Password
     const forgotPassword = document.querySelector('.forgot-password');
     if (forgotPassword) {
-        forgotPassword.addEventListener('click', function(e) {
+        forgotPassword.addEventListener('click', async function(e) {
             e.preventDefault();
             const email = prompt('أدخل بريدك الإلكتروني:');
             if (email) {
-                showNotification('تم إرسال رابط استعادة كلمة المرور إلى بريدك الإلكتروني');
+                try {
+                    if (window.firebaseAuth) {
+                        await window.firebaseAuth.sendPasswordResetEmail(email);
+                        showNotification('تم إرسال رابط استعادة كلمة المرور', 'success');
+                    }
+                } catch (error) {
+                    showNotification('حدث خطأ. تحقق من البريد', 'error');
+                }
             }
         });
     }
+    
+    // Animate elements on load
+    animateLogin();
+    }
+});
     
     // Animate elements on load
     animateLogin();
