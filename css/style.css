@@ -3587,3 +3587,334 @@ p {
         grid-template-columns: 1fr;
     }
 }
+/* ====================================
+   Enhanced Homepage Styles
+   ==================================== */
+
+/* Hero Badge */
+.hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(212, 175, 55, 0.2);
+    border: 2px solid var(--secondary-color);
+    padding: 8px 20px;
+    border-radius: 50px;
+    margin-bottom: 1.5rem;
+    animation: fadeInDown 1s ease;
+}
+
+.hero-badge i {
+    color: var(--secondary-color);
+    font-size: 1.2rem;
+}
+
+.hero-badge span {
+    color: var(--white);
+    font-weight: 600;
+    font-size: 1rem;
+}
+
+/* Hero Stats */
+.hero-stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.5rem;
+    max-width: 700px;
+    margin: 0 auto 2.5rem;
+    animation: fadeInUp 1s ease 0.4s both;
+}
+
+.stat-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    padding: 1.2rem;
+    border-radius: 15px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    transition: var(--transition);
+}
+
+.stat-item:hover {
+    background: rgba(255, 255, 255, 0.15);
+    transform: translateY(-5px);
+    border-color: var(--secondary-color);
+}
+
+.stat-item i {
+    color: var(--secondary-color);
+    font-size: 1.8rem;
+}
+
+.stat-number {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--white);
+}
+
+.stat-label {
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.9);
+}
+
+/* Features Section Enhancement */
+.section-description {
+    text-align: center;
+    font-size: 1.1rem;
+    color: var(--text-light);
+    max-width: 600px;
+    margin: -2rem auto 3rem;
+}
+
+.feature-card {
+    position: relative;
+}
+
+.feature-card.highlight {
+    border: 2px solid var(--secondary-color);
+    background: linear-gradient(135deg, rgba(212, 175, 55, 0.05) 0%, rgba(30, 90, 62, 0.05) 100%);
+}
+
+.feature-badge {
+    position: absolute;
+    top: -12px;
+    right: 20px;
+    background: linear-gradient(135deg, var(--secondary-color) 0%, #c4a02e 100%);
+    color: var(--white);
+    padding: 5px 15px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    box-shadow: 0 3px 10px rgba(212, 175, 55, 0.4);
+}
+
+.feature-list {
+    list-style: none;
+    margin: 1rem 0;
+    padding: 0;
+}
+
+.feature-list li {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 0.7rem;
+    color: var(--text-dark);
+    font-size: 0.95rem;
+}
+
+.feature-list i {
+    color: var(--primary-color);
+    font-size: 0.9rem;
+}
+
+/* Enhanced Hadith Card */
+.hadith-icon {
+    text-align: center;
+    margin-bottom: 1.5rem;
+}
+
+.hadith-icon i {
+    font-size: 3rem;
+    color: var(--secondary-color);
+    opacity: 0.8;
+}
+
+.hadith-quote {
+    font-size: 1.1rem !important;
+    color: var(--secondary-color);
+    margin-bottom: 1rem !important;
+    font-family: 'Cairo', sans-serif !important;
+}
+
+.hadith-content {
+    font-family: 'Amiri', serif;
+    font-size: 1.8rem !important;
+    line-height: 2.8;
+    margin-bottom: 2rem !important;
+    text-align: center;
+    padding: 1rem 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.hadith-reference {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.ref-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 1rem;
+    opacity: 0.9;
+}
+
+.ref-item i {
+    color: var(--secondary-color);
+    font-size: 1.1rem;
+}
+
+.hadith-more {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--secondary-color);
+    text-decoration: none;
+    font-weight: 600;
+    transition: var(--transition);
+    font-size: 1.1rem;
+}
+
+.hadith-more:hover {
+    gap: 12px;
+    color: var(--white);
+}
+
+/* Enhanced Footer */
+.footer-section.about {
+    grid-column: span 2;
+}
+
+.footer-section.about p {
+    line-height: 1.8;
+    opacity: 0.85;
+    margin-bottom: 1rem;
+}
+
+.footer-stats {
+    display: flex;
+    gap: 2rem;
+    margin-top: 1rem;
+}
+
+.footer-stats span {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.9rem;
+    opacity: 0.8;
+}
+
+.footer-stats i {
+    color: var(--secondary-color);
+}
+
+.footer-section.links ul li a,
+.footer-section.cities ul li {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.footer-section.cities ul li i {
+    color: var(--secondary-color);
+    font-size: 0.9rem;
+}
+
+.footer-section.cities .view-all {
+    color: var(--secondary-color);
+    font-weight: 600;
+    margin-top: 0.5rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.footer-section.contact p {
+    opacity: 0.8;
+    margin-bottom: 1rem;
+}
+
+.footer-login-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--secondary-color);
+    color: var(--white);
+    padding: 10px 25px;
+    border-radius: 25px;
+    text-decoration: none;
+    font-weight: 600;
+    margin-top: 1rem;
+    transition: var(--transition);
+}
+
+.footer-login-btn:hover {
+    background: #c4a02e;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(212, 175, 55, 0.3);
+}
+
+.footer-bottom-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.footer-bottom-content p {
+    margin: 0;
+    opacity: 0.7;
+}
+
+/* Responsive Enhancements */
+@media (max-width: 768px) {
+    .hero-stats {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .stat-item {
+        padding: 1rem;
+    }
+    
+    .stat-number {
+        font-size: 1.5rem;
+    }
+    
+    .footer-section.about {
+        grid-column: span 1;
+    }
+    
+    .footer-stats {
+        flex-direction: column;
+        gap: 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero-title {
+        font-size: 2rem;
+    }
+    
+    .hero-subtitle {
+        font-size: 1rem;
+    }
+    
+    .hero-stats {
+        grid-template-columns: 1fr 1fr;
+        gap: 1rem;
+    }
+    
+    .stat-item {
+        padding: 0.8rem;
+    }
+    
+    .stat-number {
+        font-size: 1.3rem;
+    }
+    
+    .stat-label {
+        font-size: 0.8rem;
+    }
+    
+    .hadith-content {
+        font-size: 1.4rem !important;
+    }
+}
