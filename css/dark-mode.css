@@ -23,22 +23,29 @@
 
 /* Dark Mode Variables */
 body.dark-mode {
-    --bg-primary: #000000;
-    --bg-secondary: #0a0a0a;
-    --bg-card: #111111;
-    --text-primary: #ffd700;
-    --text-secondary: #f4d03f;
-    --text-light: #d4af37;
-    --border-color: #2a2a2a;
-    --shadow-color: rgba(0, 0, 0, 0.8);
-    --shadow-hover: rgba(255, 215, 0, 0.3);
+    /* نظام ألوان محسّن بالذكاء الاصطناعي */
+    /* Backgrounds - الخلفيات */
+    --bg-primary: #0d0d0d;           /* رمادي أسود ناعم */
+    --bg-secondary: #1a1a1a;         /* رمادي داكن */
+    --bg-card: #1f1f1f;              /* بطاقات رمادية داكنة */
     
-    /* Adjust Islamic colors for dark mode */
-    --islamic-green: #ffd700;
-    --islamic-green-dark: #f4d03f;
-    --islamic-green-light: #ffe44d;
-    --islamic-gold: #ffd700;
-    --islamic-gold-dark: #f4d03f;
+    /* Text Colors - ألوان النصوص (تدرج ذهبي متناسق) */
+    --text-primary: #f5d576;         /* ذهبي ناعم للعناوين */
+    --text-secondary: #d4af37;       /* ذهبي كلاسيكي للنصوص */
+    --text-light: #c9a961;           /* بيج ذهبي للنصوص الثانوية */
+    
+    /* Borders & Shadows - الحدود والظلال */
+    --border-color: #2d2d2d;
+    --shadow-color: rgba(0, 0, 0, 0.7);
+    --shadow-hover: rgba(245, 213, 118, 0.2);
+    
+    /* Islamic colors - ألوان إسلامية محسّنة */
+    --islamic-green: #48c774;        /* أخضر نعناعي جميل */
+    --islamic-green-dark: #36a35d;   /* أخضر داكن */
+    --islamic-green-light: #5dd68d;  /* أخضر فاتح */
+    --islamic-gold: #f5d576;         /* ذهبي ناعم */
+    --islamic-gold-dark: #d4af37;    /* ذهبي داكن */
+    --islamic-accent: #ff9f43;       /* برتقالي ذهبي للتمييز */
 }
 
 /* Apply Variables to Elements */
@@ -50,7 +57,7 @@ body {
 
 /* Enhanced dark mode styles */
 body.dark-mode {
-    background: #000000;
+    background: linear-gradient(135deg, #0d0d0d 0%, #1a1a1a 100%);
 }
 
 body.dark-mode::before {
@@ -61,8 +68,9 @@ body.dark-mode::before {
     width: 100%;
     height: 100%;
     background: 
-        radial-gradient(circle at 20% 50%, rgba(255, 215, 0, 0.05) 0%, transparent 50%),
-        radial-gradient(circle at 80% 50%, rgba(255, 215, 0, 0.03) 0%, transparent 50%);
+        radial-gradient(circle at 20% 30%, rgba(245, 213, 118, 0.04) 0%, transparent 50%),
+        radial-gradient(circle at 80% 70%, rgba(72, 199, 116, 0.03) 0%, transparent 50%),
+        radial-gradient(circle at 50% 50%, rgba(255, 159, 67, 0.02) 0%, transparent 70%);
     pointer-events: none;
     z-index: 0;
 }
@@ -90,12 +98,12 @@ body.dark-mode .prayer-card,
 body.dark-mode .hadith-card,
 body.dark-mode .stat-card,
 body.dark-mode .city-btn {
-    background: #111111;
+    background: linear-gradient(135deg, rgba(31, 31, 31, 0.95) 0%, rgba(26, 26, 26, 0.9) 100%);
     backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 215, 0, 0.2);
+    border: 1px solid rgba(245, 213, 118, 0.15);
     box-shadow: 
-        0 8px 32px rgba(0, 0, 0, 0.9),
-        inset 0 1px 0 rgba(255, 215, 0, 0.1);
+        0 8px 32px rgba(0, 0, 0, 0.8),
+        inset 0 1px 0 rgba(245, 213, 118, 0.08);
 }
 
 .card:hover,
@@ -110,10 +118,11 @@ body.dark-mode .feature-card:hover,
 body.dark-mode .hadith-card:hover,
 body.dark-mode .stat-card:hover {
     box-shadow: 
-        0 12px 48px rgba(255, 215, 0, 0.3),
-        0 0 30px rgba(255, 215, 0, 0.2),
-        inset 0 1px 0 rgba(255, 215, 0, 0.15);
-    border-color: rgba(255, 215, 0, 0.4);
+        0 12px 48px rgba(245, 213, 118, 0.25),
+        0 0 30px rgba(245, 213, 118, 0.15),
+        inset 0 1px 0 rgba(245, 213, 118, 0.12);
+    border-color: rgba(245, 213, 118, 0.3);
+    transform: translateY(-2px);
 }
 
 /* Headers and Sections */
@@ -156,9 +165,9 @@ table {
 }
 
 body.dark-mode table {
-    background: #0a0a0a;
+    background: linear-gradient(135deg, rgba(26, 26, 26, 0.6) 0%, rgba(13, 13, 13, 0.6) 100%);
     backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 215, 0, 0.2);
+    border: 1px solid rgba(245, 213, 118, 0.12);
 }
 
 thead {
@@ -167,14 +176,14 @@ thead {
 }
 
 body.dark-mode thead {
-    background: linear-gradient(135deg, #ffd700 0%, #f4d03f 100%);
-    color: #000000 !important;
-    box-shadow: 0 2px 10px rgba(255, 215, 0, 0.3);
+    background: linear-gradient(135deg, #f5d576 0%, #d4af37 100%);
+    color: #1a1a1a !important;
+    box-shadow: 0 2px 10px rgba(245, 213, 118, 0.25);
 }
 
 body.dark-mode thead th,
 body.dark-mode thead td {
-    color: #000000 !important;
+    color: #1a1a1a !important;
     font-weight: 700;
     text-shadow: none !important;
 }
@@ -263,12 +272,12 @@ body.dark-mode .dark-mode-toggle .icon-moon {
 }
 
 body.dark-mode .navbar {
-    background: rgba(0, 0, 0, 0.98);
+    background: linear-gradient(135deg, rgba(26, 26, 26, 0.98) 0%, rgba(13, 13, 13, 0.98) 100%);
     backdrop-filter: blur(20px);
-    border-bottom: 1px solid rgba(255, 215, 0, 0.2);
+    border-bottom: 1px solid rgba(245, 213, 118, 0.15);
     box-shadow: 
         0 4px 20px rgba(0, 0, 0, 0.9),
-        0 0 40px rgba(255, 215, 0, 0.1);
+        0 0 40px rgba(245, 213, 118, 0.08);
 }
 
 .navbar a {
@@ -276,7 +285,7 @@ body.dark-mode .navbar {
 }
 
 body.dark-mode .navbar a {
-    color: #ffd700;
+    color: #f5d576;
     transition: all 0.3s ease;
 }
 
@@ -285,8 +294,8 @@ body.dark-mode .navbar a {
 }
 
 body.dark-mode .navbar a:hover {
-    color: #ffd700;
-    text-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
+    color: #48c774;
+    text-shadow: 0 0 10px rgba(72, 199, 116, 0.4);
 }
 
 /* Buttons */
@@ -296,12 +305,12 @@ body.dark-mode .navbar a:hover {
 }
 
 body.dark-mode .btn-primary {
-    background: linear-gradient(135deg, #ffd700 0%, #f4d03f 100%);
-    color: #000000 !important;
+    background: linear-gradient(135deg, #48c774 0%, #36a35d 100%);
+    color: #ffffff !important;
     box-shadow: 
-        0 4px 15px rgba(255, 215, 0, 0.4),
-        inset 0 1px 0 rgba(255, 255, 255, 0.2);
-    border: 1px solid rgba(255, 215, 0, 0.3);
+        0 4px 15px rgba(72, 199, 116, 0.35),
+        inset 0 1px 0 rgba(255, 255, 255, 0.15);
+    border: 1px solid rgba(72, 199, 116, 0.3);
 }
 
 .btn-primary:hover {
@@ -309,11 +318,11 @@ body.dark-mode .btn-primary {
 }
 
 body.dark-mode .btn-primary:hover {
-    background: linear-gradient(135deg, #ffe44d 0%, #ffd700 100%);
+    background: linear-gradient(135deg, #5dd68d 0%, #48c774 100%);
     box-shadow: 
-        0 6px 20px rgba(255, 215, 0, 0.6),
-        0 0 30px rgba(255, 215, 0, 0.3),
-        inset 0 1px 0 rgba(255, 255, 255, 0.3);
+        0 6px 20px rgba(72, 199, 116, 0.5),
+        0 0 30px rgba(72, 199, 116, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.2);
     transform: translateY(-2px);
 }
 
@@ -415,8 +424,9 @@ body.dark-mode .countdown-message {
 }
 
 body.dark-mode .time-unit {
-    background: rgba(17, 17, 17, 0.8);
-    border: 1px solid rgba(255, 215, 0, 0.3);
+    background: linear-gradient(135deg, rgba(31, 31, 31, 0.9) 0%, rgba(26, 26, 26, 0.8) 100%);
+    border: 1px solid rgba(245, 213, 118, 0.2);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
 }
 
 body.dark-mode .time-value {
@@ -465,9 +475,9 @@ body.dark-mode .city-btn {
 }
 
 body.dark-mode .city-btn.active {
-    background: linear-gradient(135deg, #ffd700, #f4d03f);
-    color: #000000 !important;
-    box-shadow: 0 0 20px rgba(255, 215, 0, 0.4);
+    background: linear-gradient(135deg, #48c774, #36a35d);
+    color: #ffffff !important;
+    box-shadow: 0 0 25px rgba(72, 199, 116, 0.4);
 }
 
 body.dark-mode .city-name {
@@ -600,15 +610,16 @@ body.dark-mode .modal-overlay {
 }
 
 body.dark-mode ::-webkit-scrollbar {
-    background-color: #000000;
+    background-color: #0d0d0d;
 }
 
 body.dark-mode ::-webkit-scrollbar-thumb {
-    background: linear-gradient(180deg, #ffd700, #f4d03f);
+    background: linear-gradient(180deg, #48c774, #36a35d);
+    border-radius: 6px;
 }
 
 body.dark-mode ::-webkit-scrollbar-thumb:hover {
-    background: linear-gradient(180deg, #ffe44d, #ffd700);
+    background: linear-gradient(180deg, #5dd68d, #48c774);
 }
 
 /* Footer */
@@ -629,19 +640,19 @@ footer a:hover {
 }
 
 body.dark-mode footer {
-    background: #000000;
-    border-top: 1px solid rgba(255, 215, 0, 0.2);
+    background: linear-gradient(135deg, #0d0d0d, #1a1a1a);
+    border-top: 1px solid rgba(245, 213, 118, 0.15);
 }
 
 body.dark-mode footer p,
 body.dark-mode footer a,
 body.dark-mode footer span {
-    color: #ffd700 !important;
+    color: #d4af37 !important;
 }
 
 body.dark-mode footer a:hover {
-    color: #ffe44d !important;
-    text-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
+    color: #48c774 !important;
+    text-shadow: 0 0 10px rgba(72, 199, 116, 0.3);
 }
 
 /* Navigation specific */
@@ -711,8 +722,8 @@ body.dark-mode .verse-arabic {
 }
 
 body.dark-mode .spinner {
-    border-color: rgba(255, 215, 0, 0.2);
-    border-top-color: #ffd700;
+    border-color: rgba(245, 213, 118, 0.15);
+    border-top-color: #48c774;
 }
 
 /* Tooltips */
@@ -733,12 +744,14 @@ body.dark-mode .spinner {
 }
 
 body.dark-mode .badge {
-    background-color: #ffd700;
-    color: #000000;
+    background: linear-gradient(135deg, #f5d576, #d4af37);
+    color: #1a1a1a;
+    box-shadow: 0 2px 8px rgba(245, 213, 118, 0.3);
 }
 
 body.dark-mode .stat-number {
-    color: #ffd700;
+    color: #48c774;
+    text-shadow: 0 0 10px rgba(72, 199, 116, 0.2);
 }
 
 /* Responsive Design */
@@ -768,89 +781,92 @@ body.dark-mode * {
     animation: fadeIn 0.3s ease;
 }
 
-/* تأثيرات ذهبية إضافية للوضع المظلم */
-body.dark-mode .card,
-body.dark-mode .feature-card,
-body.dark-mode .prayer-card {
-    box-shadow: 
-        0 8px 32px rgba(0, 0, 0, 0.9),
-        0 0 1px rgba(255, 215, 0, 0.1),
-        inset 0 1px 0 rgba(255, 215, 0, 0.1);
-}
+/* تأثيرات محسنة للوضع المظلم - AI Enhanced */
 
-/* تأثير توهج ذهبي عند hover */
-body.dark-mode .card:hover,
-body.dark-mode .feature-card:hover {
-    box-shadow: 
-        0 12px 48px rgba(255, 215, 0, 0.4),
-        0 0 40px rgba(255, 215, 0, 0.2),
-        inset 0 1px 0 rgba(255, 215, 0, 0.2);
-}
-
-/* جميع العناوين ذهبية */
+/* جميع النصوص بتدرج ذهبي متوازن */
 body.dark-mode h1,
-body.dark-mode h2,
+body.dark-mode h2 {
+    color: #f5d576 !important;
+    text-shadow: 0 0 15px rgba(245, 213, 118, 0.2);
+}
+
 body.dark-mode h3,
 body.dark-mode h4,
 body.dark-mode h5,
-body.dark-mode h6,
+body.dark-mode h6 {
+    color: #d4af37 !important;
+}
+
 body.dark-mode p,
-body.dark-mode span,
+body.dark-mode span:not(.time-value):not(.stat-value),
 body.dark-mode li,
-body.dark-mode a,
-body.dark-mode label,
-body.dark-mode .text {
-    color: #ffd700 !important;
+body.dark-mode label {
+    color: #c9a961 !important;
 }
 
-/* تأثير ظل ذهبي للنصوص المهمة */
-body.dark-mode h1,
-body.dark-mode h2 {
-    text-shadow: 0 0 20px rgba(255, 215, 0, 0.3);
+body.dark-mode a {
+    color: #d4af37 !important;
+    transition: all 0.3s ease;
 }
 
-/* الأزرار بتأثير ذهبي */
-body.dark-mode button,
-body.dark-mode .btn {
-    background: linear-gradient(135deg, #ffd700, #f4d03f);
-    color: #000000 !important;
-    border: 1px solid rgba(255, 215, 0, 0.5);
-    box-shadow: 0 4px 15px rgba(255, 215, 0, 0.3);
+body.dark-mode a:hover {
+    color: #48c774 !important;
+    text-shadow: 0 0 8px rgba(72, 199, 116, 0.4);
 }
 
-body.dark-mode button:hover,
-body.dark-mode .btn:hover {
-    background: linear-gradient(135deg, #ffe44d, #ffd700);
-    box-shadow: 0 6px 20px rgba(255, 215, 0, 0.5);
+/* الأزرار العامة بتصميم أخضر */
+body.dark-mode button:not(.btn-primary):not(.dark-mode-toggle),
+body.dark-mode .btn:not(.btn-primary) {
+    background: linear-gradient(135deg, rgba(31, 31, 31, 0.9), rgba(26, 26, 26, 0.9));
+    color: #d4af37 !important;
+    border: 1px solid rgba(245, 213, 118, 0.2);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+}
+
+body.dark-mode button:not(.btn-primary):not(.dark-mode-toggle):hover,
+body.dark-mode .btn:not(.btn-primary):hover {
+    background: linear-gradient(135deg, rgba(72, 199, 116, 0.15), rgba(54, 163, 93, 0.1));
+    border-color: rgba(72, 199, 116, 0.3);
+    box-shadow: 0 6px 20px rgba(72, 199, 116, 0.2);
     transform: translateY(-2px);
 }
 
-/* الإدخالات والنماذج */
+/* حقول الإدخال */
 body.dark-mode input,
 body.dark-mode textarea,
 body.dark-mode select {
-    background: #0a0a0a;
-    border: 1px solid rgba(255, 215, 0, 0.3);
-    color: #ffd700 !important;
+    background: linear-gradient(135deg, rgba(26, 26, 26, 0.8), rgba(13, 13, 13, 0.8));
+    border: 1px solid rgba(245, 213, 118, 0.2);
+    color: #d4af37 !important;
 }
 
 body.dark-mode input:focus,
 body.dark-mode textarea:focus,
 body.dark-mode select:focus {
-    border-color: #ffd700;
-    box-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
+    border-color: #48c774;
+    box-shadow: 0 0 12px rgba(72, 199, 116, 0.25);
+    background: rgba(26, 26, 26, 0.95);
 }
 
-/* الأيقونات ذهبية */
-body.dark-mode i,
+/* الأيقونات بألوان متنوعة */
+body.dark-mode .stat-card i {
+    color: #f5d576 !important;
+}
+
+body.dark-mode i:not(.stat-card i),
 body.dark-mode .icon {
-    color: #ffd700 !important;
+    color: #48c774 !important;
 }
 
-/* الروابط مع تأثير توهج */
-body.dark-mode a:hover {
-    color: #ffe44d !important;
-    text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+/* تحسين قراءة النصوص المهمة */
+body.dark-mode .time-value,
+body.dark-mode .stat-value {
+    color: #f5d576 !important;
+    text-shadow: 0 0 10px rgba(245, 213, 118, 0.15);
+}
+
+body.dark-mode .text {
+    color: #c9a961 !important;
 }
 
 /* Print Styles - إخفاء زر الوضع المظلم عند الطباعة */

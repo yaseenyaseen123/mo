@@ -1610,11 +1610,11 @@ p {
 }
 
 body.dark-mode .data-table thead {
-    background: linear-gradient(135deg, #ffd700 0%, #f4d03f 100%);
+    background: linear-gradient(135deg, #f5d576 0%, #d4af37 100%);
 }
 
 body.dark-mode .data-table th {
-    color: #000000 !important;
+    color: #1a1a1a !important;
     text-shadow: none !important;
 }
 
@@ -3362,11 +3362,11 @@ body.dark-mode .data-table th {
 }
 
 body.dark-mode .ramadan-table thead {
-    background: linear-gradient(135deg, #ffd700 0%, #f4d03f 100%);
+    background: linear-gradient(135deg, #f5d576 0%, #d4af37 100%);
 }
 
 body.dark-mode .ramadan-table th {
-    color: #000000 !important;
+    color: #1a1a1a !important;
     text-shadow: none !important;
 }
 
