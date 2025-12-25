@@ -264,29 +264,84 @@ body.dark-mode .dark-mode-toggle .icon-moon {
 }
 
 /* Ramadan Page Specific */
-body.dark-mode .ramadan-title,
-body.dark-mode .hijri-year,
-body.dark-mode .ramadan-verse,
-body.dark-mode .verse-source {
+body.dark-mode .ramadan-container {
+    background-color: var(--bg-primary);
+}
+
+body.dark-mode .ramadan-header {
+    background-color: var(--bg-secondary);
+}
+
+body.dark-mode .ramadan-title {
     color: var(--text-primary) !important;
 }
 
-body.dark-mode .countdown-card h2,
+body.dark-mode .hijri-year {
+    color: var(--islamic-gold) !important;
+}
+
+body.dark-mode .ramadan-verse {
+    color: var(--text-primary) !important;
+}
+
+body.dark-mode .verse-source {
+    color: var(--text-secondary) !important;
+}
+
+body.dark-mode .countdown-card {
+    background-color: var(--bg-card);
+}
+
+body.dark-mode .countdown-card h2 {
+    color: var(--text-primary) !important;
+}
+
 body.dark-mode .countdown-message {
     color: var(--text-primary) !important;
 }
 
-body.dark-mode .time-value,
-body.dark-mode .time-label {
+body.dark-mode .time-unit {
+    background: linear-gradient(135deg, rgba(45, 122, 86, 0.3), rgba(212, 175, 55, 0.1));
+    border-color: var(--border-color);
+}
+
+body.dark-mode .time-value {
     color: var(--text-primary) !important;
+}
+
+body.dark-mode .time-label {
+    color: var(--text-secondary) !important;
+}
+
+body.dark-mode .time-separator {
+    color: var(--islamic-gold) !important;
 }
 
 body.dark-mode .stat-card {
     background-color: var(--bg-card);
+    border-color: var(--border-color);
 }
 
-body.dark-mode .stat-value,
+body.dark-mode .stat-card i {
+    color: var(--islamic-gold) !important;
+}
+
+body.dark-mode .stat-value {
+    color: var(--text-primary) !important;
+}
+
 body.dark-mode .stat-label {
+    color: var(--text-secondary) !important;
+}
+
+/* City Selector */
+body.dark-mode .city-selector-card,
+body.dark-mode .city-selector {
+    background-color: var(--bg-card);
+}
+
+body.dark-mode .city-selector h2,
+body.dark-mode .selector-header h3 {
     color: var(--text-primary) !important;
 }
 
