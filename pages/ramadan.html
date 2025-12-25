@@ -99,47 +99,52 @@
                     <div class="stat-label">عيد الفطر المبارك</div>
                 </div>
                 <div class="stat-card">
-                    <i class="fas fa-globe-asia"></i>
-                    <div class="stat-value" id="totalCountries">20</div>
-                    <div class="stat-label">دولة</div>
-                </div>
-                <div class="stat-card">
                     <i class="fas fa-city"></i>
-                    <div class="stat-value" id="totalCities">70+</div>
-                    <div class="stat-label">مدينة</div>
+                    <div class="stat-value">9</div>
+                    <div class="stat-label">مدن عربية</div>
                 </div>
             </div>
 
-            <!-- Country Selector -->
-            <div class="country-selector-wrapper">
-                <h2 style="color: white; text-align: center; margin-bottom: 20px;">
-                    <i class="fas fa-globe"></i> اختر الدولة
-                </h2>
-                <div class="country-grid" id="countryGrid">
-                    <!-- Countries will be loaded dynamically -->
-                </div>
-            </div>
-
-            <!-- City Pills -->
-            <div class="city-pills-wrapper" id="cityPillsWrapper" style="display: none;">
-                <h3>
-                    <i class="fas fa-city"></i>
-                    <span id="selectedCountryName">اختر المدينة</span>
-                </h3>
-                <div class="city-pills" id="cityPills">
-                    <!-- Cities will be loaded dynamically -->
-                </div>
-            </div>
-
-            <!-- Selected Location -->
-            <div class="selected-location" id="selectedLocation" style="display: none;">
-                <h2>
-                    <span class="location-flag" id="locationFlag">🇸🇦</span>
-                    <span id="locationCity">مكة المكرمة</span>
-                </h2>
-                <div class="location-details">
-                    <span id="locationCountry">السعودية</span> | 
-                    <span id="locationCityEn">Mecca</span>
+            <!-- City Selector -->
+            <div class="city-selector">
+                <h2><i class="fas fa-city"></i> اختر المدينة</h2>
+                <div class="city-grid">
+                    <button class="city-btn active" data-city="makkah">
+                        <span class="city-emoji">🕋</span>
+                        <span class="city-name">مكة المكرمة</span>
+                    </button>
+                    <button class="city-btn" data-city="madinah">
+                        <span class="city-emoji">🕌</span>
+                        <span class="city-name">المدينة المنورة</span>
+                    </button>
+                    <button class="city-btn" data-city="riyadh">
+                        <span class="city-emoji">🏙️</span>
+                        <span class="city-name">الرياض</span>
+                    </button>
+                    <button class="city-btn" data-city="jeddah">
+                        <span class="city-emoji">🌊</span>
+                        <span class="city-name">جدة</span>
+                    </button>
+                    <button class="city-btn" data-city="cairo">
+                        <span class="city-emoji">🏛️</span>
+                        <span class="city-name">القاهرة</span>
+                    </button>
+                    <button class="city-btn" data-city="dubai">
+                        <span class="city-emoji">🏗️</span>
+                        <span class="city-name">دبي</span>
+                    </button>
+                    <button class="city-btn" data-city="jerusalem">
+                        <span class="city-emoji">🕌</span>
+                        <span class="city-name">القدس</span>
+                    </button>
+                    <button class="city-btn" data-city="amman">
+                        <span class="city-emoji">🏛️</span>
+                        <span class="city-name">عمّان</span>
+                    </button>
+                    <button class="city-btn" data-city="qalqilya">
+                        <span class="city-emoji">🌳</span>
+                        <span class="city-name">قلقيلية</span>
+                    </button>
                 </div>
             </div>
 
@@ -178,6 +183,19 @@
                         </div>
                         <div class="btn-text">
                             <span class="btn-title">مشاركة</span>
+                            <span class="btn-subtitle">Share</span>
+                        </div>
+                    </button>
+                    <button class="control-btn clear-cache-btn" id="clearCacheBtn">
+                        <div class="btn-icon-wrapper">
+                            <i class="fas fa-trash-alt"></i>
+                        </div>
+                        <div class="btn-text">
+                            <span class="btn-title">حذف الكاش</span>
+                            <span class="btn-subtitle">Clear Cache</span>
+                        </div>
+                    </button>
+                </div>
                             <span class="btn-subtitle">Share</span>
                         </div>
                     </button>
@@ -278,6 +296,9 @@
     </footer>
 
     <script src="../js/ramadan-cities-data.js"></script>
-    <script src="../js/ramadan.js"></script>    <script src="../js/dark-mode.js"></script>    <script src="../js/main.js"></script>
+    <script src="../js/amman-schedule.js"></script>
+    <script src="../js/ramadan.js"></script>
+    <script src="../js/dark-mode.js"></script>
+    <script src="../js/main.js"></script>
 </body>
 </html>

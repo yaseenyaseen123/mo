@@ -270,12 +270,10 @@ function initControls() {
     const printBtn = document.getElementById('printBtn');
     const downloadBtn = document.getElementById('downloadBtn');
     const shareBtn = document.getElementById('shareBtn');
-    const clearCacheBtn = document.getElementById('clearCacheBtn');
     
     if (printBtn) printBtn.addEventListener('click', printSchedule);
     if (downloadBtn) downloadBtn.addEventListener('click', downloadPDF);
     if (shareBtn) shareBtn.addEventListener('click', shareSchedule);
-    if (clearCacheBtn) clearCacheBtn.addEventListener('click', clearCache);
 }
 
 // Print schedule
@@ -312,23 +310,6 @@ async function shareSchedule() {
         console.error('Error sharing:', err);
         showNotification('حدث خطأ في المشاركة');
     }
-}
-
-// Clear cache and reload
-function clearCache() {
-    // Clear localStorage
-    localStorage.clear();
-    
-    // Clear sessionStorage
-    sessionStorage.clear();
-    
-    // Show notification
-    showNotification('تم حذف البيانات المؤقتة بنجاح');
-    
-    // Reload page after 1 second
-    setTimeout(() => {
-        window.location.reload(true);
-    }, 1000);
 }
 
 // Helper Functions

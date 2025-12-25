@@ -355,3 +355,33 @@ body.dark-mode .schedule-table tbody tr {
 body.dark-mode .schedule-table tbody tr:hover {
     background: var(--bg-secondary);
 }
+
+/* Notification Styles */
+@keyframes slideIn {
+    from {
+        transform: translateX(400px);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes slideOut {
+    from {
+        transform: translateX(0);
+        opacity: 1;
+    }
+    to {
+        transform: translateX(400px);
+        opacity: 0;
+    }
+}
+
+.notification {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-weight: 600;
+    direction: rtl;
+    text-align: center;
+}

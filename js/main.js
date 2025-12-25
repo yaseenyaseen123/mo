@@ -96,8 +96,10 @@ function shareContent(title, text) {
 }
 
 // Add CSS animations
-const style = document.createElement('style');
-style.textContent = `
+if (!document.getElementById('main-animations-style')) {
+    const animationsStyle = document.createElement('style');
+    animationsStyle.id = 'main-animations-style';
+    animationsStyle.textContent = `
     @keyframes slideDown {
         from {
             opacity: 0;
@@ -134,4 +136,5 @@ style.textContent = `
         }
     }
 `;
-document.head.appendChild(style);
+    document.head.appendChild(animationsStyle);
+}

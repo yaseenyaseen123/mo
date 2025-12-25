@@ -166,7 +166,9 @@ const RAMADAN_COUNTRIES = {
                 timezone: 'Asia/Amman',
                 lat: 31.9454,
                 lng: 35.9284,
-                fajr: [4, 54], sunrise: [6, 20], dhuhr: [11, 58], asr: [15, 10], maghrib: [17, 35], isha: [19, 0]
+                // البيانات الصحيحة من https://jo.prayertimes.news/ramadan/amman_city.html
+                // اليوم الأول: 18 فبراير 2026
+                fajr: [5, 57], sunrise: [7, 24], dhuhr: [12, 58], asr: [16, 7], maghrib: [18, 32], isha: [20, 2]
             },
             irbid: { 
                 name: 'إربد',
