@@ -3027,7 +3027,7 @@ p {
 }
 
 .stat-label {
-    color: var(--text-light);
+    color: #666666;
     font-size: 0.95rem;
 }
 
