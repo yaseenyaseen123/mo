@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>إمساكية رمضان 2026 - التطبيق الإسلامي</title>
     <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/ramadan-modern.css">
     <link rel="stylesheet" href="../css/dark-mode.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
@@ -98,55 +99,47 @@
                     <div class="stat-label">عيد الفطر المبارك</div>
                 </div>
                 <div class="stat-card">
+                    <i class="fas fa-globe-asia"></i>
+                    <div class="stat-value" id="totalCountries">20</div>
+                    <div class="stat-label">دولة</div>
+                </div>
+                <div class="stat-card">
                     <i class="fas fa-city"></i>
-                    <div class="stat-value">9</div>
-                    <div class="stat-label">مدن متاحة</div>
+                    <div class="stat-value" id="totalCities">70+</div>
+                    <div class="stat-label">مدينة</div>
                 </div>
             </div>
 
-            <!-- City Selector -->
-            <div class="city-selector-card">
-                <div class="selector-header">
-                    <i class="fas fa-map-marker-alt"></i>
-                    <h3>اختر مدينتك لعرض الإمساكية</h3>
+            <!-- Country Selector -->
+            <div class="country-selector-wrapper">
+                <h2 style="color: white; text-align: center; margin-bottom: 20px;">
+                    <i class="fas fa-globe"></i> اختر الدولة
+                </h2>
+                <div class="country-grid" id="countryGrid">
+                    <!-- Countries will be loaded dynamically -->
                 </div>
-                <div class="city-grid">
-                    <button class="city-btn active" data-city="makkah">
-                        <i class="fas fa-kaaba"></i>
-                        <span>مكة المكرمة</span>
-                    </button>
-                    <button class="city-btn" data-city="madinah">
-                        <i class="fas fa-mosque"></i>
-                        <span>المدينة المنورة</span>
-                    </button>
-                    <button class="city-btn" data-city="riyadh">
-                        <i class="fas fa-building"></i>
-                        <span>الرياض</span>
-                    </button>
-                    <button class="city-btn" data-city="jeddah">
-                        <i class="fas fa-city"></i>
-                        <span>جدة</span>
-                    </button>
-                    <button class="city-btn" data-city="cairo">
-                        <i class="fas fa-landmark"></i>
-                        <span>القاهرة</span>
-                    </button>
-                    <button class="city-btn" data-city="dubai">
-                        <i class="fas fa-building"></i>
-                        <span>دبي</span>
-                    </button>
-                    <button class="city-btn" data-city="jerusalem">
-                        <i class="fas fa-mosque"></i>
-                        <span>القدس</span>
-                    </button>
-                    <button class="city-btn" data-city="amman">
-                        <i class="fas fa-city"></i>
-                        <span>عمان</span>
-                    </button>
-                    <button class="city-btn" data-city="qalqilya">
-                        <i class="fas fa-flag"></i>
-                        <span>قلقيلية</span>
-                    </button>
+            </div>
+
+            <!-- City Pills -->
+            <div class="city-pills-wrapper" id="cityPillsWrapper" style="display: none;">
+                <h3>
+                    <i class="fas fa-city"></i>
+                    <span id="selectedCountryName">اختر المدينة</span>
+                </h3>
+                <div class="city-pills" id="cityPills">
+                    <!-- Cities will be loaded dynamically -->
+                </div>
+            </div>
+
+            <!-- Selected Location -->
+            <div class="selected-location" id="selectedLocation" style="display: none;">
+                <h2>
+                    <span class="location-flag" id="locationFlag">🇸🇦</span>
+                    <span id="locationCity">مكة المكرمة</span>
+                </h2>
+                <div class="location-details">
+                    <span id="locationCountry">السعودية</span> | 
+                    <span id="locationCityEn">Mecca</span>
                 </div>
             </div>
 
@@ -284,6 +277,7 @@
         </div>
     </footer>
 
+    <script src="../js/ramadan-cities-data.js"></script>
     <script src="../js/ramadan.js"></script>    <script src="../js/dark-mode.js"></script>    <script src="../js/main.js"></script>
 </body>
 </html>

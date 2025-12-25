@@ -1,0 +1,357 @@
+/* Ramadan Modern Styles - تصميم عصري للإمساكية */
+
+/* Country & City Selector */
+.country-selector-wrapper {
+    background: linear-gradient(135deg, var(--islamic-green), var(--islamic-green-dark));
+    padding: 30px;
+    border-radius: 20px;
+    margin: 30px 0;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.country-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.country-btn {
+    background: white;
+    border: 3px solid transparent;
+    border-radius: 15px;
+    padding: 20px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-align: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.country-btn:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+    border-color: var(--islamic-gold);
+}
+
+.country-btn.active {
+    background: linear-gradient(135deg, var(--islamic-gold), var(--islamic-gold-dark));
+    color: white;
+    border-color: var(--islamic-gold);
+    transform: scale(1.05);
+}
+
+.country-flag {
+    font-size: 48px;
+    margin-bottom: 10px;
+    display: block;
+}
+
+.country-name-ar {
+    font-size: 20px;
+    font-weight: bold;
+    color: var(--text-primary);
+    margin-bottom: 5px;
+    font-family: 'Cairo', sans-serif;
+}
+
+.country-btn.active .country-name-ar {
+    color: white;
+}
+
+.country-name-en {
+    font-size: 14px;
+    color: var(--text-secondary);
+    opacity: 0.8;
+}
+
+.country-btn.active .country-name-en {
+    color: rgba(255, 255, 255, 0.9);
+}
+
+/* City Pills */
+.city-pills-wrapper {
+    background: var(--bg-card);
+    padding: 25px;
+    border-radius: 15px;
+    margin: 20px 0;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+}
+
+.city-pills-wrapper h3 {
+    color: var(--islamic-green);
+    margin-bottom: 15px;
+    font-size: 22px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.city-pills-wrapper h3 i {
+    color: var(--islamic-gold);
+}
+
+.city-pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.city-pill {
+    background: var(--bg-secondary);
+    border: 2px solid var(--border-color);
+    border-radius: 25px;
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 16px;
+    color: var(--text-primary);
+    font-weight: 600;
+}
+
+.city-pill:hover {
+    background: var(--islamic-green);
+    color: white;
+    border-color: var(--islamic-green);
+    transform: scale(1.05);
+}
+
+.city-pill.active {
+    background: linear-gradient(135deg, var(--islamic-green), var(--islamic-green-dark));
+    color: white;
+    border-color: var(--islamic-gold);
+    box-shadow: 0 4px 10px rgba(30, 90, 62, 0.3);
+}
+
+/* Selected Location Display */
+.selected-location {
+    background: linear-gradient(135deg, var(--islamic-gold), var(--islamic-gold-dark));
+    color: white;
+    padding: 20px 30px;
+    border-radius: 15px;
+    text-align: center;
+    margin: 20px 0;
+    box-shadow: 0 6px 15px rgba(212, 175, 55, 0.3);
+}
+
+.selected-location h2 {
+    margin: 0;
+    font-size: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.selected-location .location-flag {
+    font-size: 32px;
+}
+
+.selected-location .location-details {
+    margin-top: 10px;
+    font-size: 16px;
+    opacity: 0.95;
+}
+
+/* Enhanced Schedule Table */
+.schedule-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0 8px;
+    margin: 20px 0;
+}
+
+.schedule-table thead {
+    background: linear-gradient(135deg, var(--islamic-green), var(--islamic-green-dark));
+}
+
+.schedule-table thead th {
+    padding: 18px 12px;
+    color: white;
+    font-weight: 700;
+    text-align: center;
+    font-size: 16px;
+    border: none;
+}
+
+.schedule-table thead th:first-child {
+    border-radius: 15px 0 0 15px;
+}
+
+.schedule-table thead th:last-child {
+    border-radius: 0 15px 15px 0;
+}
+
+.schedule-table tbody tr {
+    background: var(--bg-card);
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+.schedule-table tbody tr:hover {
+    background: var(--bg-secondary);
+    transform: translateX(-5px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.schedule-table tbody td {
+    padding: 15px 12px;
+    text-align: center;
+    border: none;
+    font-size: 15px;
+    color: var(--text-primary);
+}
+
+.schedule-table tbody tr td:first-child {
+    border-radius: 15px 0 0 15px;
+    font-weight: 700;
+    color: var(--islamic-green);
+}
+
+.schedule-table tbody tr td:last-child {
+    border-radius: 0 15px 15px 0;
+}
+
+/* Friday Row */
+.schedule-table tbody tr.friday-row {
+    background: linear-gradient(90deg, var(--islamic-green), transparent);
+    border-right: 5px solid var(--islamic-gold);
+}
+
+.schedule-table tbody tr.friday-row td:first-child {
+    color: var(--islamic-gold);
+}
+
+/* Last 10 Days */
+.schedule-table tbody tr.last-ten-days {
+    background: linear-gradient(90deg, rgba(212, 175, 55, 0.1), transparent);
+    border-right: 5px solid var(--islamic-gold);
+}
+
+/* Current Day */
+.schedule-table tbody tr.current-day {
+    background: linear-gradient(90deg, var(--islamic-gold), transparent);
+    border-right: 8px solid var(--islamic-green);
+    transform: scale(1.02);
+    box-shadow: 0 6px 15px rgba(212, 175, 55, 0.3);
+}
+
+.schedule-table tbody tr.current-day td {
+    color: white;
+    font-weight: 700;
+}
+
+/* Responsive Design */
+@media (max-width: 1200px) {
+    .country-grid {
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    }
+}
+
+@media (max-width: 768px) {
+    .country-grid {
+        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    }
+    
+    .country-flag {
+        font-size: 36px;
+    }
+    
+    .country-name-ar {
+        font-size: 16px;
+    }
+    
+    .country-name-en {
+        font-size: 12px;
+    }
+    
+    .city-pill {
+        font-size: 14px;
+        padding: 8px 16px;
+    }
+    
+    .selected-location h2 {
+        font-size: 22px;
+    }
+    
+    .schedule-table {
+        font-size: 13px;
+    }
+    
+    .schedule-table thead th,
+    .schedule-table tbody td {
+        padding: 10px 6px;
+        font-size: 13px;
+    }
+}
+
+@media (max-width: 480px) {
+    .country-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .schedule-table {
+        font-size: 11px;
+    }
+    
+    .schedule-table thead th,
+    .schedule-table tbody td {
+        padding: 8px 4px;
+        font-size: 11px;
+    }
+}
+
+/* Loading Animation */
+.loading-spinner {
+    display: inline-block;
+    width: 50px;
+    height: 50px;
+    border: 5px solid var(--border-color);
+    border-top-color: var(--islamic-green);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin: 40px auto;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+/* Empty State */
+.empty-state {
+    text-align: center;
+    padding: 60px 20px;
+    color: var(--text-secondary);
+}
+
+.empty-state i {
+    font-size: 80px;
+    color: var(--islamic-gold);
+    margin-bottom: 20px;
+}
+
+.empty-state h3 {
+    font-size: 24px;
+    margin-bottom: 10px;
+    color: var(--text-primary);
+}
+
+.empty-state p {
+    font-size: 16px;
+}
+
+/* Dark Mode Adjustments */
+body.dark-mode .country-btn {
+    background: var(--bg-card);
+}
+
+body.dark-mode .country-btn:hover {
+    background: var(--bg-secondary);
+}
+
+body.dark-mode .schedule-table tbody tr {
+    background: var(--bg-card);
+}
+
+body.dark-mode .schedule-table tbody tr:hover {
+    background: var(--bg-secondary);
+}
