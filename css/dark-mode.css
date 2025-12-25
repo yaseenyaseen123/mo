@@ -23,22 +23,22 @@
 
 /* Dark Mode Variables */
 body.dark-mode {
-    --bg-primary: #1a1a1a;
-    --bg-secondary: #242424;
-    --bg-card: #2d2d2d;
-    --text-primary: #e0e0e0;
-    --text-secondary: #b0b0b0;
-    --text-light: #888888;
-    --border-color: #404040;
-    --shadow-color: rgba(0, 0, 0, 0.3);
-    --shadow-hover: rgba(0, 0, 0, 0.5);
+    --bg-primary: #0f1419;
+    --bg-secondary: #1a1f26;
+    --bg-card: #252b33;
+    --text-primary: #e8eaed;
+    --text-secondary: #b8bcc2;
+    --text-light: #9aa0a6;
+    --border-color: #3a4149;
+    --shadow-color: rgba(0, 0, 0, 0.5);
+    --shadow-hover: rgba(0, 0, 0, 0.7);
     
     /* Adjust Islamic colors for dark mode */
-    --islamic-green: #2d7a56;
-    --islamic-green-dark: #1e5a3e;
-    --islamic-green-light: #3a9668;
-    --islamic-gold: #f4d03f;
-    --islamic-gold-dark: #d4af37;
+    --islamic-green: #3fb883;
+    --islamic-green-dark: #2a9d6f;
+    --islamic-green-light: #4ec995;
+    --islamic-gold: #ffd700;
+    --islamic-gold-dark: #f4d03f;
 }
 
 /* Apply Variables to Elements */
@@ -46,6 +46,25 @@ body {
     background-color: var(--bg-primary);
     color: var(--text-primary);
     transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Enhanced dark mode styles */
+body.dark-mode {
+    background: linear-gradient(135deg, #0f1419 0%, #1a1f26 100%);
+}
+
+body.dark-mode::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: 
+        radial-gradient(circle at 20% 50%, rgba(63, 184, 131, 0.03) 0%, transparent 50%),
+        radial-gradient(circle at 80% 50%, rgba(255, 215, 0, 0.02) 0%, transparent 50%);
+    pointer-events: none;
+    z-index: 0;
 }
 
 /* Cards and Containers */
@@ -61,12 +80,40 @@ body {
     color: var(--text-primary);
     box-shadow: 0 4px 6px var(--shadow-color);
     border-color: var(--border-color);
+    position: relative;
+    z-index: 1;
+}
+
+body.dark-mode .card,
+body.dark-mode .feature-card,
+body.dark-mode .prayer-card,
+body.dark-mode .hadith-card,
+body.dark-mode .stat-card,
+body.dark-mode .city-btn {
+    background: linear-gradient(135deg, rgba(37, 43, 51, 0.9) 0%, rgba(26, 31, 38, 0.8) 100%);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(63, 184, 131, 0.1);
+    box-shadow: 
+        0 8px 32px rgba(0, 0, 0, 0.4),
+        inset 0 1px 0 rgba(255, 255, 255, 0.05);
 }
 
 .card:hover,
 .feature-card:hover,
 .hadith-card:hover {
     box-shadow: 0 6px 12px var(--shadow-hover);
+    transform: translateY(-2px);
+}
+
+body.dark-mode .card:hover,
+body.dark-mode .feature-card:hover,
+body.dark-mode .hadith-card:hover,
+body.dark-mode .stat-card:hover {
+    box-shadow: 
+        0 12px 48px rgba(0, 0, 0, 0.6),
+        0 0 20px rgba(63, 184, 131, 0.1),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    border-color: rgba(63, 184, 131, 0.3);
 }
 
 /* Headers and Sections */
@@ -108,17 +155,37 @@ table {
     color: var(--text-primary);
 }
 
+body.dark-mode table {
+    background: linear-gradient(135deg, rgba(37, 43, 51, 0.5) 0%, rgba(26, 31, 38, 0.5) 100%);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(63, 184, 131, 0.1);
+}
+
 thead {
     background-color: var(--islamic-green);
     color: white;
+}
+
+body.dark-mode thead {
+    background: linear-gradient(135deg, #3fb883 0%, #2a9d6f 100%);
+    box-shadow: 0 2px 10px rgba(63, 184, 131, 0.3);
 }
 
 tbody tr {
     border-bottom: 1px solid var(--border-color);
 }
 
+body.dark-mode tbody tr {
+    border-bottom: 1px solid rgba(63, 184, 131, 0.05);
+}
+
 tbody tr:hover {
     background-color: var(--bg-secondary);
+}
+
+body.dark-mode tbody tr:hover {
+    background: rgba(63, 184, 131, 0.05);
+    border-bottom-color: rgba(63, 184, 131, 0.2);
 }
 
 /* Dark Mode Toggle Button */
@@ -183,14 +250,35 @@ body.dark-mode .dark-mode-toggle .icon-moon {
 .navbar {
     background-color: var(--bg-card);
     box-shadow: 0 2px 10px var(--shadow-color);
+    position: relative;
+    z-index: 1000;
+}
+
+body.dark-mode .navbar {
+    background: linear-gradient(135deg, rgba(26, 31, 38, 0.95) 0%, rgba(15, 20, 25, 0.98) 100%);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(63, 184, 131, 0.1);
+    box-shadow: 
+        0 4px 20px rgba(0, 0, 0, 0.5),
+        0 0 40px rgba(63, 184, 131, 0.05);
 }
 
 .navbar a {
     color: var(--text-primary);
 }
 
+body.dark-mode .navbar a {
+    color: #e8eaed;
+    transition: all 0.3s ease;
+}
+
 .navbar a:hover {
     color: var(--islamic-green);
+}
+
+body.dark-mode .navbar a:hover {
+    color: #ffd700;
+    text-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
 }
 
 /* Buttons */
@@ -199,8 +287,25 @@ body.dark-mode .dark-mode-toggle .icon-moon {
     color: white;
 }
 
+body.dark-mode .btn-primary {
+    background: linear-gradient(135deg, #3fb883 0%, #2a9d6f 100%);
+    box-shadow: 
+        0 4px 15px rgba(63, 184, 131, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(63, 184, 131, 0.3);
+}
+
 .btn-primary:hover {
     background: linear-gradient(135deg, var(--islamic-green-light), var(--islamic-green));
+}
+
+body.dark-mode .btn-primary:hover {
+    background: linear-gradient(135deg, #4ec995 0%, #3fb883 100%);
+    box-shadow: 
+        0 6px 20px rgba(63, 184, 131, 0.5),
+        0 0 30px rgba(63, 184, 131, 0.2),
+        inset 0 1px 0 rgba(255, 255, 255, 0.15);
+    transform: translateY(-2px);
 }
 
 .btn-secondary {

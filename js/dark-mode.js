@@ -28,9 +28,8 @@ class DarkModeManager {
         if (savedMode !== null) {
             this.isDarkMode = savedMode === 'true';
         } else {
-            // Check system preference
-            this.isDarkMode = window.matchMedia && 
-                             window.matchMedia('(prefers-color-scheme: dark)').matches;
+            // Default to dark mode (الوضع المظلم افتراضياً)
+            this.isDarkMode = true;
         }
     }
 
