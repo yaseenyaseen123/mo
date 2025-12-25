@@ -1609,6 +1609,15 @@ p {
     color: var(--white);
 }
 
+body.dark-mode .data-table thead {
+    background: linear-gradient(135deg, #ffd700 0%, #f4d03f 100%);
+}
+
+body.dark-mode .data-table th {
+    color: #000000 !important;
+    text-shadow: none !important;
+}
+
 .data-table th,
 .data-table td {
     padding: 1rem;
@@ -3350,6 +3359,15 @@ p {
 .ramadan-table thead {
     background: linear-gradient(135deg, var(--primary-color), #2c7a5c);
     color: var(--white);
+}
+
+body.dark-mode .ramadan-table thead {
+    background: linear-gradient(135deg, #ffd700 0%, #f4d03f 100%);
+}
+
+body.dark-mode .ramadan-table th {
+    color: #000000 !important;
+    text-shadow: none !important;
 }
 
 .ramadan-table th {

@@ -172,6 +172,13 @@ body.dark-mode thead {
     box-shadow: 0 2px 10px rgba(255, 215, 0, 0.3);
 }
 
+body.dark-mode thead th,
+body.dark-mode thead td {
+    color: #000000 !important;
+    font-weight: 700;
+    text-shadow: none !important;
+}
+
 tbody tr {
     border-bottom: 1px solid var(--border-color);
 }

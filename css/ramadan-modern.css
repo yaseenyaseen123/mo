@@ -385,3 +385,14 @@ body.dark-mode .schedule-table tbody tr:hover {
     direction: rtl;
     text-align: center;
 }
+
+/* Dark Mode Specific Styles */
+body.dark-mode .schedule-table thead {
+    background: linear-gradient(135deg, #ffd700 0%, #f4d03f 100%);
+}
+
+body.dark-mode .schedule-table thead th {
+    color: #000000 !important;
+    text-shadow: none !important;
+    font-weight: 700;
+}
