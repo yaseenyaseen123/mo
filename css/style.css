@@ -3019,20 +3019,21 @@ p {
 
 .stat-card i {
     font-size: 2.5rem;
-    color: var(--secondary-color);
+    color: #d4af37;
     margin-bottom: 1rem;
 }
 
 .stat-value {
     font-size: 1.8rem;
     font-weight: 700;
-    color: var(--primary-color);
+    color: #1e5a3e;
     margin: 1rem 0;
 }
 
 .stat-label {
-    color: #666666;
+    color: #2d3748;
     font-size: 0.95rem;
+    font-weight: 600;
 }
 
 .city-selector-card {
