@@ -16,6 +16,68 @@ function togglePassword() {
     }
 }
 
+// Register Form Submission
+function handleRegisterForm() {
+    const registerForm = document.getElementById('registerForm');
+    
+    if (registerForm) {
+        registerForm.addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const fullname = document.getElementById('fullname').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const password = document.getElementById('password').value;
+            const confirmPassword = document.getElementById('confirm-password').value;
+            const terms = document.getElementById('terms').checked;
+            
+            // Validation
+            if (!fullname || fullname.length < 3) {
+                showNotification('الاسم يجب أن يكون 3 أحرف على الأقل', 'error');
+                return;
+            }
+            
+            if (!email || !email.includes('@')) {
+                showNotification('البريد الإلكتروني غير صحيح', 'error');
+                return;
+            }
+            
+            if (!password || password.length < 8) {
+                showNotification('كلمة المرور يجب أن تكون 8 أحرف على الأقل', 'error');
+                return;
+            }
+            
+            if (password !== confirmPassword) {
+                showNotification('كلمتا المرور غير متطابقتين', 'error');
+                return;
+            }
+            
+            if (!terms) {
+                showNotification('يجب الموافقة على الشروط والأحكام', 'error');
+                return;
+            }
+            
+            try {
+                showNotification('جاري إنشاء الحساب...', 'info');
+                
+                // استخدام نظام auth.js للتسجيل
+                if (typeof registerUser === 'function') {
+                    await registerUser(fullname, email, password);
+                    showNotification('تم إنشاء الحساب بنجاح!', 'success');
+                    
+                    setTimeout(() => {
+                        window.location.href = 'quran.html';
+                    }, 1500);
+                } else {
+                    throw new Error('نظام التسجيل غير متاح');
+                }
+            } catch (error) {
+                console.error('Register error:', error);
+                showNotification(error.message || 'حدث خطأ غير متوقع', 'error');
+            }
+        });
+    }
+}
+
 // Login Form Submission
 document.addEventListener('DOMContentLoaded', function() {
     console.log('🔵 Login page loaded');
@@ -24,6 +86,9 @@ document.addEventListener('DOMContentLoaded', function() {
     console.log('window.firebaseAuth available:', typeof window.firebaseAuth !== 'undefined');
     
     const loginForm = document.getElementById('loginForm');
+    
+    // Handle Register Form if exists
+    handleRegisterForm();
     
     // Wait for all Firebase components to load
     const checkAndInit = () => {
