@@ -1,13 +1,15 @@
 // Ruqyah Page JavaScript
 
-// Audio URLs from Islamic Network API (reliable and CORS-enabled)
-// Using Mishary Rashid Alafasy recitation
+// Audio URLs from EveryAyah.com (highly reliable and stable source)
+// Using Mishary Rashid Alafasy (128kbps quality)
+// Format: https://everyayah.com/data/Alafasy_128kbps/SSSAAA.mp3
+// SSS = Surah number (3 digits), AAA = Ayah number (3 digits)
 const ruqyahAudios = {
-    'fatiha': 'https://cdn.islamic.network/quran/audio/128/ar.alafasy/1.mp3',
-    'ayat-kursi': 'https://cdn.islamic.network/quran/audio/128/ar.alafasy/262.mp3', // Ayat Al-Kursi (2:255)
-    'baqarah-end': 'https://cdn.islamic.network/quran/audio/128/ar.alafasy/286.mp3', // Last verse of Baqarah
-    'muawwidhaat': 'https://cdn.islamic.network/quran/audio/128/ar.alafasy/6231.mp3', // Surah Al-Ikhlas (112)
-    'complete': 'https://cdn.islamic.network/quran/audio/128/ar.alafasy/1.mp3' // Starting with Fatiha
+    'fatiha': 'https://everyayah.com/data/Alafasy_128kbps/001001.mp3', // Al-Fatiha verse 1
+    'ayat-kursi': 'https://everyayah.com/data/Alafasy_128kbps/002255.mp3', // Ayat Al-Kursi (2:255)
+    'baqarah-end': 'https://everyayah.com/data/Alafasy_128kbps/002285.mp3', // Last verses of Baqarah (2:285)
+    'muawwidhaat': 'https://everyayah.com/data/Alafasy_128kbps/112001.mp3', // Surah Al-Ikhlas (112:1)
+    'complete': 'https://everyayah.com/data/Alafasy_128kbps/001001.mp3' // Starting with Fatiha
 };
 
 // Global audio player
@@ -137,9 +139,9 @@ function playAudio(url, button) {
         icon.classList.remove('fa-play');
         icon.classList.add('fa-pause');
         
-        // Set audio properties
-        currentAudio.crossOrigin = "anonymous";
-        currentAudio.preload = "auto";
+        // Set audio properties (removed crossOrigin as it may cause issues)
+        currentAudio.preload = "metadata";
+        currentAudio.volume = 1.0;
         
         showNotification('جاري تحميل التلاوة...');
         
