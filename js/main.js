@@ -15,6 +15,11 @@ function updateUserDisplay() {
         // التحقق من الصلاحية لعرض لوحة التحكم
         const isDashboardAllowed = userRole === 'admin' || userRole === 'moderator';
         
+        // تحديد المسار الصحيح حسب الصفحة الحالية
+        const currentPath = window.location.pathname;
+        const isInPagesFolder = currentPath.includes('/pages/');
+        const dashboardPath = isInPagesFolder ? 'dashboard.html' : 'pages/dashboard.html';
+        
         // إنشاء قائمة المستخدم
         const userMenu = document.createElement('li');
         userMenu.className = 'user-menu-item';
@@ -24,7 +29,7 @@ function updateUserDisplay() {
                 <span>${userName}</span>
             </a>
             <div class="user-dropdown">
-                ${isDashboardAllowed ? '<a href="pages/dashboard.html"><i class="fas fa-dashboard"></i> لوحة التحكم</a>' : ''}
+                ${isDashboardAllowed ? `<a href="${dashboardPath}"><i class="fas fa-dashboard"></i> لوحة التحكم</a>` : ''}
                 <a href="#" onclick="logoutUser()"><i class="fas fa-sign-out-alt"></i> تسجيل الخروج</a>
             </div>
         `;
