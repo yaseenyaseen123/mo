@@ -9,8 +9,12 @@ function updateUserDisplay() {
     // التحقق من تسجيل الدخول
     const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
     const userName = localStorage.getItem('userName');
+    const userRole = localStorage.getItem('userRole');
     
     if (isLoggedIn && userName) {
+        // التحقق من الصلاحية لعرض لوحة التحكم
+        const isDashboardAllowed = userRole === 'admin' || userRole === 'moderator';
+        
         // إنشاء قائمة المستخدم
         const userMenu = document.createElement('li');
         userMenu.className = 'user-menu-item';
@@ -20,7 +24,7 @@ function updateUserDisplay() {
                 <span>${userName}</span>
             </a>
             <div class="user-dropdown">
-                <a href="pages/dashboard.html"><i class="fas fa-dashboard"></i> لوحة التحكم</a>
+                ${isDashboardAllowed ? '<a href="pages/dashboard.html"><i class="fas fa-dashboard"></i> لوحة التحكم</a>' : ''}
                 <a href="#" onclick="logoutUser()"><i class="fas fa-sign-out-alt"></i> تسجيل الخروج</a>
             </div>
         `;

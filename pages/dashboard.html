@@ -479,19 +479,29 @@
     <script src="../js/dashboard.js"></script>
     <script src="../js/main.js"></script>
     <script>
-        // إزالة حماية لوحة التحكم للسماح بالوصول المباشر
+        // حماية لوحة التحكم - فقط للمشرفين والمدراء
         document.addEventListener('DOMContentLoaded', function() {
-            // تم تعطيل التحقق من تسجيل الدخول
-            // يمكنك الآن الوصول إلى لوحة التحكم مباشرة
+            // التحقق من تسجيل الدخول
+            const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+            const userRole = localStorage.getItem('userRole');
             
-            // عرض معلومات المستخدم إذا كان مسجل دخول
-            if (typeof isLoggedIn === 'function' && isLoggedIn()) {
-                const currentUser = getCurrentUser();
-                if (currentUser) {
-                    console.log('مرحباً بك في لوحة التحكم،', currentUser.name);
-                }
-            } else {
-                console.log('مرحباً بك في لوحة التحكم');
+            if (!isLoggedIn) {
+                alert('يجب تسجيل الدخول أولاً');
+                window.location.href = 'login.html?redirect=dashboard';
+                return;
+            }
+            
+            // التحقق من الصلاحيات
+            if (userRole !== 'admin' && userRole !== 'moderator') {
+                alert('عذراً، ليس لديك صلاحية الوصول إلى لوحة التحكم\nهذه الصفحة متاحة للمدراء والمشرفين فقط');
+                window.location.href = '../index.html';
+                return;
+            }
+            
+            // عرض معلومات المستخدم
+            const userName = localStorage.getItem('userName');
+            if (userName) {
+                console.log('مرحباً بك في لوحة التحكم،', userName);
             }
         });
     </script>
