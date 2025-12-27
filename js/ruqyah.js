@@ -1,12 +1,13 @@
 // Ruqyah Page JavaScript
 
-// Audio URLs from reliable Islamic sources
+// Audio URLs from Islamic Network API (reliable and CORS-enabled)
+// Using Mishary Rashid Alafasy recitation
 const ruqyahAudios = {
-    'fatiha': 'https://server8.mp3quran.net/ahmad_huth/001.mp3',
-    'ayat-kursi': 'https://server8.mp3quran.net/ahmad_huth/002.mp3',
-    'baqarah-end': 'https://server8.mp3quran.net/ahmad_huth/002.mp3',
-    'muawwidhaat': 'https://server8.mp3quran.net/ahmad_huth/112.mp3',
-    'complete': 'https://server11.mp3quran.net/sds/Rewayat-Hafs-A-n-Assem/Ruqia.mp3'
+    'fatiha': 'https://cdn.islamic.network/quran/audio/128/ar.alafasy/1.mp3',
+    'ayat-kursi': 'https://cdn.islamic.network/quran/audio/128/ar.alafasy/262.mp3', // Ayat Al-Kursi (2:255)
+    'baqarah-end': 'https://cdn.islamic.network/quran/audio/128/ar.alafasy/286.mp3', // Last verse of Baqarah
+    'muawwidhaat': 'https://cdn.islamic.network/quran/audio/128/ar.alafasy/6231.mp3', // Surah Al-Ikhlas (112)
+    'complete': 'https://cdn.islamic.network/quran/audio/128/ar.alafasy/1.mp3' // Starting with Fatiha
 };
 
 // Global audio player
@@ -37,13 +38,19 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Play button functionality for individual items
     const playButtons = document.querySelectorAll('.play-btn');
+    console.log('Found play buttons:', playButtons.length);
+    
     playButtons.forEach((btn, index) => {
-        btn.addEventListener('click', function() {
+        btn.addEventListener('click', function(e) {
+            e.preventDefault();
+            console.log('Play button clicked, index:', index);
+            
             const icon = this.querySelector('i');
             const isPlaying = icon.classList.contains('fa-pause');
             
             if (isPlaying) {
                 // Pause current audio
+                console.log('Pausing audio');
                 stopAudio();
             } else {
                 // Stop any other playing audio
@@ -59,6 +66,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     default: audioUrl = ruqyahAudios['complete']; break;
                 }
                 
+                console.log('Playing audio:', audioUrl);
                 // Play audio
                 playAudio(audioUrl, this);
             }
@@ -68,7 +76,10 @@ document.addEventListener('DOMContentLoaded', function() {
     // Main player controls
     const mainPlayBtn = document.querySelector('.play-main');
     if (mainPlayBtn) {
-        mainPlayBtn.addEventListener('click', function() {
+        mainPlayBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            console.log('Main play button clicked');
+            
             const icon = this.querySelector('i');
             const isPlaying = icon.classList.contains('fa-pause');
             
@@ -113,44 +124,96 @@ document.addEventListener('DOMContentLoaded', function() {
 
 // Function to play audio
 function playAudio(url, button) {
+    console.log('playAudio called with URL:', url);
+    
     try {
+        // Create new audio instance
         currentAudio = new Audio(url);
         currentButton = button;
+        
+        console.log('Audio object created successfully');
         
         const icon = button.querySelector('i');
         icon.classList.remove('fa-play');
         icon.classList.add('fa-pause');
         
+        // Set audio properties
+        currentAudio.crossOrigin = "anonymous";
+        currentAudio.preload = "auto";
+        
         showNotification('جاري تحميل التلاوة...');
         
+        // Event listeners
+        currentAudio.addEventListener('loadstart', function() {
+            console.log('Audio loading started');
+        });
+        
+        currentAudio.addEventListener('loadedmetadata', function() {
+            console.log('Audio metadata loaded, duration:', currentAudio.duration);
+        });
+        
         currentAudio.addEventListener('loadeddata', function() {
+            console.log('Audio data loaded');
             showNotification('جاري التشغيل...');
         });
         
+        currentAudio.addEventListener('canplay', function() {
+            console.log('Audio can play');
+        });
+        
         currentAudio.addEventListener('playing', function() {
+            console.log('Audio is now playing');
             updateProgress();
         });
         
+        currentAudio.addEventListener('pause', function() {
+            console.log('Audio paused');
+        });
+        
         currentAudio.addEventListener('ended', function() {
+            console.log('Audio ended');
             stopAudio();
             showNotification('انتهت التلاوة');
         });
         
         currentAudio.addEventListener('error', function(e) {
-            console.error('Audio error:', e);
+            console.error('Audio error event:', e);
+            console.error('Error details:', {
+                code: currentAudio.error?.code,
+                message: currentAudio.error?.message
+            });
             stopAudio();
             showNotification('حدث خطأ في تحميل الصوت، يرجى المحاولة مرة أخرى');
         });
         
-        currentAudio.play().catch(error => {
-            console.error('Play error:', error);
-            stopAudio();
-            showNotification('يرجى السماح بتشغيل الصوت في المتصفح');
-        });
+        // Attempt to play
+        console.log('Attempting to play audio...');
+        const playPromise = currentAudio.play();
+        
+        if (playPromise !== undefined) {
+            playPromise.then(() => {
+                console.log('Audio playing successfully!');
+            }).catch(error => {
+                console.error('Play promise rejected:', error);
+                console.error('Error name:', error.name);
+                console.error('Error message:', error.message);
+                stopAudio();
+                
+                if (error.name === 'NotAllowedError') {
+                    showNotification('يرجى السماح بتشغيل الصوت في المتصفح. انقر على أيقونة القفل في شريط العنوان');
+                } else if (error.name === 'NotSupportedError') {
+                    showNotification('تنسيق الصوت غير مدعوم في متصفحك');
+                } else {
+                    showNotification('حدث خطأ: ' + error.message);
+                }
+            });
+        }
         
     } catch (error) {
-        console.error('Error creating audio:', error);
+        console.error('Error in playAudio function:', error);
+        console.error('Error stack:', error.stack);
         showNotification('حدث خطأ في تشغيل الصوت');
+        stopAudio();
     }
 }
 
