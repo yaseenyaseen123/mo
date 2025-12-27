@@ -4,12 +4,20 @@
 function updateUserDisplay() {
     const loginBtn = document.querySelector('.login-btn');
     
-    if (!loginBtn) return;
+    console.log('updateUserDisplay called');
+    console.log('loginBtn:', loginBtn);
+    
+    if (!loginBtn) {
+        console.log('No login button found');
+        return;
+    }
     
     // التحقق من تسجيل الدخول
     const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
     const userName = localStorage.getItem('userName');
     const userRole = localStorage.getItem('userRole');
+    
+    console.log('isLoggedIn:', isLoggedIn, 'userName:', userName, 'userRole:', userRole);
     
     if (isLoggedIn && userName) {
         // التحقق من الصلاحية لعرض لوحة التحكم
@@ -19,6 +27,8 @@ function updateUserDisplay() {
         const currentPath = window.location.pathname;
         const isInPagesFolder = currentPath.includes('/pages/');
         const dashboardPath = isInPagesFolder ? 'dashboard.html' : 'pages/dashboard.html';
+        
+        console.log('Creating user menu');
         
         // إنشاء قائمة المستخدم
         const userMenu = document.createElement('li');
@@ -37,6 +47,8 @@ function updateUserDisplay() {
         // استبدال زر الدخول بقائمة المستخدم
         const loginLi = loginBtn.parentElement;
         loginLi.parentElement.replaceChild(userMenu, loginLi);
+        
+        console.log('User menu created and replaced');
         
         // إضافة الأنماط للقائمة المنسدلة
         addUserMenuStyles();
