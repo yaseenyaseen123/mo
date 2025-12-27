@@ -8,13 +8,54 @@ const ruqyahAudios = {
     'fatiha': 'https://everyayah.com/data/Alafasy_128kbps/001001.mp3', // Al-Fatiha verse 1
     'ayat-kursi': 'https://everyayah.com/data/Alafasy_128kbps/002255.mp3', // Ayat Al-Kursi (2:255)
     'baqarah-end': 'https://everyayah.com/data/Alafasy_128kbps/002285.mp3', // Last verses of Baqarah (2:285)
-    'muawwidhaat': 'https://everyayah.com/data/Alafasy_128kbps/112001.mp3', // Surah Al-Ikhlas (112:1)
-    'complete': 'https://everyayah.com/data/Alafasy_128kbps/001001.mp3' // Starting with Fatiha
+    'muawwidhaat': 'https://everyayah.com/data/Alafasy_128kbps/112001.mp3' // Surah Al-Ikhlas (112:1)
 };
+
+// Complete Ruqyah playlist - all verses in sequence
+const completeRuqyahPlaylist = [
+    // Surah Al-Fatiha (7 verses)
+    'https://everyayah.com/data/Alafasy_128kbps/001001.mp3',
+    'https://everyayah.com/data/Alafasy_128kbps/001002.mp3',
+    'https://everyayah.com/data/Alafasy_128kbps/001003.mp3',
+    'https://everyayah.com/data/Alafasy_128kbps/001004.mp3',
+    'https://everyayah.com/data/Alafasy_128kbps/001005.mp3',
+    'https://everyayah.com/data/Alafasy_128kbps/001006.mp3',
+    'https://everyayah.com/data/Alafasy_128kbps/001007.mp3',
+    
+    // Ayat Al-Kursi (2:255)
+    'https://everyayah.com/data/Alafasy_128kbps/002255.mp3',
+    
+    // Last 2 verses of Baqarah (2:285-286)
+    'https://everyayah.com/data/Alafasy_128kbps/002285.mp3',
+    'https://everyayah.com/data/Alafasy_128kbps/002286.mp3',
+    
+    // Surah Al-Ikhlas (112:1-4)
+    'https://everyayah.com/data/Alafasy_128kbps/112001.mp3',
+    'https://everyayah.com/data/Alafasy_128kbps/112002.mp3',
+    'https://everyayah.com/data/Alafasy_128kbps/112003.mp3',
+    'https://everyayah.com/data/Alafasy_128kbps/112004.mp3',
+    
+    // Surah Al-Falaq (113:1-5)
+    'https://everyayah.com/data/Alafasy_128kbps/113001.mp3',
+    'https://everyayah.com/data/Alafasy_128kbps/113002.mp3',
+    'https://everyayah.com/data/Alafasy_128kbps/113003.mp3',
+    'https://everyayah.com/data/Alafasy_128kbps/113004.mp3',
+    'https://everyayah.com/data/Alafasy_128kbps/113005.mp3',
+    
+    // Surah An-Nas (114:1-6)
+    'https://everyayah.com/data/Alafasy_128kbps/114001.mp3',
+    'https://everyayah.com/data/Alafasy_128kbps/114002.mp3',
+    'https://everyayah.com/data/Alafasy_128kbps/114003.mp3',
+    'https://everyayah.com/data/Alafasy_128kbps/114004.mp3',
+    'https://everyayah.com/data/Alafasy_128kbps/114005.mp3',
+    'https://everyayah.com/data/Alafasy_128kbps/114006.mp3'
+];
 
 // Global audio player
 let currentAudio = null;
 let currentButton = null;
+let currentPlaylistIndex = 0;
+let isPlayingPlaylist = false;
 
 document.addEventListener('DOMContentLoaded', function() {
     // Tab functionality
@@ -80,7 +121,7 @@ document.addEventListener('DOMContentLoaded', function() {
     if (mainPlayBtn) {
         mainPlayBtn.addEventListener('click', function(e) {
             e.preventDefault();
-            console.log('Main play button clicked');
+            console.log('Main play button clicked - Complete Ruqyah');
             
             const icon = this.querySelector('i');
             const isPlaying = icon.classList.contains('fa-pause');
@@ -89,7 +130,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 stopAudio();
             } else {
                 stopAudio();
-                playAudio(ruqyahAudios['complete'], this);
+                // Start playing complete ruqyah playlist
+                playCompleteRuqyah(this);
             }
         });
     }
@@ -124,9 +166,76 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 
+// Function to play complete Ruqyah (playlist)
+function playCompleteRuqyah(button) {
+    console.log('Starting complete Ruqyah playlist with', completeRuqyahPlaylist.length, 'verses');
+    
+    currentPlaylistIndex = 0;
+    isPlayingPlaylist = true;
+    currentButton = button;
+    
+    const icon = button.querySelector('i');
+    icon.classList.remove('fa-play');
+    icon.classList.add('fa-pause');
+    
+    showNotification('بدء الرقية الشرعية الكاملة... (الفاتحة، آية الكرسي، خواتيم البقرة، المعوذات)');
+    
+    playNextInPlaylist();
+}
+
+// Function to play next verse in playlist
+function playNextInPlaylist() {
+    if (!isPlayingPlaylist || currentPlaylistIndex >= completeRuqyahPlaylist.length) {
+        console.log('Playlist finished');
+        stopAudio();
+        showNotification('انتهت الرقية الشرعية الكاملة');
+        return;
+    }
+    
+    const url = completeRuqyahPlaylist[currentPlaylistIndex];
+    console.log(`Playing verse ${currentPlaylistIndex + 1}/${completeRuqyahPlaylist.length}:`, url);
+    
+    try {
+        currentAudio = new Audio(url);
+        currentAudio.preload = "metadata";
+        currentAudio.volume = 1.0;
+        
+        currentAudio.addEventListener('ended', function() {
+            console.log('Verse ended, playing next...');
+            currentPlaylistIndex++;
+            playNextInPlaylist();
+        });
+        
+        currentAudio.addEventListener('error', function(e) {
+            console.error('Error playing verse:', url, e);
+            // Try next verse on error
+            currentPlaylistIndex++;
+            playNextInPlaylist();
+        });
+        
+        currentAudio.addEventListener('playing', function() {
+            updateProgress();
+        });
+        
+        currentAudio.play().catch(error => {
+            console.error('Play error:', error);
+            currentPlaylistIndex++;
+            playNextInPlaylist();
+        });
+        
+    } catch (error) {
+        console.error('Error in playNextInPlaylist:', error);
+        currentPlaylistIndex++;
+        playNextInPlaylist();
+    }
+}
+
 // Function to play audio
 function playAudio(url, button) {
     console.log('playAudio called with URL:', url);
+    
+    // Make sure we're not in playlist mode
+    isPlayingPlaylist = false;
     
     try {
         // Create new audio instance
@@ -221,6 +330,12 @@ function playAudio(url, button) {
 
 // Function to stop audio
 function stopAudio() {
+    console.log('Stopping audio, isPlayingPlaylist:', isPlayingPlaylist);
+    
+    // Stop playlist mode
+    isPlayingPlaylist = false;
+    currentPlaylistIndex = 0;
+    
     if (currentAudio) {
         currentAudio.pause();
         currentAudio.currentTime = 0;
