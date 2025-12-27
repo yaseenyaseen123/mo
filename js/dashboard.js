@@ -134,8 +134,8 @@ document.addEventListener('DOMContentLoaded', function() {
 // تحميل بيانات المستخدمين من قاعدة البيانات
 function loadUsersData() {
     try {
-        // جلب جميع المستخدمين من نظام المصادقة
-        const users = getAllUsers();
+        // جلب جميع المستخدمين مباشرة من localStorage دون التحقق من الصلاحيات
+        const users = JSON.parse(localStorage.getItem('usersDatabase') || '[]');
         
         // تحديث الإحصائيات
         updateUsersStats(users);
@@ -144,6 +144,7 @@ function loadUsersData() {
         displayUsersTable(users);
     } catch (error) {
         console.error('خطأ في تحميل بيانات المستخدمين:', error);
+        showNotification('خطأ في تحميل بيانات المستخدمين', 'error');
     }
 }
 
@@ -223,7 +224,18 @@ function displayUsersTable(users) {
 window.changeUserRole = function(email, newRole) {
     if (confirm(`هل أنت متأكد من تغيير صلاحية هذا المستخدم إلى "${newRole}"؟`)) {
         try {
-            updateUserRole(email, newRole);
+            // تحديث مباشر دون التحقق من الصلاحيات
+            const users = JSON.parse(localStorage.getItem('usersDatabase') || '[]');
+            const userIndex = users.findIndex(u => u.email === email);
+            
+            if (userIndex === -1) {
+                throw new Error('المستخدم غير موجود');
+            }
+            
+            users[userIndex].role = newRole;
+            users[userIndex].updatedAt = new Date().toISOString();
+            localStorage.setItem('usersDatabase', JSON.stringify(users));
+            
             showNotification('تم تحديث صلاحية المستخدم بنجاح');
             loadUsersData(); // إعادة تحميل البيانات
         } catch (error) {
@@ -235,7 +247,18 @@ window.changeUserRole = function(email, newRole) {
 // تبديل حالة المستخدم (نشط/معطل)
 window.toggleUserStatus = function(email) {
     try {
-        toggleUserStatus(email);
+        // تحديث مباشر دون التحقق من الصلاحيات
+        const users = JSON.parse(localStorage.getItem('usersDatabase') || '[]');
+        const userIndex = users.findIndex(u => u.email === email);
+        
+        if (userIndex === -1) {
+            throw new Error('المستخدم غير موجود');
+        }
+        
+        users[userIndex].isActive = !users[userIndex].isActive;
+        users[userIndex].updatedAt = new Date().toISOString();
+        localStorage.setItem('usersDatabase', JSON.stringify(users));
+        
         showNotification('تم تحديث حالة المستخدم بنجاح');
         loadUsersData(); // إعادة تحميل البيانات
     } catch (error) {
